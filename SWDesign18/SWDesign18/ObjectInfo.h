@@ -1,18 +1,5 @@
 #pragma once
-
-enum direction
-{
-	LEFT = 0,
-	RIGHT,
-	UP,	
-	DOWN
-};
-
-typedef struct vector
-{
-	int x;
-	int y;
-}Vector;
+#include "GameBoardInfo.h"
 
 typedef struct character
 {
@@ -22,5 +9,12 @@ typedef struct character
 	void (*getHit)(Character, int);
 	//attack function pointer
 	void (*die)();
-	//Item function array
+	Item* inventory;
 }Character;
+
+typedef struct item
+{
+	int duration;
+	char* name;
+	void (*use)();
+}Item;
