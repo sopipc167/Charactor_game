@@ -142,6 +142,10 @@
     <ClInclude Include="GameBoardInfo.h" />
     <ClInclude Include="ObjectInfo.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameBoardInfo.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

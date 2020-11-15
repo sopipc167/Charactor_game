@@ -1,7 +1,7 @@
 #pragma once
 
-#define _MAP_WIDTH (40)
-#define _MAP_HEIGHT (25)
+#define _MAP_WIDTH (55)
+#define _MAP_HEIGHT (35)
 
 enum direction
 {
