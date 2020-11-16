@@ -5,7 +5,7 @@ typedef struct character
 {
 	int hp;
 	int atk;
-	void (*move)(Vector, direction);
+	void (*move)(Vector, Direction);
 	void (*getHit)(Character, int);
 	//attack function pointer
 	void (*die)();
@@ -18,3 +18,5 @@ typedef struct item
 	char* name;
 	void (*use)();
 }Item;
+
+int DetectCollision(int floor,int x, int y);

@@ -3,13 +3,13 @@
 #define _MAP_WIDTH (55)
 #define _MAP_HEIGHT (35)
 
-enum direction
+typedef enum direction
 {
 	LEFT = 0,
 	RIGHT,
 	UP,
 	DOWN
-};
+}Direction;
 
 typedef struct vector
 {
