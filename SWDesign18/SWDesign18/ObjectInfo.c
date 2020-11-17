@@ -7,8 +7,8 @@ int DetectCollision(int floor, int x, int y)
 {
 	int num = gameBoardInfo[floor][y][x];
 	
-	if ((x <= -10) || ((x >= 1) && (x <= 10)) /*|| (막힌 문)*/)
+	if ((num <= -10) || ((num >= 1) && (num <= 10)) /*|| (막힌 문)*/)
 		return 1;
-	else if ((x == 0) || ((x >= 30) && (x <= 120)) /* || (열린 문) || (함정)*/)
+	else if ((num == 0) || ((num >= 30) && (num <= 120)) /* || (열린 문) || (함정)*/)
 		return 0;	
 }
