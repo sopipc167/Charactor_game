@@ -12,6 +12,7 @@ typedef struct character
 	Item* inventory;
 }Character;
 
+
 typedef struct item
 {
 	int duration;
