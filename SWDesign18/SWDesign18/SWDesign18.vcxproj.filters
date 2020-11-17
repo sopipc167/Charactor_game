@@ -32,5 +32,8 @@
     <ClCompile Include="ObjectInfo.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="movement.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
