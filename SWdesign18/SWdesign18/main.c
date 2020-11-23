@@ -1,19 +1,23 @@
 #include <stdio.h>
 #include <Windows.h>
 #include "GameBoardInfo.h"
+
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
+
 int main()
 {
 	system("mode con cols=140 lines=42");
 	DrawBoard();
 }
+
 void SetCurrentCursorPos(int x, int y)
 {
 	COORD position = { x, y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position);
 }
+
 COORD GetCurrentCursorPos()
 {
 	COORD curPoint;
@@ -23,6 +27,7 @@ COORD GetCurrentCursorPos()
 	curPoint.Y = curInfo.dwCursorPosition.Y;
 	return curPoint;
 }
+
 void DrawVerticalLine(int type, int length, COORD start)
 {
 	SetCurrentCursorPos(start.X, start.Y);
@@ -43,6 +48,7 @@ void DrawVerticalLine(int type, int length, COORD start)
 		}
 	}
 }
+
 void DrawHorizontalLine(int type, int length, COORD start)
 {
 
