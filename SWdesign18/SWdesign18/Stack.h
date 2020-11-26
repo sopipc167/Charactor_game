@@ -3,5 +3,6 @@
 #define SIZE 7
 
 char stack[SIZE] = { '\0' };
-int top = -2;
+char compare[SIZE] = { '\0' };
+int top = -1;
 
