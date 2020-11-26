@@ -2,6 +2,8 @@
 #include "ObjectInfo.h"
 
 /* 무기 3종류 추가 필요*/
+Item WeaponList[3];
+Item ItemList[2];
 
 Item Food = {
 	1,

@@ -57,6 +57,7 @@ void isComplete(int ascii)
 			if (strcmp(compare, "DOOF") == 0)
 			{
 				//인벤토리에 추가
+				AddToInventory(Food);
 			}
 		}
 	}
@@ -75,4 +76,8 @@ void isComplete(int ascii)
 			}
 		}
 	}
+}
+void AddToInventory(Item item)
+{
+
 }
