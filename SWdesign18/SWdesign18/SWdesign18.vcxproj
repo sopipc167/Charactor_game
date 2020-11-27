@@ -143,7 +143,9 @@
     <ClCompile Include="Item.c" />
     <ClCompile Include="ItemStack.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="movement.c" />
+    <ClCompile Include="movement.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="ObjectInfo.c" />
   </ItemGroup>
   <ItemGroup>

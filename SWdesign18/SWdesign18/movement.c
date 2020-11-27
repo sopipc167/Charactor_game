@@ -2,6 +2,8 @@
 #include "ObjectInfo.h"
 #include <stdio.h>
 #include <Windows.h>
+#include <conio.h>
+
 #define keyboard_LEFT (75)
 #define keyboard_RIGHT (77)
 #define keyboard_UP (72)
@@ -87,7 +89,11 @@ void ShiftUp(Character moving, int floor, int x, int y) {
 
 void ProcessKeyInput() {
     int x, y , floor = 0;//좌표, 좌표와 캐릭터 구조체는 밖에서 가져올것
-    int i, key;//연산용 변수
+
+    x = pc.pos.x;
+    y = pc.pos.y;
+
+    int key;//연산용 변수
     for (int i = 0; i < 20; i++) {
         if (_kbhit() != 0) {
             key = _getch();
@@ -116,7 +122,7 @@ void ProcessKeyInput() {
             else {
                 switch (key) {
                 case keyboard_a:
-                    pc.inventory->use();
+                    //pc.inventory->use(&pc, x);
                     break;
                 }
             }

@@ -5,16 +5,17 @@ typedef struct item
 {
 	int duration;
 	char* name;
-	int (*use)(Character, int);
+	int (*use)(struct character* p, int x);
 }Item;
 
 typedef struct character
 {
+	Vector pos;
 	int hp;
 	int atk;
 	void (*move)(Vector, Direction);
-	void (*getHit)(Character*, int);
-	int (*attack)(Character*, int);
+	void (*getHit)(struct character* p, int x);
+	int (*attack)(struct character* p, int x);
 	void (*die)();
 	Item* inventory;
 }Character;
