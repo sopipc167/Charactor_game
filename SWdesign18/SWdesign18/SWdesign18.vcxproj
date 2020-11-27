@@ -141,13 +141,15 @@
   <ItemGroup>
     <ClCompile Include="1.c" />
     <ClCompile Include="GameBoardInfo.c" />
-    <ClCompile Include="GameBoardInfoTest.c" />
+    <ClCompile Include="Item.c" />
+    <ClCompile Include="ItemStack.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="movement.c" />
     <ClCompile Include="ObjectInfo.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoardInfo.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="ObjectInfo.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
