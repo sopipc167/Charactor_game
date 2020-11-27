@@ -33,6 +33,9 @@
     <ClCompile Include="ObjectInfo.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="소스_임시.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoardInfo.h">

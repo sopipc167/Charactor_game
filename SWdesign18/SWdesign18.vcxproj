@@ -145,6 +145,7 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="movement.c" />
     <ClCompile Include="ObjectInfo.c" />
+    <ClCompile Include="소스_임시.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameBoardInfo.h" />
