@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="1.c" />
     <ClCompile Include="GameBoardInfo.c" />
     <ClCompile Include="Item.c" />
     <ClCompile Include="ItemStack.c" />

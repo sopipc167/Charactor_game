@@ -5,18 +5,18 @@
 Item WeaponList[3];
 Item ItemList[2];
 
+int useFood(Character*, int);
+int useOrder(Character*, int);
+
 Item Food = {
 	1,
 	"DOOF",
 	useFood
 };
 
-int useFood(Character*, int);
 
 Item Order = {
 	1,
 	"REDRO",
 	useOrder
 };
-
-int useOrder(Character*, int);
