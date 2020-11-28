@@ -11,6 +11,7 @@ typedef struct item
 typedef struct character
 {
 	Vector pos;
+	Direction Di;
 	int hp;
 	int atk;
 	void (*move)(Vector, Direction);

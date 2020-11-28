@@ -15,6 +15,7 @@ typedef struct vector
 {
 	int x;
 	int y;
+	int floor;
 }Vector;
 void DrawBoard();
 int gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH];
