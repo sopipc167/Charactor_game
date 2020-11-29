@@ -14,6 +14,7 @@ int isFull()
 	else
 		return 0;
 }
+
 int isEmpty()
 {
 	if (top == -1)
@@ -21,6 +22,7 @@ int isEmpty()
 	else
 		return 0;
 }
+
 int insert(int ascii)
 {
 	if (isFull())
@@ -35,6 +37,7 @@ int insert(int ascii)
 		return 1;
 	}
 }
+
 int pop()
 {
 	int ascii = stack[top];
@@ -49,6 +52,7 @@ int pop()
 		return ascii;
 	}
 }
+
 void isComplete(int ascii)
 {
 	int i, j=0;
@@ -86,6 +90,7 @@ void isComplete(int ascii)
 		}
 	}
 }
+
 //void AddToInventory(Item item)
 //{
 //
