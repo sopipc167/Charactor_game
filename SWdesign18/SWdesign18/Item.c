@@ -30,4 +30,5 @@ int useOrder(Character* arr, int sec)
 	}
 
 	free(atkData);
+	return 0;
 }

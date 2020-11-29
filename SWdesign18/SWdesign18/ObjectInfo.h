@@ -10,6 +10,7 @@ typedef struct item
 
 typedef struct character
 {
+	int map;
 	Vector pos;
 	Direction Di;
 	int hp;

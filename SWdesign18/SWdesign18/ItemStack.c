@@ -1,6 +1,58 @@
 #include"Stack.h"
 #include<string.h>
 
+int isFull();//스택 공간 여부는 변수 top으로 판단, top이 size랑 같을 시 1 반환,아니면 0
+int isEmpty();//top이 -1일 때 1반환, 아니면 0
+int insert(int ascii);// 아스키 코드를 인자로 가짐, isFull()로 검사후 top+1하여 그 공간에 삽입, 삽입 성공시 1 반환
+int pop();//isEmpty()검사후, 해당 공간을 '\0'반환,삭제 성공시 삭제된 원소 반환
+void isComplete(int ascii);//끝글자를 가져올때마다 compare배열에 스택의 내용을 단어 길이만큼 가져옴, 그 후 단어와 비교, 맞다면 AddtoInventory 실행 
+
+int isFull()
+{
+	if (top + 1 == SIZE)
+		return 1;
+	else
+		return 0;
+}
+
+int isEmpty()
+{
+	if (top == -1)
+		return 1;
+	else
+		return 0;
+}
+
+int insert(int ascii)
+{
+	if (isFull())
+	{
+		//UI에서 꽉찼다는거 표시
+		return 0;
+	}
+	else
+	{
+		top++;
+		stack[top] = ascii;
+		return 1;
+	}
+}
+
+int pop()
+{
+	int ascii = stack[top];
+	if (isEmpty())
+	{
+		return 0;
+	}
+	else
+	{
+		stack[top] = '\0';
+		top--;
+		return ascii;
+	}
+}
+
 void isComplete(int ascii)
 {
 	int i, j=0;
@@ -38,6 +90,7 @@ void isComplete(int ascii)
 		}
 	}
 }
+
 //void AddToInventory(Item item)
 //{
 //

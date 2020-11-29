@@ -10,6 +10,9 @@ void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
 
 Character pc;
+//인벤토리 배열
+//item 배열
+//몬스터 배열
 
 int main()
 {
