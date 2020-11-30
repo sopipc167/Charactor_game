@@ -3,9 +3,9 @@
 
 int isFull();//스택 공간 여부는 변수 top으로 판단, top이 size랑 같을 시 1 반환,아니면 0
 int isEmpty();//top이 -1일 때 1반환, 아니면 0
-int insert(int ascii);// 아스키 코드를 인자로 가짐, isFull()로 검사후 top+1하여 그 공간에 삽입, 삽입 성공시 1 반환
-int pop();//isEmpty()검사후, 해당 공간을 '\0'반환,삭제 성공시 삭제된 원소 반환
-void isComplete(int ascii);//끝글자를 가져올때마다 compare배열에 스택의 내용을 단어 길이만큼 가져옴, 그 후 단어와 비교, 맞다면 AddtoInventory 실행 
+char insert(char ascii);// 아스키 코드를 인자로 가짐, isFull()로 검사후 top+1하여 그 공간에 삽입, 삽입 성공시 1 반환
+char pop();//isEmpty()검사후, 해당 공간을 '\0'반환,삭제 성공시 삭제된 원소 반환
+void isComplete(char ascii);//끝글자를 가져올때마다 compare배열에 스택의 내용을 단어 길이만큼 가져옴, 그 후 단어와 비교, 맞다면 AddtoInventory 실행 
 
 int isFull()
 {
@@ -23,7 +23,7 @@ int isEmpty()
 		return 0;
 }
 
-int insert(int ascii)
+char insert(char ascii)
 {
 	if (isFull())
 	{
@@ -35,13 +35,13 @@ int insert(int ascii)
 	{
 		top++;
 		stack[top] = ascii;
-		return 1;
+		return ascii;
 	}
 }
 
-int pop()
+char pop()
 {
-	int ascii = stack[top];
+	char ascii = stack[top];
 	if (isEmpty())
 	{
 		return 0;
@@ -54,7 +54,7 @@ int pop()
 	}
 }
 
-void isComplete(int ascii)
+void isComplete(char ascii)
 {
 	int i, j=0;
 	for ( i = 0; i < SIZE; i++)
