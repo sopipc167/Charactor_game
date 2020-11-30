@@ -28,6 +28,7 @@ int insert(int ascii)
 	if (isFull())
 	{
 		//UI¿¡¼­ ²ËÃ¡´Ù´Â°Å Ç¥½Ã
+		printf("isFull\n");
 		return 0;
 	}
 	else
