@@ -8,8 +8,23 @@ void DrawLine(int type, int length, COORD start);
 
 int main()
 {
+<<<<<<< Updated upstream:SWdesign18/main.c
 	system("mode con cols=160 lines=42");
 	DrawBoard();
+=======
+	int map_index=0;
+	pc.pos.x = 64;
+	pc.pos.y = 31;
+	pc.pos.floor = 0;
+	CursorView(0);
+	system("mode con cols=155 lines=42");
+	DrawBoard(0);
+	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
+	printf("¡Ü");
+	while (1) {
+		ProcessKeyInput();
+	}
+>>>>>>> Stashed changes:SWdesign18/SWdesign18/main.c
 }
 
 void SetCurrentCursorPos(int x, int y)

@@ -1,3 +1,1 @@
-﻿  GameBoardInfo.c
-C:\Users\sopip\Documents\GitHub\SWDesign18\SWdesign18\SWdesign18\SWdesign18\GameBoardInfo.c(251,22): warning C4013: 'SetCurrentCursorPos'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-  SWdesign18.vcxproj -> C:\Users\sopip\Documents\GitHub\SWDesign18\SWdesign18\SWdesign18\x64\Debug\SWdesign18.exe
+﻿C:\Users\sopip\Documents\GitHub\SWDesign18\SWdesign18\SWdesign18\SWdesign18\SWdesign18.vcxproj : error MSB4025: 프로젝트 파일을 로드할 수 없습니다. 'C:\Users\sopip\Documents\GitHub\SWDesign18\SWdesign18\SWdesign18\SWdesign18\SWdesign18.vcxproj' 파일을 찾을 수 없습니다.
