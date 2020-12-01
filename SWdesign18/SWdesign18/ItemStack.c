@@ -34,6 +34,7 @@ char insert(char ascii)
 	else
 	{
 		top++;
+		count++;
 		stack[top] = ascii;
 		return ascii;
 	}
@@ -50,6 +51,7 @@ char pop()
 	{
 		stack[top] = '\0';
 		top--;
+		count--;
 		return ascii;
 	}
 }
