@@ -41,7 +41,7 @@ void DeleteCharacter(int x, int y) {
 
 void ShiftRight() {
     pc.Di = 1;
-    if (DetectCollision(pc.pos.floor, (pc.pos.x + 2) / 2, pc.pos.y)) {
+    if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
         return;
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
@@ -51,7 +51,7 @@ void ShiftRight() {
 
 void ShiftLeft() {
     pc.Di = 0;
-    if (DetectCollision(pc.pos.floor, (pc.pos.x - 2) / 2, pc.pos.y)) {
+    if (DetectCollision(pc.map, (pc.pos.x - 2) / 2, pc.pos.y)) {
         return;
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
@@ -61,7 +61,7 @@ void ShiftLeft() {
 
 void ShiftDown() {
     pc.Di = 3;
-    if (DetectCollision(pc.pos.floor, pc.pos.x / 2, pc.pos.y+1)) {
+    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y+1)) {
         return;
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
@@ -71,7 +71,7 @@ void ShiftDown() {
 
 void ShiftUp() {
     pc.Di = 2;
-    if (DetectCollision(pc.pos.floor, pc.pos.x / 2, pc.pos.y-1)) {
+    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y-1)) {
         return;
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
@@ -87,13 +87,13 @@ void use_KNIFE(Character ch) {
     SetCurrentCursorPos(ch.pos.x, ch.pos.y);
     if (ch.Di == 0) {
         for (int reach = 0; reach < 3; reach++) {
-            if (DetectCollision(ch.pos.floor, (ch.pos.x - 2) / 2, ch.pos.y))
+            if (DetectCollision(ch.map, (ch.pos.x - 2) / 2, ch.pos.y))
                 break;
             ch.pos.x -= 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
         }
@@ -106,13 +106,13 @@ void use_KNIFE(Character ch) {
     else if (ch.Di == 1)
     {
         for (int reach = 0; reach < 3; reach++) {
-            if (DetectCollision(ch.pos.floor, (ch.pos.x + 2) / 2, ch.pos.y))
+            if (DetectCollision(ch.map, (ch.pos.x + 2) / 2, ch.pos.y))
                 break;
             ch.pos.x += 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
         }
@@ -124,13 +124,13 @@ void use_KNIFE(Character ch) {
     }
     else if (ch.Di == 2) {
         for (int reach = 0; reach < 3; reach++) {
-            if (DetectCollision(ch.pos.floor, ch.pos.x / 2, ch.pos.y - 1))
+            if (DetectCollision(ch.map, ch.pos.x / 2, ch.pos.y - 1))
                 break;
             ch.pos.y--;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
         }
@@ -143,13 +143,13 @@ void use_KNIFE(Character ch) {
     }
     else if (ch.Di == 3) {
         for (int reach = 0; reach < 3; reach++) {
-            if (DetectCollision(ch.pos.floor, ch.pos.x / 2, ch.pos.y + 1))
+            if (DetectCollision(ch.map, ch.pos.x / 2, ch.pos.y + 1))
                 break;
             ch.pos.y++;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
         }
@@ -163,142 +163,14 @@ void use_KNIFE(Character ch) {
 }
 
 
-void use_ROCKET(Character ch) {
-    COORD curpos = GetCurrentCursorPos();
-    if (pc.Di == 0) {
-        for (int reach = 0; reach < 100; reach++) {
-            if (DetectCollision(ch.pos.floor, (ch.pos.x - 2) / 2, ch.pos.y)) {
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf("*");
-                    }
-                }
-                Sleep(100);
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf(" ");
-                        gameBoardInfo[ch.pos.floor][ch.pos.y - 1 + y1][(ch.pos.x - 2 + x1 * 2) / 2] = 0;
-                    }
-                }
-                break;
-            }
-            ch.pos.x -= 2;
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
-                break;
-            }
-            printf("⊂");
-            Sleep(10);
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("  ");
-        }
-    }
-    else if (pc.Di == 1) {
-        for (int reach = 0; reach < 100; reach++) {
-            if (DetectCollision(ch.pos.floor, (ch.pos.x + 2) / 2, ch.pos.y)) {
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf("*");
-                    }
-                }
-                Sleep(100);
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf(" ");
-                        gameBoardInfo[ch.pos.floor][ch.pos.y - 1 + y1][(ch.pos.x - 2 + x1 * 2) / 2] = 0;
-                    }
-                }
-                break;
-            }
-            ch.pos.x += 2;
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
-                break;
-            }
-            printf("⊃");
-            Sleep(10);
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("  ");
-        }
-    }
-    else if (pc.Di == 2) {
-        for (int reach = 0; reach < 100; reach++) {
-            if (DetectCollision(ch.pos.floor, ch.pos.x / 2, ch.pos.y-1)) {
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf("*");
-                    }
-                }
-                Sleep(100);
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf(" ");
-                        gameBoardInfo[ch.pos.floor][ch.pos.y - 1 + y1][(ch.pos.x - 2 + x1 * 2) / 2] = 0;
-                    }
-                }
-                break;
-            }
-            ch.pos.y--;
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
-                break;
-            }
-            printf("∩");
-            Sleep(10);
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("  ");
-        }
-    }
-    else if (pc.Di == 3) {
-        for (int reach = 0; reach < 100; reach++) {
-            if (DetectCollision(ch.pos.floor, ch.pos.x / 2, ch.pos.y+1)) {
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf("*");
-                    }
-                }
-                Sleep(100);
-                for (int x1 = 0; x1 < 3; x1++) {
-                    for (int y1 = 0; y1 < 3; y1++) {
-                        SetCurrentCursorPos(ch.pos.x - 2 + x1 * 2, ch.pos.y - 1 + y1);
-                        printf(" ");
-                        gameBoardInfo[ch.pos.floor][ch.pos.y - 1 + y1][(ch.pos.x - 2 + x1 * 2) / 2] = 0;
-                    }
-                }
-                break;
-            }
-            ch.pos.y++;
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            if (gameBoardInfo[ch.pos.floor][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
-                break;
-            }
-            printf("∪");
-            Sleep(10);
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("  ");
-        }
-    }
-}
-
-void bulletmove() {
+void bulletmove() {//총알
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
         printf("  ");
     }
     if (bulD == 0) {
         bullet.x -= 2;
-        if (DetectCollision(pc.pos.floor, bullet.x / 2, bullet.y)) {
+        if (DetectCollision(pc.map, bullet.x / 2, bullet.y)) {
             bulletuse = 0;
             return;
         }
@@ -307,7 +179,7 @@ void bulletmove() {
     }
     else if (bulD == 1) {
         bullet.x += 2;
-        if (DetectCollision(pc.pos.floor, bullet.x / 2, bullet.y)) {
+        if (DetectCollision(pc.map, bullet.x / 2, bullet.y)) {
             bulletuse = 0;
             return;
         }
@@ -316,7 +188,7 @@ void bulletmove() {
     }
     else if (bulD == 2) {
         bullet.y--;
-        if (DetectCollision(pc.pos.floor, bullet.x / 2, bullet.y)) {
+        if (DetectCollision(pc.map, bullet.x / 2, bullet.y)) {
             bulletuse = 0;
             return;
         }
@@ -325,7 +197,7 @@ void bulletmove() {
     }
     else if (bulD == 3) {
         bullet.y++;
-        if (DetectCollision(pc.pos.floor, bullet.x / 2, bullet.y)) {
+        if (DetectCollision(pc.map, bullet.x / 2, bullet.y)) {
             bulletuse = 0;
             return;
         }
@@ -336,7 +208,7 @@ void bulletmove() {
 
 
 
-void explosion(int x, int y) {
+void explosion(int x, int y) {//폭발 이펙트
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
             if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
@@ -351,7 +223,7 @@ void explosion(int x, int y) {
             if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
                 SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
                 printf("  ");
-                gameBoardInfo[pc.pos.floor][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
+                gameBoardInfo[pc.map][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
             }
         }
     }
@@ -359,14 +231,14 @@ void explosion(int x, int y) {
 
 
 
-void cannonmove() {
+void cannonmove() {//대포알
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
     }
     if (cannD == 0) {
         cannonball.x -= 2;
-        if (DetectCollision(pc.pos.floor, cannonball.x / 2, cannonball.y)) {
+        if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
             explosion(cannonball.x, cannonball.y);
             return;
@@ -376,7 +248,7 @@ void cannonmove() {
     }
     else if (cannD == 1) {
         cannonball.x += 2;
-        if (DetectCollision(pc.pos.floor, cannonball.x / 2, cannonball.y)) {
+        if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
             explosion(cannonball.x, cannonball.y);
             return;
@@ -386,7 +258,7 @@ void cannonmove() {
     }
     else if (cannD == 2) {
         cannonball.y--;
-        if (DetectCollision(pc.pos.floor, cannonball.x / 2, cannonball.y)) {
+        if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
             explosion(cannonball.x, cannonball.y);
             return;
@@ -396,7 +268,7 @@ void cannonmove() {
     }
     else if (cannD == 3) {
         cannonball.y++;
-        if (DetectCollision(pc.pos.floor, cannonball.x / 2, cannonball.y)) {
+        if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
             explosion(cannonball.x, cannonball.y);
             return;
@@ -408,7 +280,7 @@ void cannonmove() {
 
 BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
-}
+}//키다운 함수
 
 void ProcessKeyInput() {
     int key;//연산용 변수

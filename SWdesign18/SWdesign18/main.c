@@ -17,12 +17,12 @@ Character pc;
 int main()
 {
 	int map_index=0;
-	pc.pos.x = 64;
-	pc.pos.y = 31;
-	pc.pos.floor = 0;
-	CursorView(0);
+	pc.map = 0;        //플레이어 맵 인덱스
+	pc.pos.x = 64;     //플레이어 초기 x축
+	pc.pos.y = 31;     //플레이어 초기 y축
+	CursorView(0);     //커서 숨기기
 	system("mode con cols=140 lines=42");
-	DrawBoard(0);
+	DrawBoard(map_index);
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
 	while (1) {
