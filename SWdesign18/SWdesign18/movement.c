@@ -334,8 +334,6 @@ void bulletmove() {
     }
 }
 
-
-
 void explosion(int x, int y) {
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
@@ -356,8 +354,6 @@ void explosion(int x, int y) {
         }
     }
 }
-
-
 
 void cannonmove() {
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {

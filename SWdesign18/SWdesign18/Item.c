@@ -35,7 +35,7 @@ int useOrder(Character* arr, int sec)
 
 void makeList()
 {
-	ItemList[0] = Sword;
+	ItemList[0] = Knife;
 	ItemList[1] = Rifle;
 	ItemList[2] = Rocket;
 	ItemList[3] = Food;

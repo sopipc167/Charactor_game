@@ -1,4 +1,5 @@
 #include"Stack.h"
+#include"Item.h"
 #include<string.h>
 
 int isFull();//스택 공간 여부는 변수 top으로 판단, top이 size랑 같을 시 1 반환,아니면 0
@@ -70,7 +71,7 @@ void isComplete(char ascii)
 				compare[j] = stack[i];
 				j++;
 			}
-			if (strcmp(compare, "DOOF") == 0)
+			if (strcmp(compare,ItemList[3].name) == 0)
 			{
 				//인벤토리에 추가
 				//AddToInventory(Food);
@@ -94,7 +95,7 @@ void isComplete(char ascii)
 	}
 }
 
-//void AddToInventory(Item item)
-//{
-//
-//}
+void AddToInventory(Item item)
+{
+
+}

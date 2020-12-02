@@ -4,12 +4,15 @@
 /* 무기 3종류 추가 필요*/
 Item ItemList[7] = {0,'\0'};
 
+Item Inventory[7];
+
 int useFood(Character*, int);
 int useOrder(Character*, int);
 
-Item Sword = {
+Item Knife = {
 	30,
 	"DROWS",
+
 };
 
 Item Rifle = {
