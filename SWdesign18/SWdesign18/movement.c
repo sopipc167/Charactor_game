@@ -28,6 +28,8 @@ int bulletuse = 0;
 Vector cannonball;
 Direction cannD = 0;
 int cannonuse = 0;
+int cancountdown = 0;
+int explos = 0;
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
@@ -212,20 +214,28 @@ void explosion(int x, int y) {//폭발 이펙트
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
             if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                printf("＊");
+                if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT-5 && x - 2 + x1 * 2 <= (_MAP_WIDTH-2) * 2) {
+                    SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                    printf("＊");
+                }
             }
         }
     }
-    Sleep(100);
-    for (int x1 = 0; x1 < 3; x1++) {
-        for (int y1 = 0; y1 < 3; y1++) {
-            if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                printf("  ");
-                gameBoardInfo[pc.map][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
+    cancountdown++;
+    if (cancountdown == 5) {
+        for (int x1 = 0; x1 < 3; x1++) {
+            for (int y1 = 0; y1 < 3; y1++) {
+                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 5 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                        printf("  ");
+                        gameBoardInfo[pc.map][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
+                    }
+                }
             }
         }
+        cancountdown = 0;
+        explos = 0;
     }
 }
 
@@ -240,7 +250,7 @@ void cannonmove() {//대포알
         cannonball.x -= 2;
         if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
-            explosion(cannonball.x, cannonball.y);
+            explos = 1;
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
@@ -250,7 +260,7 @@ void cannonmove() {//대포알
         cannonball.x += 2;
         if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
-            explosion(cannonball.x, cannonball.y);
+            explos = 1;
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
@@ -260,7 +270,7 @@ void cannonmove() {//대포알
         cannonball.y--;
         if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
-            explosion(cannonball.x, cannonball.y);
+            explos = 1;
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
@@ -270,7 +280,7 @@ void cannonmove() {//대포알
         cannonball.y++;
         if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
             cannonuse = 0;
-            explosion(cannonball.x, cannonball.y);
+            explos = 1;
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
@@ -314,7 +324,7 @@ void ProcessKeyInput() {
                         }
                     }
                     else if (pick == 3) {
-                        if (cannonuse == 0) {
+                        if (cannonuse == 0&&explos!=1) {
                             cannonuse = 1;
                             cannonball.x = pc.pos.x;
                             cannonball.y = pc.pos.y;
@@ -339,6 +349,9 @@ void ProcessKeyInput() {
         }
         if (cannonuse == 1) {
             cannonmove();
+        }
+        if (explos == 1) {
+            explosion(cannonball.x, cannonball.y);
         }
         Sleep(20);
     }
