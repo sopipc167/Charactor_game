@@ -32,3 +32,14 @@ int useOrder(Character* arr, int sec)
 	free(atkData);
 	return 0;
 }
+
+void makeList()
+{
+	ItemList[0] = Sword;
+	ItemList[1] = Rifle;
+	ItemList[2] = Rocket;
+	ItemList[3] = Food;
+	ItemList[4] = Order;
+	ItemList[5] = Star;
+	ItemList[6] = Key;
+}

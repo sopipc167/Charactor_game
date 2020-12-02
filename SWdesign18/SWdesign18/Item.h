@@ -2,7 +2,7 @@
 #include "ObjectInfo.h"
 
 /* 무기 3종류 추가 필요*/
-Item ItemList[8];
+Item ItemList[7] = {0,'\0'};
 
 int useFood(Character*, int);
 int useOrder(Character*, int);
@@ -34,5 +34,12 @@ Item Order = {
 	useOrder
 };
 
+Item Star = {
+	1,
+	"RATS",
+};
 
-
+Item Key = {
+	1,
+	"YEK",
+};
