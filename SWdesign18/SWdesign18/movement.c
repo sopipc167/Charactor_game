@@ -24,8 +24,10 @@
 int SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void map_switch(int map);
+
 extern Character pc;
 extern int map_index;
+
 int pick = 0;
 Vector bullet;
 Direction bulD = 0;
@@ -53,7 +55,6 @@ void ShiftRight() {
     if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
         return;
     }
-    if(gameBoardInfo[pc.map][pc.pos.x+2][pc.pos.y])
     DeleteCharacter(pc.pos.x, pc.pos.y);
     pc.pos.x += 2;
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
