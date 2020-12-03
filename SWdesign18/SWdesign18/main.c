@@ -2,13 +2,12 @@
 #include <Windows.h>
 #include "GameBoardInfo.h"
 #include "ObjectInfo.h"
-
+#include"Stack.h"
 void ProcessKeyInput();
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
-
 Character pc;
 //인벤토리 배열
 //item 배열

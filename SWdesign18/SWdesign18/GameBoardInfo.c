@@ -338,8 +338,7 @@ void DrawUI()
 void getAlphabetUI(int id,char a)
 {
 	SetCurrentCursorPos(0, 0);
-	printf("k");
 	UIBoardInfo[ItemSpot[id].y][ItemSpot[id].x] = a;
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2 + 2, ItemSpot[id].y);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2 , ItemSpot[id].y);
 	printf("%c", a);
 }
