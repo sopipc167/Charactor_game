@@ -1,8 +1,18 @@
-#pragma once
-
 #include "ObjectInfo.h"
 #include <stdlib.h>
 
+Item Food = {
+	1,
+	"DOOF",
+	useFood
+};
+
+
+Item Order = {
+	1,
+	"REDRO",
+	useOrder
+};
 int useFood(Character* p, int heal)
 {
 	if (heal >= 0)

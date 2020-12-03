@@ -2,7 +2,7 @@
 
 
 #include "ObjectInfo.h"
-#include "Stack.h"
+
 
 #include <Windows.h>
 #include <conio.h>
@@ -101,6 +101,7 @@ void ShiftUp() {
 
 void use_KNIFE(Character ch) {
     int count = 0;
+
     COORD curpos = GetCurrentCursorPos();
     SetCurrentCursorPos(ch.pos.x, ch.pos.y);
     if (ch.Di == 0) {
@@ -353,9 +354,7 @@ void ProcessKeyInput() {
                         }
                     }
                 }
-                else if (key == keyboard_s_test) {
-                    pop();
-                }
+                
                 else if (key == keyboard_1) {
                     pick = 1;
                 }
