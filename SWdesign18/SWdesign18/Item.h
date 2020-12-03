@@ -8,15 +8,5 @@ Item ItemList[2];
 int useFood(Character*, int);
 int useOrder(Character*, int);
 
-Item Food = {
-	1,
-	"DOOF",
-	useFood
-};
-
-
-Item Order = {
-	1,
-	"REDRO",
-	useOrder
-};
+Item Food;
+Item Order
