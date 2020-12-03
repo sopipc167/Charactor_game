@@ -1,10 +1,7 @@
 #pragma once
 
 #include "ObjectInfo.h"
-#include "Item.h"
 #include <stdlib.h>
-
-
 
 int useFood(Character* p, int heal)
 {

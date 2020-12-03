@@ -1,10 +1,17 @@
 #pragma once
 #include "Stack.h"
+#include"Item.h"
 
 
 top = -1;
 count = 0;
 
+
+void initList()
+{
+	ItemList[3] = Food;
+	ItemList[4] = Order;
+}
 
 int isFull()
 {
@@ -27,7 +34,7 @@ char insert(char ascii)
 	if (isFull())
 	{
 		//UI에서 꽉찼다는거 표시
-		printf("isFull\n");
+		//printf("isFull\n");
 		return 0;
 	}
 	else
@@ -45,11 +52,12 @@ char pop()
 	char ascii = stack[top];
 	if (isEmpty())
 	{
+		//printf("isEmpty\n");
 		return 0;
 	}
 	else
 	{
-		stack[top] = '\0';
+		stack[top] = ' ';
 		getAlphabetUI(top, stack[top]);
 		top--;
 		count--;
@@ -71,7 +79,7 @@ void isComplete(int ascii)
 				compare[j] = stack[i];
 				j++;
 			}
-			if (strcmp(compare, "DOOF") == 0)
+			if (strcmp(compare, ItemList[3].name) == 0)
 			{
 				//인벤토리에 추가
 				//AddToInventory(Food);
@@ -87,7 +95,7 @@ void isComplete(int ascii)
 				compare[j] = stack[i];
 				j++;
 			}
-			if (strcmp(compare, "REDRO") == 0)
+			if (strcmp(compare, ItemList[4].name) == 0)
 			{
 				//인벤토리에 추가
 			}

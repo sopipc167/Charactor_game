@@ -50,17 +50,18 @@ void DeleteCharacter(int x, int y) {
 }
 
 void ShiftRight() {
-    pc.Di = 1;
+    pc.Di = RIGHT;
     if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
         return;
     }
+    if(gameBoardInfo[pc.map][pc.pos.x+2][pc.pos.y])
     DeleteCharacter(pc.pos.x, pc.pos.y);
     pc.pos.x += 2;
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
 }
 
 void ShiftLeft() {
-    pc.Di = 0;
+    pc.Di = LEFT;
     if (DetectCollision(pc.map, (pc.pos.x - 2) / 2, pc.pos.y)) {
         return;
     }
@@ -78,7 +79,7 @@ void ShiftLeft() {
 }
 
 void ShiftDown() {
-    pc.Di = 3;
+    pc.Di = DOWN;
     if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y+1)) {
         return;
     }
@@ -88,7 +89,7 @@ void ShiftDown() {
 }
 
 void ShiftUp() {
-    pc.Di = 2;
+    pc.Di = UP;
     if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y-1)) {
         return;
     }
