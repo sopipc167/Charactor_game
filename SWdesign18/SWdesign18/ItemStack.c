@@ -1,5 +1,5 @@
+#pragma once
 #include"Stack.h"
-#include<string.h>
 
 int isFull();//스택 공간 여부는 변수 top으로 판단, top이 size랑 같을 시 1 반환,아니면 0
 int isEmpty();//top이 -1일 때 1반환, 아니면 0
@@ -34,6 +34,7 @@ int insert(int ascii)
 	{
 		top++;
 		stack[top] = ascii;
+		getAlphabetUI(top, stack[top]);
 		return 1;
 	}
 }

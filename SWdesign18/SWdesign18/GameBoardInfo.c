@@ -1,5 +1,5 @@
+#pragma once
 #include "GameBoardInfo.h"
-#include <stdio.h>
 
 /*
 	. º® : 1~10
@@ -197,11 +197,12 @@ UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH] =
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	2,0,7,0,7,0,7,0,7,0,7,0,7,0,7,0,7,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 };
+Vector ItemSpot[8];
 void DrawBoard(int idx)
 {
 	int x, y;
@@ -274,6 +275,20 @@ void DrawBoard(int idx)
 }
 void DrawUI()
 {
+	ItemSpot[0].x = 2;
+	ItemSpot[0].y = 31;
+	ItemSpot[1].x = 4;
+	ItemSpot[1].y = 31;
+	ItemSpot[2].x = 6;
+	ItemSpot[2].y = 31;
+	ItemSpot[3].x = 8;
+	ItemSpot[3].y = 31;
+	ItemSpot[4].x = 10;
+	ItemSpot[4].y = 31;
+	ItemSpot[5].x = 12;
+	ItemSpot[5].y = 31;
+	ItemSpot[6].x = 14;
+	ItemSpot[6].y = 31;
 	int x, y;
 	SetCurrentCursorPos(_MAP_WIDTH*2, 0);
 	for (y = 0; y < _MAP_HEIGHT; y++)
@@ -311,7 +326,20 @@ void DrawUI()
 				printf("¦±");
 
 			}
+			else if (UIBoardInfo[y][x] == 7)
+			{
+				printf("_");
+
+			}
 			SetCurrentCursorPos(_MAP_WIDTH*2 + x * 2 + 2, y);
 		}
 	}
+}
+void getAlphabetUI(int id,char a)
+{
+	SetCurrentCursorPos(0, 0);
+	printf("k");
+	UIBoardInfo[ItemSpot[id].y][ItemSpot[id].x] = a;
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2 + 2, ItemSpot[id].y);
+	printf("%c", a);
 }

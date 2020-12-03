@@ -1,5 +1,6 @@
 #pragma once
-
+#include<string.h>
+#include"GameBoardInfo.h"
 #define SIZE 7
 
 char stack[SIZE] = { '\0' };

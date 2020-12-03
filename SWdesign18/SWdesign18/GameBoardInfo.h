@@ -1,4 +1,5 @@
 #pragma once
+#include <stdio.h>
 
 #define _MAP_WIDTH (57)
 #define _MAP_HEIGHT (38)
@@ -18,5 +19,7 @@ typedef struct vector
 	int y;
 }Vector;
 void DrawBoard(int idx);
+void DrawUI();
+void getAlphabetUI(int id, char a);
 int gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH];
 int UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH];
