@@ -299,6 +299,7 @@ void DrawUI()
 			if (UIBoardInfo[y][x] == 1)
 			{
 				printf("¦¬");
+
 			}
 			else if (UIBoardInfo[y][x] == 2)
 			{
@@ -329,10 +330,6 @@ void DrawUI()
 			{
 				printf("_");
 
-			}
-			else if (UIBoardInfo[y][x] == 65)
-			{
-				printf("A");
 			}
 			SetCurrentCursorPos(_MAP_WIDTH*2 + x * 2 + 2, y);
 		}

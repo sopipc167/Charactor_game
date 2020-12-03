@@ -57,7 +57,11 @@ char pop()
 	}
 	else
 	{
+<<<<<<< HEAD
 		stack[top] = ' ';
+=======
+		stack[top] = '\0';
+>>>>>>> parent of 3750b18... 글자 UI가 다음 맵에도 적용되게 함
 		getAlphabetUI(top, stack[top]);
 		top--;
 		count--;
