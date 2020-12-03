@@ -50,7 +50,7 @@ char pop()
 	else
 	{
 		stack[top] = '\0';
-		getAlphabetUI(top, stack[top]);
+		getAlphabetUI(top, '_');
 		top--;
 		count--;
 		return ascii;
