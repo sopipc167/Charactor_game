@@ -21,8 +21,9 @@ int main()
 	pc.pos.x = 64;     //플레이어 초기 x축
 	pc.pos.y = 31;     //플레이어 초기 y축
 	CursorView(0);     //커서 숨기기
-	system("mode con cols=140 lines=42");
+	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
+	DrawUI();
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
 	while (1) {

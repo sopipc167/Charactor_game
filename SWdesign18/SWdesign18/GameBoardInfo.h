@@ -2,6 +2,7 @@
 
 #define _MAP_WIDTH (57)
 #define _MAP_HEIGHT (38)
+#define _UI_WIDTH (20)
 
 typedef enum direction
 {
@@ -18,3 +19,4 @@ typedef struct vector
 }Vector;
 void DrawBoard(int idx);
 int gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH];
+int UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH];
