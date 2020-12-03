@@ -1,8 +1,12 @@
-#include "GameBoardInfo.h"
+#pragma once
+
+
 #include "ObjectInfo.h"
-#include <stdio.h>
+
+
 #include <Windows.h>
 #include <conio.h>
+
 
 #define keyboard_LEFT (75)
 #define keyboard_RIGHT (77)
@@ -20,7 +24,9 @@
 
 int SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
+void map_switch(int map);
 extern Character pc;
+extern int map_index;
 int pick = 0;
 Vector bullet;
 Direction bulD = 0;
@@ -30,6 +36,8 @@ Direction cannD = 0;
 int cannonuse = 0;
 int cancountdown = 0;
 int explos = 0;
+
+
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
@@ -58,6 +66,14 @@ void ShiftLeft() {
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
     pc.pos.x -=2;
+    if (pc.pos.x == 0 && pc.pos.y == 6) {
+        system("cls");
+        DrawBoard(1);
+        DrawUI();
+        map_switch(1);
+        pc.pos.x = 106;
+        pc.pos.y = 14;
+    }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
@@ -292,6 +308,11 @@ BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }//키다운 함수
 
+void map_switch(int map) {
+    pc.map = 1;
+    map_index = 1;
+}
+
 void ProcessKeyInput() {
     int key;//연산용 변수
     for (int i = 0; i < 20; i++) {
@@ -332,6 +353,7 @@ void ProcessKeyInput() {
                         }
                     }
                 }
+                
                 else if (key == keyboard_1) {
                     pick = 1;
                 }

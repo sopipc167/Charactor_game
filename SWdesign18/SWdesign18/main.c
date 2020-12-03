@@ -9,13 +9,14 @@ COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
 Character pc;
+int map_index;
 //인벤토리 배열
 //item 배열
 //몬스터 배열
 
 int main()
 {
-	int map_index=0;
+	map_index=0;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 64;     //플레이어 초기 x축
 	pc.pos.y = 31;     //플레이어 초기 y축
