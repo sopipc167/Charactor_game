@@ -2,10 +2,9 @@
 
 
 #include "ObjectInfo.h"
-
-
 #include <Windows.h>
 #include <conio.h>
+#include "Stack.h"
 
 
 #define keyboard_LEFT (75)
@@ -354,7 +353,9 @@ void ProcessKeyInput() {
                         }
                     }
                 }
-                
+                else if (key == keyboard_s_test) {
+                    pop();
+                }
                 else if (key == keyboard_1) {
                     pick = 1;
                 }

@@ -1,21 +1,14 @@
 #pragma once
-#include "Stack.h"
-#include"Item.h"
+#include"Stack.h"
 
 
-top = -1;
 count = 0;
+top = -1;
 
-
-void initList()
-{
-	ItemList[3] = Food;
-	ItemList[4] = Order;
-}
 
 int isFull()
 {
-	if (top + 1 == M_SIZE)
+	if (top + 1 == SIZE_M)
 		return 1;
 	else
 		return 0;
@@ -34,7 +27,7 @@ char insert(char ascii)
 	if (isFull())
 	{
 		//UI¿¡¼­ ²ËÃ¡´Ù´Â°Å Ç¥½Ã
-		//printf("isFull\n");
+		printf("isFull\n");
 		return 0;
 	}
 	else
@@ -52,16 +45,11 @@ char pop()
 	char ascii = stack[top];
 	if (isEmpty())
 	{
-		//printf("isEmpty\n");
 		return 0;
 	}
 	else
 	{
-<<<<<<< HEAD
-		stack[top] = ' ';
-=======
 		stack[top] = '\0';
->>>>>>> parent of 3750b18... ê¸€ì UIê°€ ë‹¤ìŒ ë§µì—ë„ ì ìš©ë˜ê²Œ í•¨
 		getAlphabetUI(top, stack[top]);
 		top--;
 		count--;
@@ -72,7 +60,7 @@ char pop()
 void isComplete(int ascii)
 {
 	int i, j = 0;
-	for (i = 0; i < M_SIZE; i++)
+	for (i = 0; i < SIZE_M; i++)
 		compare[i] = '\0';
 	if (ascii == 'D')
 	{
@@ -83,7 +71,7 @@ void isComplete(int ascii)
 				compare[j] = stack[i];
 				j++;
 			}
-			if (strcmp(compare, ItemList[3].name) == 0)
+			if (strcmp(compare, "DOOF") == 0)
 			{
 				//ÀÎº¥Åä¸®¿¡ Ãß°¡
 				//AddToInventory(Food);
@@ -99,7 +87,7 @@ void isComplete(int ascii)
 				compare[j] = stack[i];
 				j++;
 			}
-			if (strcmp(compare, ItemList[4].name) == 0)
+			if (strcmp(compare, "REDRO") == 0)
 			{
 				//ÀÎº¥Åä¸®¿¡ Ãß°¡
 			}
