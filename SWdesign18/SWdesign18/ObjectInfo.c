@@ -1,5 +1,3 @@
-#pragma once
-
 #include "ObjectInfo.h"
 #include "GameBoardInfo.h"
 

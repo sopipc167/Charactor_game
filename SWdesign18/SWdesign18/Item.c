@@ -1,5 +1,3 @@
-#pragma once
-
 #include "ObjectInfo.h"
 #include "Item.h"
 #include <stdlib.h>
