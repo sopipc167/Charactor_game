@@ -1,8 +1,11 @@
+#pragma once
+
 #include <stdio.h>
 #include <Windows.h>
 #include "GameBoardInfo.h"
 #include "ObjectInfo.h"
 #include"Stack.h"
+
 void ProcessKeyInput();
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
