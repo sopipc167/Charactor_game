@@ -7,6 +7,7 @@
 #include "Stack.h"
 
 
+
 #define keyboard_LEFT (75)
 #define keyboard_RIGHT (77)
 #define keyboard_UP (72)
@@ -40,6 +41,8 @@ int explos = 0;
 
 
 
+
+
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
     printf("¡Ü");
@@ -56,6 +59,9 @@ void ShiftRight() {
         return;
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
+    if (pc.pos.x == 110 && pc.pos.y == 14 && pc.map == 1) {
+        map_switch(1, 0);
+    }
     pc.pos.x += 2;
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
 }
@@ -67,13 +73,8 @@ void ShiftLeft() {
     }
     DeleteCharacter(pc.pos.x, pc.pos.y);
     pc.pos.x -=2;
-    if (pc.pos.x == 0 && pc.pos.y == 6) {
-        system("cls");
-        DrawBoard(1);
-        DrawUI();
-        map_switch(1);
-        pc.pos.x = 106;
-        pc.pos.y = 14;
+    if (pc.pos.x == 0 && pc.pos.y == 6&&pc.map==0) {
+        map_switch(0,1);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
@@ -181,7 +182,6 @@ void use_KNIFE(Character ch) {
     }
 }
 
-
 void bulletmove() {//ÃÑ¾Ë
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
@@ -225,8 +225,6 @@ void bulletmove() {//ÃÑ¾Ë
     }
 }
 
-
-
 void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
@@ -242,12 +240,17 @@ void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     if (cancountdown == 5) {
         for (int x1 = 0; x1 < 3; x1++) {
             for (int y1 = 0; y1 < 3; y1++) {
-                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 5 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                int x2 = x - 2 + x1 * 2;
+                int y2 = y - 1 + y1;
+                if (x2 >= 0 && y2 >= 0) {
+                    if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 5 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x2, y2);
                         printf("  ");
-                        gameBoardInfo[pc.map][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
+                        gameBoardInfo[pc.map][y2][x2 / 2] = 0;
                     }
+                }
+                if (pc.pos.x == x2 && pc.pos.y == y2) {
+                    ShowCharacter(pc,pc.pos.x,pc.pos.y);
                 }
             }
         }
@@ -255,8 +258,6 @@ void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
         explos = 0;
     }
 }
-
-
 
 void cannonmove() {//´ëÆ÷¾Ë
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
@@ -309,9 +310,28 @@ BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }//Å°´Ù¿î ÇÔ¼ö
 
-void map_switch(int map) {
-    pc.map = 1;
-    map_index = 1;
+void map_switch(int map,int destination) {
+    system("cls");
+    DrawBoard(destination);
+    DrawUI();
+    pc.map = destination;
+    map_index = destination;
+    pc.pos.x = map_start[map][destination].x;
+    pc.pos.y = map_start[map][destination].y;
+}
+
+void useRIFLE() {
+    bulletuse = 1;
+    bullet.x = pc.pos.x;
+    bullet.y = pc.pos.y;
+    bulD = pc.Di;
+}
+
+void useCANNON() {
+    cannonuse = 1;
+    cannonball.x = pc.pos.x;
+    cannonball.y = pc.pos.y;
+    cannD = pc.Di;
 }
 
 void ProcessKeyInput() {
@@ -339,10 +359,7 @@ void ProcessKeyInput() {
                     }
                     else if (pick == 2) {
                         if (bulletuse == 0) {
-                            bulletuse = 1;
-                            bullet.x = pc.pos.x;
-                            bullet.y = pc.pos.y;
-                            bulD = pc.Di;
+                            useRIFLE();
                         }
                     }
                     else if (pick == 3) {

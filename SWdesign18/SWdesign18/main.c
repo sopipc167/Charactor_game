@@ -9,8 +9,10 @@ void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
+void set_startingpoint();//맵 이동때 위치 저장
 Character pc;
 int map_index;
+
 
 //인벤토리 배열
 //item 배열
@@ -23,6 +25,7 @@ int main()
 	pc.pos.x = 64;     //플레이어 초기 x축
 	pc.pos.y = 31;     //플레이어 초기 y축
 	pc.hp = 3;
+	set_startingpoint();
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
@@ -87,4 +90,9 @@ void CursorView(char show)//커서숨기기
 	ConsoleCursor.dwSize = 1;
 
 	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
+}
+
+void set_startingpoint() {
+	map_start[0][1].x = 108; map_start[0][1].y = 14;
+	map_start[1][0].x = 2; map_start[1][0].y = 6;
 }

@@ -23,3 +23,5 @@ void DrawUI();
 void getAlphabetUI(int id, char a);
 int gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH];
 int UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH];
+
+Vector map_start[11][11];
