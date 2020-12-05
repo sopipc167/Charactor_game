@@ -48,6 +48,11 @@ void ShowCharacter(Character Ch,int x,int y) {
     printf("¡Ü");
 }
 
+void Show_alp(char alp, int x, int y) {
+    SetCurrentCursorPos(x, y);
+    printf("%c ", alp);
+}
+
 void DeleteCharacter(int x, int y) {
     SetCurrentCursorPos(x, y);
     printf("  ");
@@ -58,7 +63,12 @@ void ShiftRight() {
     if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     if (pc.pos.x == 110 && pc.pos.y == 14 && pc.map == 1) {
         map_switch(1, 0);
     }
@@ -71,7 +81,12 @@ void ShiftLeft() {
     if (DetectCollision(pc.map, (pc.pos.x - 2) / 2, pc.pos.y)) {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.x -=2;
     if (pc.pos.x == 0 && pc.pos.y == 6&&pc.map==0) {
         map_switch(0,1);
@@ -84,7 +99,12 @@ void ShiftDown() {
     if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y+1)) {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.y++;
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
@@ -94,7 +114,12 @@ void ShiftUp() {
     if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y-1)) {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.y--;
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
