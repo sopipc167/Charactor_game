@@ -1,14 +1,14 @@
 #pragma once
-#include "Stack.h"
+#include"Stack.h"
 
 
-top = -1;
 count = 0;
+top = -1;
 
 
 int isFull()
 {
-	if (top + 1 == M_SIZE)
+	if (top + 1 == SIZE_M)
 		return 1;
 	else
 		return 0;
@@ -50,7 +50,7 @@ char pop()
 	else
 	{
 		stack[top] = '\0';
-		getAlphabetUI(top, '_');
+		getAlphabetUI(top, stack[top]);
 		top--;
 		count--;
 		return ascii;
@@ -60,7 +60,7 @@ char pop()
 void isComplete(int ascii)
 {
 	int i, j = 0;
-	for (i = 0; i < M_SIZE; i++)
+	for (i = 0; i < SIZE_M; i++)
 		compare[i] = '\0';
 	if (ascii == 'D')
 	{

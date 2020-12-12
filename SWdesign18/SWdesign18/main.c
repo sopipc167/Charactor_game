@@ -1,3 +1,4 @@
+#pragma once
 #include <stdio.h>
 #include <Windows.h>
 #include "GameBoardInfo.h"
@@ -10,6 +11,8 @@ void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
 Character pc;
 int map_index;
+
+
 
 //인벤토리 배열
 //item 배열
@@ -26,6 +29,7 @@ int main()
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
 	DrawUI();
+	setmapinfo();
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
 	while (1) {
@@ -87,3 +91,4 @@ void CursorView(char show)//커서숨기기
 
 	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 }
+
