@@ -163,8 +163,14 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            printf("  ");
+        for (int i = 1; i < count+1; i++) {
+            SetCurrentCursorPos(pc.pos.x - i * 2, pc.pos.y);
+            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x-i*2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2], pc.pos.x - i * 2, pc.pos.y);
+            }
+            else {
+                printf("  ");
+            }
         }
     }
     else if (ch.Di == 1)
@@ -172,6 +178,9 @@ void use_KNIFE(Character ch) {
         for (int reach = 0; reach < 3; reach++) {
             if (DetectCollision(ch.map, (ch.pos.x + 2) / 2, ch.pos.y))
                 break;
+
+
+
             ch.pos.x += 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -181,10 +190,22 @@ void use_KNIFE(Character ch) {
             }
         }
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x-i*2, ch.pos.y);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x + i * 2, pc.pos.y);
+            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2], pc.pos.x + i * 2, pc.pos.y);
+            }
+            else {
+                printf("  ");
+            }
         }
+
+
+
+
+
+
+
     }
     else if (ch.Di == 2) {
         for (int reach = 0; reach < 3; reach++) {
@@ -200,10 +221,16 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y + i);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x, pc.pos.y-i);
+            if (gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2], pc.pos.x , pc.pos.y-i);
+            }
+            else {
+                printf("  ");
+            }
         }
+
     }
     else if (ch.Di == 3) {
         for (int reach = 0; reach < 3; reach++) {
@@ -219,10 +246,17 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y - i);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x, pc.pos.y + i);
+            if (gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2], pc.pos.x, pc.pos.y + i);
+            }
+            else {
+                printf("  ");
+            }
         }
+
+
     }
 }
 
@@ -230,6 +264,9 @@ void bulletmove() {//ÃÑ¾Ë
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
         printf("  ");
+    }
+    if (gameBoardInfo[pc.map][bullet.y][bullet.x / 2] >= 30 && gameBoardInfo[pc.map][bullet.y][bullet.x / 2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][bullet.y][bullet.x / 2], bullet.x, bullet.y);
     }
     if (bulD == 0) {
         bullet.x -= 2;
@@ -307,6 +344,9 @@ void cannonmove() {//´ëÆ÷¾Ë
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
+    }
+    if (gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] >= 30 && gameBoardInfo[pc.map][cannonball.y][cannonball.x/ 2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2], cannonball.x, cannonball.y);
     }
     if (cannD == 0) {
         cannonball.x -= 2;
