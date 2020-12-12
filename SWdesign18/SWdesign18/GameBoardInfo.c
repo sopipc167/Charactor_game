@@ -7,6 +7,7 @@
 	. 문 :
 	. 글자 : 30~120 (아스키코드값)
 */
+Mapinfo[10][4] = { 0 };
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	/*{
@@ -406,6 +407,57 @@ UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH] =
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 };
 Vector ItemSpot[8];
+void setmapinfo()
+{
+	Mapinfo[0][0] = 015515;
+	Mapinfo[0][1] = 015515;
+	Mapinfo[0][2] = 015515;
+
+	Mapinfo[1][1] = 015515;
+	Mapinfo[1][2] = 015515;
+	Mapinfo[1][3] = 015515;
+
+	Mapinfo[2][0] = 015515;
+	Mapinfo[2][0] = 015515;
+	Mapinfo[2][0] = 015515;
+	Mapinfo[2][0] = 015515;
+
+	Mapinfo[3][0] = 015515;
+	Mapinfo[3][0] = 015515;
+	Mapinfo[3][0] = 015515;
+	Mapinfo[3][0] = 015515;
+
+	Mapinfo[4][0] = 015515;
+	Mapinfo[4][0] = 015515;
+	Mapinfo[4][0] = 015515;
+	Mapinfo[4][0] = 015515;
+
+	Mapinfo[5][0] = 015515;
+	Mapinfo[5][0] = 015515;
+	Mapinfo[5][0] = 015515;
+	Mapinfo[5][0] = 015515;
+
+	Mapinfo[6][0] = 015515;
+	Mapinfo[6][0] = 015515;
+	Mapinfo[6][0] = 015515;
+	Mapinfo[6][0] = 015515;
+
+	Mapinfo[7][0] = 015515;
+	Mapinfo[7][0] = 015515;
+	Mapinfo[7][0] = 015515;
+	Mapinfo[7][0] = 015515;
+
+	Mapinfo[8][0] = 015515;
+	Mapinfo[8][0] = 015515;
+	Mapinfo[8][0] = 015515;
+	Mapinfo[8][0] = 015515;
+
+	Mapinfo[9][0] = 015515;
+	Mapinfo[9][0] = 015515;
+	Mapinfo[9][0] = 015515;
+	Mapinfo[9][0] = 015515;
+
+}
 void DrawBoard(int idx)
 {
 	int x, y;
