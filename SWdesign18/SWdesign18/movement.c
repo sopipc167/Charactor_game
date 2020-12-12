@@ -60,9 +60,14 @@ void DeleteCharacter(int x, int y) {
 
 void ShiftRight() {
     pc.Di = RIGHT;
-    if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y))
+    {
         return;
     }
+
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2], pc.pos.x, pc.pos.y);
     }
@@ -78,9 +83,14 @@ void ShiftRight() {
 
 void ShiftLeft() {
     pc.Di = LEFT;
-    if (DetectCollision(pc.map, (pc.pos.x - 2) / 2, pc.pos.y)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y))
+    {
         return;
     }
+
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
@@ -96,9 +106,13 @@ void ShiftLeft() {
 
 void ShiftDown() {
     pc.Di = DOWN;
-    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y+1)) {
+
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y+1))
+    {
         return;
     }
+
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
@@ -111,9 +125,14 @@ void ShiftDown() {
 
 void ShiftUp() {
     pc.Di = UP;
-    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y-1)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y-1))
+    {
         return;
     }
+
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
