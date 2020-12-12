@@ -7,6 +7,7 @@
 #include "Stack.h"
 
 
+
 #define keyboard_LEFT (75)
 #define keyboard_RIGHT (77)
 #define keyboard_UP (72)
@@ -24,8 +25,10 @@
 int SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void map_switch(int map);
+
 extern Character pc;
 extern int map_index;
+
 int pick = 0;
 Vector bullet;
 Direction bulD = 0;
@@ -38,9 +41,16 @@ int explos = 0;
 
 
 
+
+
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
     printf("¡Ü");
+}
+
+void Show_alp(char alp, int x, int y) {
+    SetCurrentCursorPos(x, y);
+    printf("%c ", alp);
 }
 
 void DeleteCharacter(int x, int y) {
@@ -50,50 +60,95 @@ void DeleteCharacter(int x, int y) {
 
 void ShiftRight() {
     pc.Di = RIGHT;
-    if (DetectCollision(pc.map, (pc.pos.x + 2) / 2, pc.pos.y)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y))
+    {
         return;
     }
-    if(gameBoardInfo[pc.map][pc.pos.x+2][pc.pos.y])
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+
+
+
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.x += 2;
+
+    if (pc.pos.x == (_MAP_WIDTH-1)*2) {
+        map_switch(pc.map,1);
+    }
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
 }
 
 void ShiftLeft() {
     pc.Di = LEFT;
-    if (DetectCollision(pc.map, (pc.pos.x - 2) / 2, pc.pos.y)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y))
+    {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+
+
+
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.x -=2;
-    if (pc.pos.x == 0 && pc.pos.y == 6) {
-        system("cls");
-        DrawBoard(1);
-        DrawUI();
-        map_switch(1);
-        pc.pos.x = 106;
-        pc.pos.y = 14;
+    if (pc.pos.x == 0) {
+        map_switch(pc.map,3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
 void ShiftDown() {
     pc.Di = DOWN;
-    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y+1)) {
+
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y+1))
+    {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+
+
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.y++;
+    if (pc.pos.y == _MAP_HEIGHT) {
+        map_switch(pc.map,2);
+    }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
 void ShiftUp() {
     pc.Di = UP;
-    if (DetectCollision(pc.map, pc.pos.x / 2, pc.pos.y-1)) {
+
+
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y-1))
+    {
         return;
     }
-    DeleteCharacter(pc.pos.x, pc.pos.y);
+
+
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
+    }
+    else {
+        DeleteCharacter(pc.pos.x, pc.pos.y);
+    }
     pc.pos.y--;
+    if (pc.pos.y == 0) {
+        map_switch(pc.map,0);
+    }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
@@ -117,8 +172,14 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            printf("  ");
+        for (int i = 1; i < count+1; i++) {
+            SetCurrentCursorPos(pc.pos.x - i * 2, pc.pos.y);
+            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x-i*2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2], pc.pos.x - i * 2, pc.pos.y);
+            }
+            else {
+                printf("  ");
+            }
         }
     }
     else if (ch.Di == 1)
@@ -135,10 +196,16 @@ void use_KNIFE(Character ch) {
             }
         }
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x-i*2, ch.pos.y);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x + i * 2, pc.pos.y);
+            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x + i * 2) / 2], pc.pos.x + i * 2, pc.pos.y);
+            }
+            else {
+                printf("  ");
+            }
         }
+
     }
     else if (ch.Di == 2) {
         for (int reach = 0; reach < 3; reach++) {
@@ -154,10 +221,16 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y + i);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x, pc.pos.y-i);
+            if (gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2], pc.pos.x , pc.pos.y-i);
+            }
+            else {
+                printf("  ");
+            }
         }
+
     }
     else if (ch.Di == 3) {
         for (int reach = 0; reach < 3; reach++) {
@@ -173,18 +246,27 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 0; i < count; i++) {
-            SetCurrentCursorPos(ch.pos.x, ch.pos.y - i);
-            printf("  ");
+        for (int i = 1; i < count + 1; i++) {
+            SetCurrentCursorPos(pc.pos.x, pc.pos.y + i);
+            if (gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y + i][(pc.pos.x) / 2], pc.pos.x, pc.pos.y + i);
+            }
+            else {
+                printf("  ");
+            }
         }
+
+
     }
 }
-
 
 void bulletmove() {//ÃÑ¾Ë
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
         printf("  ");
+    }
+    if (gameBoardInfo[pc.map][bullet.y][bullet.x / 2] >= 30 && gameBoardInfo[pc.map][bullet.y][bullet.x / 2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][bullet.y][bullet.x / 2], bullet.x, bullet.y);
     }
     if (bulD == 0) {
         bullet.x -= 2;
@@ -224,8 +306,6 @@ void bulletmove() {//ÃÑ¾Ë
     }
 }
 
-
-
 void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
@@ -241,12 +321,17 @@ void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     if (cancountdown == 5) {
         for (int x1 = 0; x1 < 3; x1++) {
             for (int y1 = 0; y1 < 3; y1++) {
-                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 5 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                int x2 = x - 2 + x1 * 2;
+                int y2 = y - 1 + y1;
+                if (x2 >= 0 && y2 >= 0) {
+                    if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 5 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x2, y2);
                         printf("  ");
-                        gameBoardInfo[pc.map][y - 1 + y1][(x - 2 + x1 * 2) / 2] = 0;
+                        gameBoardInfo[pc.map][y2][x2 / 2] = 0;
                     }
+                }
+                if (pc.pos.x == x2 && pc.pos.y == y2) {
+                    ShowCharacter(pc,pc.pos.x,pc.pos.y);
                 }
             }
         }
@@ -255,12 +340,13 @@ void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     }
 }
 
-
-
 void cannonmove() {//´ëÆ÷¾Ë
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
+    }
+    if (gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] >= 30 && gameBoardInfo[pc.map][cannonball.y][cannonball.x/ 2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2], cannonball.x, cannonball.y);
     }
     if (cannD == 0) {
         cannonball.x -= 2;
@@ -308,9 +394,35 @@ BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }//Å°´Ù¿î ÇÔ¼ö
 
-void map_switch(int map) {
-    pc.map = 1;
-    map_index = 1;
+void map_switch(int map,int direc) {
+    int mapdes_x;
+    int mapdes_y;
+    int numb;
+    numb = Mapinfo[map][direc];
+    map_index = numb / 10000;
+    mapdes_x = (numb / 100)%100;
+    mapdes_y = numb % 100;
+    system("cls");
+    DrawBoard(map_index);
+    DrawUI();
+    pc.pos.x = mapdes_x*2;
+    pc.pos.y = mapdes_y;
+    pc.map = map_index;
+    SetCurrentCursorPos(pc.pos.x, pc.pos.y);
+}
+
+void useRIFLE() {
+    bulletuse = 1;
+    bullet.x = pc.pos.x;
+    bullet.y = pc.pos.y;
+    bulD = pc.Di;
+}
+
+void useCANNON() {
+    cannonuse = 1;
+    cannonball.x = pc.pos.x;
+    cannonball.y = pc.pos.y;
+    cannD = pc.Di;
 }
 
 void ProcessKeyInput() {
@@ -338,10 +450,7 @@ void ProcessKeyInput() {
                     }
                     else if (pick == 2) {
                         if (bulletuse == 0) {
-                            bulletuse = 1;
-                            bullet.x = pc.pos.x;
-                            bullet.y = pc.pos.y;
-                            bulD = pc.Di;
+                            useRIFLE();
                         }
                     }
                     else if (pick == 3) {

@@ -7,11 +7,31 @@
 int DetectCollision(int floor, int x, int y)
 {
 	int num = gameBoardInfo[floor][y][x];
-	
+
 	if ((num <= -10) || ((num >= 1) && (num <= 10)) /*|| (막힌 문)*/)
 		return 1;
-	else if ((num == 0) || ((num >= 30) && (num <= 120)) /* || (열린 문) || (함정)*/)
+	else if ((num == 0)) /* || (열린 문) || (함정)*/
 		return 0;
+	else if ((num >= 30) && (num <= 120)) {
+		return 0;
+	}
+	else//몬스터
+		return -1;
+}
+
+
+int DetectSpell(int floor, int x, int y)
+{
+	int num = gameBoardInfo[floor][y][x];
+
+	if ((num <= -10) || ((num >= 1) && (num <= 10)) /*|| (막힌 문)*/)
+		return 1;
+	else if ((num == 0)) /* || (열린 문) || (함정)*/
+		return 0;
+	else if ((num >= 30) && (num <= 120)) {
+		insert(num);
+		return 0;
+	}
 	else//몬스터
 		return -1;
 }
