@@ -68,16 +68,18 @@ void ShiftRight() {
     }
 
 
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2], pc.pos.x, pc.pos.y);
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
     }
-    if (pc.pos.x == 110 && pc.pos.y == 14 && pc.map == 1) {
-        map_switch(1, 0);
-    }
     pc.pos.x += 2;
+
+    if (pc.pos.x == (_MAP_WIDTH-1)*2) {
+        map_switch(pc.map,1);
+    }
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
 }
 
@@ -91,6 +93,7 @@ void ShiftLeft() {
     }
 
 
+
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
@@ -98,8 +101,8 @@ void ShiftLeft() {
         DeleteCharacter(pc.pos.x, pc.pos.y);
     }
     pc.pos.x -=2;
-    if (pc.pos.x == 0 && pc.pos.y == 6&&pc.map==0) {
-        map_switch(0,1);
+    if (pc.pos.x == 0) {
+        map_switch(pc.map,3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
@@ -120,6 +123,9 @@ void ShiftDown() {
         DeleteCharacter(pc.pos.x, pc.pos.y);
     }
     pc.pos.y++;
+    if (pc.pos.y == _MAP_HEIGHT) {
+        map_switch(pc.map,2);
+    }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
@@ -140,6 +146,9 @@ void ShiftUp() {
         DeleteCharacter(pc.pos.x, pc.pos.y);
     }
     pc.pos.y--;
+    if (pc.pos.y == 0) {
+        map_switch(pc.map,0);
+    }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
 }
 
@@ -178,9 +187,6 @@ void use_KNIFE(Character ch) {
         for (int reach = 0; reach < 3; reach++) {
             if (DetectCollision(ch.map, (ch.pos.x + 2) / 2, ch.pos.y))
                 break;
-
-
-
             ch.pos.x += 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -199,12 +205,6 @@ void use_KNIFE(Character ch) {
                 printf("  ");
             }
         }
-
-
-
-
-
-
 
     }
     else if (ch.Di == 2) {
@@ -394,14 +394,21 @@ BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }//키다운 함수
 
-void map_switch(int map,int destination) {
+void map_switch(int map,int direc) {
+    int mapdes_x;
+    int mapdes_y;
+    int numb;
+    numb = Mapinfo[map][direc];
+    map_index = numb / 10000;
+    mapdes_x = (numb / 100)%100;
+    mapdes_y = numb % 100;
     system("cls");
-    DrawBoard(destination);
+    DrawBoard(map_index);
     DrawUI();
-    pc.map = destination;
-    map_index = destination;
-    pc.pos.x = map_start[map][destination].x;
-    pc.pos.y = map_start[map][destination].y;
+    pc.pos.x = mapdes_x*2;
+    pc.pos.y = mapdes_y;
+    pc.map = map_index;
+    SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 }
 
 void useRIFLE() {
