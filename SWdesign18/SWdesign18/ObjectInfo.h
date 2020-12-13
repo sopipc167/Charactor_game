@@ -35,6 +35,7 @@ typedef struct character
 
 int DetectCollision(int floor,int x, int y);
 
+
 void InitMonster(Character* monster, int _floor, int _x, int _y, Direction a[]);
 int MonsterRoute(Character* _m, int delta);
 int MonsterAttack(Character* _m);
