@@ -75,6 +75,7 @@ void ShiftRight() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 0;
     }
     pc.pos.x += 2;
 
@@ -82,6 +83,9 @@ void ShiftRight() {
         map_switch(pc.map,1);
     }
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftLeft() {
@@ -100,12 +104,16 @@ void ShiftLeft() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.x -=2;
     if (pc.pos.x == 0) {
         map_switch(pc.map,3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftDown() {
@@ -122,12 +130,16 @@ void ShiftDown() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.y++;
     if (pc.pos.y == _MAP_HEIGHT-1) {
         map_switch(pc.map,2);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftUp() {
@@ -145,12 +157,16 @@ void ShiftUp() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.y--;
     if (pc.pos.y == 0) {
         map_switch(pc.map,0);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 
