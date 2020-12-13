@@ -154,24 +154,4 @@ void isComplete(int ascii)
 			}
 		}
 	}
-	else if (ascii == 'R')
-	{
-		if (top >= 3)
-		{
-			for (i = count; i >= count - 3; i--)
-			{
-				compare[j] = stack[i];
-				j++;
-			}
-			if (strcmp(compare, ItemList[5].name) == 0)
-			{
-				index = 5;
-				for (i = count; i >= count - 3; i--)
-					pop();
-				count -= 4;
-				//인벤토리에 추가
-				AddToInventory(ItemList, index);
-			}
-		}
-	}
 }
