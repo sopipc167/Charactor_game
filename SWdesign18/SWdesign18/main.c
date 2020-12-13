@@ -34,6 +34,7 @@ int main()
 	printf("¡Ü");
 	while (1) {
 		ProcessKeyInput();
+		Sleep(20);
 	}
 }
 
@@ -91,4 +92,6 @@ void CursorView(char show)//Ä¿¼­¼û±â±â
 
 	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 }
+
+
 

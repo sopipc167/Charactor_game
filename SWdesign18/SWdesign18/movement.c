@@ -29,6 +29,7 @@ void map_switch(int map);
 extern Character pc;
 extern int map_index;
 
+int countd = 0;
 int pick = 0;
 Vector bullet;
 Direction bulD = 0;
@@ -427,8 +428,14 @@ void useCANNON() {
 
 void ProcessKeyInput() {
     int key;//연산용 변수
-    for (int i = 0; i < 20; i++) {
-        if (i % 2 == 0) {
+    for (int i = 0; i < 1; i++) {
+        if (countd == 1) {
+            countd = 0;
+        }
+        else if (countd == 0) {
+            countd = 1;
+        }
+        if (countd % 2 == 0) {
             if (iskeydown(VK_LEFT)) {
                 ShiftLeft();
             }
@@ -474,7 +481,6 @@ void ProcessKeyInput() {
                 else if (key == keyboard_3) {
                     pick = 3;
                 }
-
             }
         }
         if (bulletuse == 1) {
@@ -486,6 +492,5 @@ void ProcessKeyInput() {
         if (explos == 1) {
             explosion(cannonball.x, cannonball.y);
         }
-        Sleep(20);
     }
 }
