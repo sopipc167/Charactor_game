@@ -528,5 +528,6 @@ void ProcessKeyInput() {
         if (explos == 1) {
             explosion(cannonball.x, cannonball.y);
         }
+        //Sleep(20);
     }
 }
