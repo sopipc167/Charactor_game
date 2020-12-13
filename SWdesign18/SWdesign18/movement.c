@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 
 
 #include "ObjectInfo.h"
 #include <Windows.h>
 #include <conio.h>
 #include "Stack.h"
-
+#include"Item.h"
 
 
 #define keyboard_LEFT (75)
@@ -20,6 +20,7 @@
 #define keyboard_3 (51)
 #define keyboard_4 (52)
 #define keyboard_5 (53)
+#define keyboard_6 (54)
 
 
 int SetCurrentCursorPos(int x, int y);
@@ -274,6 +275,12 @@ void use_KNIFE(Character ch) {
 
 
     }
+    Inventory[0]->duration--;
+    if (Inventory[0]->duration == 0)
+    {
+        Inventory[0]->duration = 30;
+        Inventory[0] = NULL;
+    }
 }
 
 void bulletmove() {//총알
@@ -448,18 +455,30 @@ void map_switch(int map,int direc) {
     SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 }
 
-void useRIFLE() {
+void useRIFLE(Character* ch, int x) {//������ ��� �Ϸ�
     bulletuse = 1;
     bullet.x = pc.pos.x;
     bullet.y = pc.pos.y;
     bulD = pc.Di;
+    Inventory[1]->duration--;
+    if (Inventory[1]->duration == 0)
+    {
+        Inventory[1]->duration = 30;
+        Inventory[1] = NULL;
+    }
 }
 
-void useCANNON() {
+void useCANNON(Character* ch, int x) {
     cannonuse = 1;
     cannonball.x = pc.pos.x;
     cannonball.y = pc.pos.y;
     cannD = pc.Di;
+    Inventory[2]->duration--;
+    if (Inventory[2]->duration == 0)
+    {
+        Inventory[2]->duration = 3;
+        Inventory[2] = NULL;
+    }
 }
 
 void ProcessKeyInput() {
@@ -489,20 +508,37 @@ void ProcessKeyInput() {
 
                 if (key == keyboard_a) {
                     if (pick == 1) {
-                        use_KNIFE(pc);
+                        if (Inventory[0] != NULL)
+                        {
+                            //Inventory[0]->use(&pc, 0);
+                            use_KNIFE(pc);
+                        }
                     }
                     else if (pick == 2) {
                         if (bulletuse == 0) {
-                            useRIFLE();
+                            if (Inventory[1] != NULL)
+                            {
+                                Inventory[1]->use(&pc,0);
+                                //useRIFLE();
+                            }
                         }
                     }
                     else if (pick == 3) {
                         if (cannonuse == 0&&explos!=1) {
-                            cannonuse = 1;
-                            cannonball.x = pc.pos.x;
-                            cannonball.y = pc.pos.y;
-                            cannD = pc.Di;
+                            if (Inventory[2] != NULL)
+                            {
+                                //cannonuse = 1;
+                                //cannonball.x = pc.pos.x;
+                                //cannonball.y = pc.pos.y;
+                                //cannD = pc.Di;
+                                Inventory[2]->use(&pc, 0);
+                            }
                         }
+                    }
+                    else if (pick == 4)
+                    {
+                        if (Inventory[pick - 1] != NULL)
+                            Inventory[pick - 1]->use(&pc,1);
                     }
                 }
                 else if (key == keyboard_s_test) {
@@ -517,6 +553,17 @@ void ProcessKeyInput() {
                 else if (key == keyboard_3) {
                     pick = 3;
                 }
+                else if (key == keyboard_4) {
+                    pick = 4;
+                }
+                else if (key == keyboard_5) {
+                    pick = 5;
+                }
+                else 
+                    if (key == keyboard_6) {
+                        pick = 6;
+                    }
+
             }
         }
         if (bulletuse == 1) {
