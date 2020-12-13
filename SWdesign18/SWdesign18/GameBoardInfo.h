@@ -4,6 +4,9 @@
 #define _MAP_WIDTH (57)
 #define _MAP_HEIGHT (38)
 #define _UI_WIDTH (20)
+
+#define _MAP_COUNT 9
+
 typedef enum direction
 {
 	LEFT = 0,

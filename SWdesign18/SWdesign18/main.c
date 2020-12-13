@@ -17,6 +17,7 @@ int map_index;
 //인벤토리 배열
 //item 배열
 //몬스터 배열
+Character MonsterArray[_MAP_COUNT][11];
 
 int main()
 {
@@ -34,6 +35,7 @@ int main()
 	printf("●");
 	while (1) {
 		ProcessKeyInput();
+		Sleep(20);
 	}
 }
 
