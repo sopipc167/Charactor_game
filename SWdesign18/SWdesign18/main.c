@@ -5,6 +5,7 @@
 #include "ObjectInfo.h"
 #include"Stack.h"
 #include"Item.h"
+
 void ProcessKeyInput();
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
@@ -17,6 +18,7 @@ int map_index;
 
 //인벤토리 배열
 //item 배열
+
 //몬스터 배열
 Character MonsterArray[_MAP_COUNT][11];
 
@@ -37,8 +39,27 @@ int main()
 	setmapinfo();
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
+
+
+	for (int i = 0; i < _MAP_COUNT; i++)
+	{
+		for(int j = 0; j< 11; j++)
+		{
+			if(monsterRoutes[i][j] != NULL)
+			{
+				InitMonster(MonsterArray[i] + j, i, monsterInitPosition[i][j], monsterRoutes[i][j]);
+			}
+		}
+	}
 	while (1) {
 		ProcessKeyInput();
+
+		for(int i = 0; i < _MONSTER_MAX_COUNT; i++)
+		{
+			Character* k = MonsterArray[map_index] + i;
+			if (k != NULL)
+				k->move(k, i);
+		}
 		Sleep(20);
 	}
 }
