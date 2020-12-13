@@ -545,9 +545,9 @@ void DrawBoard(int idx)
 			{
 				printf("¦³");
 			}
-			else if (gameBoardInfo[idx][y][x] == 65)
+			else if ((gameBoardInfo[idx][y][x] >= 65)&&(gameBoardInfo[idx][y][x]<=120))
 			{
-				printf("A");
+				printf("%c",gameBoardInfo[idx][y][x]);
 			}
 			else if (gameBoardInfo[idx][y][x] == 13)
 			{

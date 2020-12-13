@@ -1,7 +1,7 @@
 #pragma once
 #include<string.h>
 #include"GameBoardInfo.h"
-#define SIZE_M 7
+#define SIZE_M 8
 
 char stack[SIZE_M];
 char compare[SIZE_M];

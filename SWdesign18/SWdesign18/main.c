@@ -4,6 +4,7 @@
 #include "GameBoardInfo.h"
 #include "ObjectInfo.h"
 #include"Stack.h"
+#include"Item.h"
 void ProcessKeyInput();
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
@@ -21,6 +22,8 @@ Character MonsterArray[_MAP_COUNT][11];
 
 int main()
 {
+	initItem();
+	initList();
 	map_index=0;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 64;     //플레이어 초기 x축
