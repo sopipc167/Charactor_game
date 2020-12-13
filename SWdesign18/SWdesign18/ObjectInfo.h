@@ -23,9 +23,10 @@ typedef struct character
 	Direction Di;
 	int hp;
 	int atk;
+	int isDie;
 	void (*move)(Vector, Direction);
 	void (*getHit)(struct character* p, int x);
-	int (*attack)(struct character* p, int x);
+	int (*attack)(struct character* p);
 	void (*die)();
 	Item* inventory;
 }Character;
@@ -36,6 +37,6 @@ int DetectCollision(int floor,int x, int y);
 
 void InitMonster(Character* monster, int _floor, int _x, int _y, Direction a[]);
 int MonsterRoute(Character* _m, int delta);
-int MonsterAttack(Character* _m, int atk);
+int MonsterAttack(Character* _m);
 void MonsterHit(Character* _m, int atk);
 void MonsterDie();

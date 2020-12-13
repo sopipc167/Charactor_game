@@ -71,6 +71,7 @@ void InitMonster(Character* monster, int _floor, int _x, int _y, Direction _rout
 
 int MonsterRoute(Character* _m, int delta)
 {
+	extern Character* pc;
 	static int routeCnt = 1;
 	Character* monster = _m;
 
@@ -98,8 +99,16 @@ int MonsterRoute(Character* _m, int delta)
 	{
 		monster->pos = nextPos;
 		routeCnt++;
-		return 0;
 	}
 
-	else return -1;
+	//+칸 내에 플레이어 있으면 공격
+	return 0;
+}
+
+int MonsterAttack(Character* _m)
+{
+	Character* monster = _m;
+	int atk = monster->atk;
+
+	return atk;
 }
