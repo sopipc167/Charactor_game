@@ -87,6 +87,16 @@ void useFood(Character* p, int heal)
 		Inventory[3] = NULL;
 	}
 	return 0;
+<<<<<<< Updated upstream
+=======
+
+
+int useFood(Character* p, int heal)
+{
+	if (heal >= 0)
+		p->hp += heal;
+	return 0;
+>>>>>>> Stashed changes
 }
 
 
