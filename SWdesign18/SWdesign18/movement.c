@@ -47,6 +47,7 @@ int explos = 0;
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
+    
     printf("●");
 }
 

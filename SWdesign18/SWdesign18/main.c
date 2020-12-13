@@ -10,6 +10,7 @@ void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
+void initPc();
 Character pc;
 int map_index;
 //플레이어 번호=20
@@ -24,12 +25,8 @@ int main()
 {
 	initItem();
 	initList();
-	map_index=0;
-	pc.map = 0;        //플레이어 맵 인덱스
-	pc.pos.x = 64;     //플레이어 초기 x축
-	pc.pos.y = 31;     //플레이어 초기 y축
-	pc.hp = 3;
-	gameBoardInfo[0][32][31] = 20;
+	initPc();
+	map_index = 0;
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
@@ -41,6 +38,15 @@ int main()
 		ProcessKeyInput();
 		Sleep(20);
 	}
+}
+
+void initPc() {
+	pc.map = 0;        //플레이어 맵 인덱스
+	pc.pos.x = 64;     //플레이어 초기 x축
+	pc.pos.y = 31;     //플레이어 초기 y축
+	pc.hp = 3;
+	gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+	pc.Di = 0;
 }
 
 void SetCurrentCursorPos(int x, int y)
