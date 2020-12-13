@@ -20,7 +20,6 @@
 #define keyboard_3 (51)
 #define keyboard_4 (52)
 #define keyboard_5 (53)
-#define keyboard_6 (54)
 
 
 int SetCurrentCursorPos(int x, int y);
@@ -47,7 +46,10 @@ int explos = 0;
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
-    printf("●");
+    if (Ch.hp <= 5)
+        printf("●");
+    else
+        printf("★");
 }
 
 void Show_alp(char alp, int x, int y) {
@@ -518,6 +520,7 @@ void ProcessKeyInput() {
                         if (bulletuse == 0) {
                             if (Inventory[1] != NULL)
                             {
+                                printf("%d", pick);
                                 Inventory[1]->use(&pc,0);
                                 //useRIFLE();
                             }
@@ -537,8 +540,17 @@ void ProcessKeyInput() {
                     }
                     else if (pick == 4)
                     {
-                        if (Inventory[pick - 1] != NULL)
-                            Inventory[pick - 1]->use(&pc,1);
+                        if (Inventory[3] != NULL)
+                        {
+                            Inventory[3]->use(&pc, 4);
+                        }
+                    }
+                    else if (pick == 5)
+                    {
+                        if (Inventory[4] != NULL)
+                        {
+                            Inventory[4]->use(&pc, 1);
+                        }
                     }
                 }
                 else if (key == keyboard_s_test) {
@@ -559,11 +571,6 @@ void ProcessKeyInput() {
                 else if (key == keyboard_5) {
                     pick = 5;
                 }
-                else 
-                    if (key == keyboard_6) {
-                        pick = 6;
-                    }
-
             }
         }
         if (bulletuse == 1) {

@@ -3,31 +3,31 @@
 #include "ObjectInfo.h"
 #include "Item.h"
 #include <stdlib.h>
+#include<time.h>
+#include<Windows.h>
 
 
 void initItem()
 {
 	Knife.duration = 30;
 	Knife.name = "EFINK";
-
 	//Knife.use = use_KNIFE;
 
 	Rifle.duration = 30;
 	Rifle.name = "ELFIR";
-
 	Rifle.use = useRIFLE;
 
 	Rocket.duration = 3;
 	Rocket.name = "TEKCOR";
-
 	Rocket.use = useCANNON;
+
 	Key.duration = 1;
 	Key.name = "YEK";
+	Key.use = useKey;
+
 	Food.duration = 1;
 	Food.name = "DOOF";
 	Food.use = useFood;
-	Star.duration = 1;
-	Star.name = "RATS";
 }
 
 void initList()
@@ -39,7 +39,6 @@ void initList()
 	ItemList[2] = Rocket;
 	ItemList[3] = Key;
 	ItemList[4] = Food;
-	ItemList[5] = Star;
 }
 void AddToInventory(Item item[],int index)
 {
@@ -65,14 +64,15 @@ void AddToInventory(Item item[],int index)
 		if (Inventory[index] == NULL)
 			Inventory[index] = item+index;
 	}
-	else
+	else if (index == 3)
 	{
-		for (int i = 3; i < 6; i++)
-			if (Inventory[i] == NULL)
-			{
-				Inventory[i] = &item;
-				return;
-			}
+		if (Inventory[index] == NULL)
+			Inventory[index] = item + index;
+	}
+	else if (index == 4)
+	{
+		if (Inventory[index] == NULL)
+			Inventory[index] = item + index;
 	}
 }
 
@@ -80,11 +80,44 @@ void useFood(Character* p, int heal)
 {
 	if (heal >= 0)
 		p->hp += heal;
-	Inventory[3]->duration--;
-	if (Inventory[3]->duration == 0)
+	Inventory[4]->duration--;
+	if (Inventory[4]->duration == 0)
 	{
-		Inventory[3]->duration = 1;
-		Inventory[3] = NULL;
+		Inventory[4]->duration = 1;
+		Inventory[4] = NULL;
 	}
 	return 0;
+}
+void useKey(Character* p, int a)
+{
+	int flag = 0;
+	if (gameBoardInfo[map_id][p->pos.y][(p->pos.x + 2) / 2] == 15)
+	{
+		gameBoardInfo[map_id][p->pos.y][(p->pos.x + 2) / 2] = 0;
+		flag = 1;
+	}
+	else if (gameBoardInfo[map_id][p->pos.y][(p->pos.x - 2) / 2] == 15)
+	{
+		gameBoardInfo[map_id][p->pos.y][(p->pos.x - 2) / 2] = 0;
+		flag = 1;
+	}
+	else if (gameBoardInfo[map_id][p->pos.y + 1][p->pos.x / 2] == 15)
+	{
+		gameBoardInfo[map_id][p->pos.y + 1][p->pos.x / 2] = 0;
+		flag = 1;
+	}
+	else if (gameBoardInfo[map_id][p->pos.y - 1][p->pos.x / 2] == 15)
+	{
+		gameBoardInfo[map_id][p->pos.y - 1][p->pos.x / 2] = 0;
+		flag = 1;
+	}
+	if (flag == 1)
+	{
+		Inventory[a-1]->duration--;
+		if (Inventory[a-1]->duration == 0)
+		{
+			Inventory[a-1]->duration = 30;
+			Inventory[a-1] = NULL;
+		}
+	}
 }
