@@ -35,3 +35,80 @@ int DetectSpell(int floor, int x, int y)
 	else//몬스터
 		return -1;
 }
+
+
+
+
+//몬스터 작업
+
+Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
+{
+	//0번 맵
+	{
+		{RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,UP,UP,UP,UP,UP,UP,UP,UP},
+		{DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,UP,UP,UP,UP,UP,UP,UP,UP,UP}
+	}
+};
+
+void InitMonster(Character* monster, int _floor, int _x, int _y, Direction _route[])
+{
+	monster->map = _floor;
+	monster->pos.x = _x;
+	monster->pos.y = _y;
+	monster->route = _route;
+
+	monster->Di = _route[0];
+
+	monster->hp = _MONSTER_HP;
+	monster->atk = _MONSTER_ATK;
+
+	monster->move = MonsterRoute;
+	//monster->getHit = 
+	//monster->attack = 
+	//monster->die = 
+	monster->inventory = NULL;
+}
+
+int MonsterRoute(Character* _m, int delta)
+{
+	extern Character* pc;
+	static int routeCnt = 1;
+	Character* monster = _m;
+
+	Vector nextPos = monster->pos;
+
+	switch (monster->route[routeCnt])
+	{
+	case LEFT:
+		nextPos.x--;
+		break;
+	case RIGHT:
+		nextPos.x++;
+		break;
+	case UP:
+		nextPos.y++;
+		break;
+	case DOWN:
+		nextPos.y--;
+		break;
+	default:
+		break;
+	}
+
+	if (DetectCollision(monster->map, nextPos.x, nextPos.y) == 1)
+	{
+		monster->pos = nextPos;
+		routeCnt++;
+	}
+
+	//+칸 내에 플레이어 있으면 공격
+	return 0;
+}
+
+int MonsterAttack(Character* _m)
+{
+	Character* monster = _m;
+	int atk = monster->atk;
+
+	return atk;
+}

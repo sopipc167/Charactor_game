@@ -29,6 +29,7 @@ void map_switch(int map);
 extern Character pc;
 extern int map_index;
 
+int countd = 0;
 int pick = 0;
 Vector bullet;
 Direction bulD = 0;
@@ -45,7 +46,7 @@ int explos = 0;
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
-    printf("°‹");
+    printf("‚óè");
 }
 
 void Show_alp(char alp, int x, int y) {
@@ -74,6 +75,7 @@ void ShiftRight() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 0;
     }
     pc.pos.x += 2;
 
@@ -81,6 +83,9 @@ void ShiftRight() {
         map_switch(pc.map,1);
     }
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftLeft() {
@@ -99,12 +104,16 @@ void ShiftLeft() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.x -=2;
     if (pc.pos.x == 0) {
         map_switch(pc.map,3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftDown() {
@@ -121,12 +130,16 @@ void ShiftDown() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.y++;
-    if (pc.pos.y == _MAP_HEIGHT) {
+    if (pc.pos.y == _MAP_HEIGHT-1) {
         map_switch(pc.map,2);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 void ShiftUp() {
@@ -144,18 +157,21 @@ void ShiftUp() {
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.y--;
     if (pc.pos.y == 0) {
         map_switch(pc.map,0);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    }
 }
 
 
 void use_KNIFE(Character ch) {
     int count = 0;
-
     COORD curpos = GetCurrentCursorPos();
     SetCurrentCursorPos(ch.pos.x, ch.pos.y);
     if (ch.Di == 0) {
@@ -165,7 +181,7 @@ void use_KNIFE(Character ch) {
             ch.pos.x -= 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("¶°");
+            printf("‚îÄ");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
@@ -190,7 +206,7 @@ void use_KNIFE(Character ch) {
             ch.pos.x += 2;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("¶°");
+            printf("‚îÄ");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
@@ -214,7 +230,7 @@ void use_KNIFE(Character ch) {
             ch.pos.y--;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("¶¢");
+            printf("‚îÇ");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
@@ -239,7 +255,7 @@ void use_KNIFE(Character ch) {
             ch.pos.y++;
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
-            printf("¶¢");
+            printf("‚îÇ");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
                 //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
             }
@@ -260,7 +276,7 @@ void use_KNIFE(Character ch) {
     }
 }
 
-void bulletmove() {//√—æÀ
+void bulletmove() {//Ï¥ùÏïå
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
         printf("  ");
@@ -275,7 +291,7 @@ void bulletmove() {//√—æÀ
             return;
         }
         SetCurrentCursorPos(bullet.x, bullet.y);
-        printf("£™");
+        printf("Ôºä");
     }
     else if (bulD == 1) {
         bullet.x += 2;
@@ -306,13 +322,23 @@ void bulletmove() {//√—æÀ
     }
 }
 
-void explosion(int x, int y) {//∆¯πﬂ ¿Ã∆Â∆Æ
+void explosion(int x, int y) {//Ìè≠Î∞ú Ïù¥ÌéôÌä∏
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
-            if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT-5 && x - 2 + x1 * 2 <= (_MAP_WIDTH-2) * 2) {
-                    SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                    printf("£™");
+            if (pc.map == 0) {
+                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 4 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                        printf("Ôºä");
+                    }
+                }
+            }
+            else {
+                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 2 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                        printf("Ôºä");
+                    }
                 }
             }
         }
@@ -323,11 +349,22 @@ void explosion(int x, int y) {//∆¯πﬂ ¿Ã∆Â∆Æ
             for (int y1 = 0; y1 < 3; y1++) {
                 int x2 = x - 2 + x1 * 2;
                 int y2 = y - 1 + y1;
-                if (x2 >= 0 && y2 >= 0) {
-                    if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 5 && x2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x2, y2);
-                        printf("  ");
-                        gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                if (pc.map == 0) {
+                    if (x2 >= 0 && y2 >= 0) {
+                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 4 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                            SetCurrentCursorPos(x2, y2);
+                            printf("  ");
+                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                        }
+                    }
+                }
+                else {
+                    if (x2 >= 0 && y2 >= 0) {
+                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 2 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                            SetCurrentCursorPos(x2, y2);
+                            printf("  ");
+                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                        }
                     }
                 }
                 if (pc.pos.x == x2 && pc.pos.y == y2) {
@@ -340,7 +377,7 @@ void explosion(int x, int y) {//∆¯πﬂ ¿Ã∆Â∆Æ
     }
 }
 
-void cannonmove() {//¥Î∆˜æÀ
+void cannonmove() {//ÎåÄÌè¨Ïïå
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
@@ -356,7 +393,7 @@ void cannonmove() {//¥Î∆˜æÀ
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
-        printf("°¯");
+        printf("‚äÇ");
     }
     else if (cannD == 1) {
         cannonball.x += 2;
@@ -366,7 +403,7 @@ void cannonmove() {//¥Î∆˜æÀ
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
-        printf("°˘");
+        printf("‚äÉ");
     }
     else if (cannD == 2) {
         cannonball.y--;
@@ -376,7 +413,7 @@ void cannonmove() {//¥Î∆˜æÀ
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
-        printf("°˚");
+        printf("‚à©");
     }
     else if (cannD == 3) {
         cannonball.y++;
@@ -386,13 +423,13 @@ void cannonmove() {//¥Î∆˜æÀ
             return;
         }
         SetCurrentCursorPos(cannonball.x, cannonball.y);
-        printf("°˙");
+        printf("‚à™");
     }
 }
 
 BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
-}//≈∞¥ŸøÓ «‘ºˆ
+}//ÌÇ§Îã§Ïö¥ Ìï®Ïàò
 
 void map_switch(int map,int direc) {
     int mapdes_x;
@@ -426,9 +463,15 @@ void useCANNON() {
 }
 
 void ProcessKeyInput() {
-    int key;//ø¨ªÍøÎ ∫Øºˆ
-    for (int i = 0; i < 20; i++) {
-        if (i % 2 == 0) {
+    int key;//Ïó∞ÏÇ∞Ïö© Î≥ÄÏàò
+    for (int i = 0; i < 1; i++) {
+        if (countd == 1) {
+            countd = 0;
+        }
+        else if (countd == 0) {
+            countd = 1;
+        }
+        if (countd % 2 == 0) {
             if (iskeydown(VK_LEFT)) {
                 ShiftLeft();
             }
@@ -474,7 +517,6 @@ void ProcessKeyInput() {
                 else if (key == keyboard_3) {
                     pick = 3;
                 }
-
             }
         }
         if (bulletuse == 1) {
@@ -486,6 +528,5 @@ void ProcessKeyInput() {
         if (explos == 1) {
             explosion(cannonball.x, cannonball.y);
         }
-        Sleep(20);
     }
 }

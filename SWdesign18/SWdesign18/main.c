@@ -11,12 +11,13 @@ void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
 Character pc;
 int map_index;
-
+//플레이어 번호=20
 
 
 //인벤토리 배열
 //item 배열
 //몬스터 배열
+Character MonsterArray[_MAP_COUNT][11];
 
 int main()
 {
@@ -25,6 +26,7 @@ int main()
 	pc.pos.x = 64;     //플레이어 초기 x축
 	pc.pos.y = 31;     //플레이어 초기 y축
 	pc.hp = 3;
+	gameBoardInfo[0][32][31] = 20;
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
@@ -34,6 +36,7 @@ int main()
 	printf("●");
 	while (1) {
 		ProcessKeyInput();
+		Sleep(20);
 	}
 }
 
@@ -91,4 +94,6 @@ void CursorView(char show)//커서숨기기
 
 	SetConsoleCursorInfo(hConsole, &ConsoleCursor);
 }
+
+
 
