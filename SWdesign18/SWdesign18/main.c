@@ -29,7 +29,7 @@ int main()
 	map_index=0;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 64;     //플레이어 초기 x축
-	pc.pos.y = 31;     //플레이어 초기 y축
+	pc.pos.y = 32;     //플레이어 초기 y축
 	pc.hp = 3;
 	gameBoardInfo[0][32][31] = 20;
 	CursorView(0);     //커서 숨기기
