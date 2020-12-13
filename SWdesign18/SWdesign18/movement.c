@@ -156,7 +156,6 @@ void ShiftUp() {
 
 void use_KNIFE(Character ch) {
     int count = 0;
-
     COORD curpos = GetCurrentCursorPos();
     SetCurrentCursorPos(ch.pos.x, ch.pos.y);
     if (ch.Di == 0) {
@@ -310,10 +309,20 @@ void bulletmove() {//ÃÑ¾Ë
 void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
-            if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT-4 && x - 2 + x1 * 2 <= (_MAP_WIDTH-2) * 2) {
-                    SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                    printf("£ª");
+            if (pc.map == 0) {
+                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 4 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                        printf("£ª");
+                    }
+                }
+            }
+            else {
+                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 2 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                        printf("£ª");
+                    }
                 }
             }
         }
@@ -324,11 +333,22 @@ void explosion(int x, int y) {//Æø¹ß ÀÌÆåÆ®
             for (int y1 = 0; y1 < 3; y1++) {
                 int x2 = x - 2 + x1 * 2;
                 int y2 = y - 1 + y1;
-                if (x2 >= 0 && y2 >= 0) {
-                    if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 4 && x2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x2, y2);
-                        printf("  ");
-                        gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                if (pc.map == 0) {
+                    if (x2 >= 0 && y2 >= 0) {
+                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 4 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                            SetCurrentCursorPos(x2, y2);
+                            printf("  ");
+                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                        }
+                    }
+                }
+                else {
+                    if (x2 >= 0 && y2 >= 0) {
+                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 2 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                            SetCurrentCursorPos(x2, y2);
+                            printf("  ");
+                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
+                        }
                     }
                 }
                 if (pc.pos.x == x2 && pc.pos.y == y2) {
