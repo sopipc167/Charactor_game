@@ -12,4 +12,4 @@ int useOrder(Character*, int);
 void initList();
 
 Item Food;
-Item Order
+Item Order;
