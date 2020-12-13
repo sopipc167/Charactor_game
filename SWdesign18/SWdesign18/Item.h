@@ -8,7 +8,7 @@ Item *Inventory[6];
 void use_KNIFE(Character ch);
 void useRIFLE(Character *ch,int x);
 void useCANNON(Character *ch,int x);
-void useFood(Character*, int);// int->void·Î ¹Ù²Þ
+void useFood(Character*, int);// int->voidï¿½ï¿½ ï¿½Ù²ï¿½
 void initList();
 void initItem();
 void AddToInventory(Item item[],int index);
@@ -20,3 +20,4 @@ Item Key;
 Item Food;
 Item Star;
 int index;
+Item Order;
