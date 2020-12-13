@@ -36,6 +36,20 @@ int DetectSpell(int floor, int x, int y)
 		return -1;
 }
 
+
+
+
+//몬스터 작업
+
+Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
+{
+	//0번 맵
+	{
+		{RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,RIGHT,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,LEFT,UP,UP,UP,UP,UP,UP,UP,UP},
+		{DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,DOWN,UP,UP,UP,UP,UP,UP,UP,UP,UP}
+	}
+};
+
 void InitMonster(Character* monster, int _floor, int _x, int _y, Direction _route[])
 {
 	monster->map = _floor;
