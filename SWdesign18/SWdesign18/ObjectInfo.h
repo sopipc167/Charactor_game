@@ -32,5 +32,5 @@ Character monsterArray[11];
 
 int DetectCollision(int floor,int x, int y);
 
-void InitMonster(Character* monster, int _x, int _y, Direction a[]);
-int MonsterRoute(int floor, Character* _m, int delta);
+void InitMonster(Character* monster, int _floor, int _x, int _y, Direction a[]);
+int MonsterRoute(Character* _m, int delta);
