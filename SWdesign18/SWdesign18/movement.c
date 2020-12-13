@@ -20,6 +20,7 @@
 #define keyboard_3 (51)
 #define keyboard_4 (52)
 #define keyboard_5 (53)
+#define keyboard_6 (54)
 
 
 int SetCurrentCursorPos(int x, int y);
@@ -492,6 +493,11 @@ void ProcessKeyInput() {
                             }
                         }
                     }
+                    else if (pick == 4)
+                    {
+                        if (Inventory[pick - 1] != NULL)
+                            Inventory[pick - 1]->use(&pc,1);
+                    }
                 }
                 else if (key == keyboard_s_test) {
                     pop();
@@ -505,6 +511,16 @@ void ProcessKeyInput() {
                 else if (key == keyboard_3) {
                     pick = 3;
                 }
+                else if (key == keyboard_4) {
+                    pick = 4;
+                }
+                else if (key == keyboard_5) {
+                    pick = 5;
+                }
+                else 
+                    if (key == keyboard_6) {
+                        pick = 6;
+                    }
 
             }
         }

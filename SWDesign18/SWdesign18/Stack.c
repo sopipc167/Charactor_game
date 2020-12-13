@@ -129,6 +129,7 @@ void isComplete(int ascii)
 				count -= 3;
 				//인벤토리에 추가
 				//AddToInventory(Food);
+				AddToInventory(ItemList, index);
 			}
 		}
 	}
@@ -149,6 +150,7 @@ void isComplete(int ascii)
 				count -= 4;
 				//인벤토리에 추가
 				//AddToInventory(Food);
+				AddToInventory(ItemList, index);
 			}
 		}
 	}
@@ -168,6 +170,7 @@ void isComplete(int ascii)
 					pop();
 				count -= 4;
 				//인벤토리에 추가
+				AddToInventory(ItemList, index);
 			}
 		}
 	}
