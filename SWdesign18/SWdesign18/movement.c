@@ -262,7 +262,7 @@ void use_KNIFE(Character ch) {
     Inventory[0]->duration--;
     if (Inventory[0]->duration == 0)
     {
-        Inventory[0]->duration = 3;
+        Inventory[0]->duration = 30;
         Inventory[0] = NULL;
     }
 }
@@ -426,7 +426,7 @@ void useRIFLE(Character* ch, int x) {//라이플 제작 완료
     Inventory[1]->duration--;
     if (Inventory[1]->duration == 0)
     {
-        Inventory[1]->duration = 3;
+        Inventory[1]->duration = 30;
         Inventory[1] = NULL;
     }
 }
@@ -489,7 +489,6 @@ void ProcessKeyInput() {
                                 //cannonball.y = pc.pos.y;
                                 //cannD = pc.Di;
                                 Inventory[2]->use(&pc, 0);
-                            
                             }
                         }
                     }

@@ -81,7 +81,7 @@ void useFood(Character* p, int heal)
 	Inventory[3]->duration--;
 	if (Inventory[3]->duration == 0)
 	{
-		Inventory[3]->duration = 3;
+		Inventory[3]->duration = 1;
 		Inventory[3] = NULL;
 	}
 	return 0;
