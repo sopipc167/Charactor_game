@@ -5,7 +5,7 @@ typedef struct item
 {
 	int duration;
 	char* name;
-	int (*use)(struct character* p, int x);
+	void (*use)(struct character* p,int x);//int->void·Î ¹Ù²Þ
 }Item;
 
 typedef struct character
