@@ -41,7 +41,7 @@ int DetectSpell(int floor, int x, int y)
 
 //몬스터 작업
 
-Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
+extern Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
 {
 	//0번 맵
 	{
@@ -50,11 +50,17 @@ Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
 	}
 };
 
-void InitMonster(Character* monster, int _floor, int _x, int _y, Direction _route[])
+extern Vector monsterInitPosition[_MAP_COUNT][_MONSTER_MAX_COUNT] =
+{
+	//0번 맵
+	{{22,15}, {41,10}}
+};
+
+void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[])
 {
 	monster->map = _floor;
-	monster->pos.x = _x;
-	monster->pos.y = _y;
+	monster->pos.x = _pos.x;
+	monster->pos.y = _pos.y;
 	monster->route = _route;
 
 	monster->Di = _route[0];
@@ -69,7 +75,7 @@ void InitMonster(Character* monster, int _floor, int _x, int _y, Direction _rout
 	monster->inventory = NULL;
 }
 
-int MonsterRoute(Character* _m, int delta)
+int MonsterRoute(Character* _m, int idx)
 {
 	extern Character* pc;
 	static int routeCnt = 1;
@@ -97,8 +103,14 @@ int MonsterRoute(Character* _m, int delta)
 
 	if (DetectCollision(monster->map, nextPos.x, nextPos.y) == 1)
 	{
+		gameBoardInfo[monster->map][monster->pos.y][monster->pos.x] = 0;
 		monster->pos = nextPos;
+		gameBoardInfo[monster->map][monster->pos.y][monster->pos.x] = -idx-10;
 		routeCnt++;
+		if(routeCnt >= sizeof(monster->route)/sizeof(Direction))
+		{
+			routeCnt = 0;
+		}
 	}
 
 	//+칸 내에 플레이어 있으면 공격
