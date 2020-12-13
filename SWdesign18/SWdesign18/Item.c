@@ -87,15 +87,8 @@ void useFood(Character* p, int heal)
 		Inventory[3] = NULL;
 	}
 	return 0;
-=======
-
-
-int useFood(Character* p, int heal)
-{
-	if (heal >= 0)
-		p->hp += heal;
-	return 0;
 }
+
 
 int useOrder(Character* arr, int sec)
 {
