@@ -28,3 +28,5 @@ int gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH];
 int Mapinfo[10][4];
 // 첫번째 번호 : 맵의 인덱스, 두번째 번호 : 상하좌우
 int UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH];
+void getItemUI(int id, int dur, char* name);
+void Selection(int id, int dur, char* name);

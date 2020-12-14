@@ -1,5 +1,6 @@
 #pragma once
 #include "GameBoardInfo.h"
+#include<Windows.h>
 
 /*
 	. 벽 : 1~10
@@ -9,6 +10,7 @@
 */
 Mapinfo[10][4] = { 0 };
 map_id = 0;
+int _id = -1;
 Vector CharSpot[8];
 Vector ItemSpot[5];
 Vector NameSpot[5];
@@ -50,7 +52,7 @@ gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 	2,0,0,0,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,0,0,6,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	2,0,0,0,0,0,0,0,0,0,0,0,69,76,70,73,82,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 	},//82 65 84 83
@@ -625,7 +627,7 @@ void DrawUI()
 	for (int i = 0; i < 5; i++)
 	{
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[i].x * 2, ItemSpot[i].y);
-		printf("%d번", i);
+		printf("%d번", i+1);
 	}
 	for (y = 0; y < _MAP_HEIGHT; y++)
 	{
@@ -695,6 +697,11 @@ void DrawUI()
 				printf("_");
 
 			}
+			else if ((UIBoardInfo[y][x] >= 65) && (UIBoardInfo[y][x] <= 120))
+			{
+
+				printf("%c", UIBoardInfo[y][x]);
+			}
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + x * 2 + 2, y);
 		}
 	}
@@ -711,7 +718,7 @@ void getAlphabetUI(int id, char a)
 	}
 	else if (id >= 6)
 	{
-		
+		UIBoardInfo[CharSpot[id].y][CharSpot[id].x] = a;
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[id].x * 2, CharSpot[id].y);
 		printf("%c", a);
 		if (a == '_')
@@ -733,14 +740,30 @@ void getItemUI(int id, int dur, char* name)
 	SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 	printf("%s", name);
 	SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
-	printf("%d", dur);
+	printf("%d ", dur);
 }
 void Selection(int id, int dur, char* name)
 {
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-	printf("%d", id + 1);
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
-	printf("%s", name);
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
-	printf("%d", dur);
+	if (name != NULL)
+	{
+		if (_id != -1)
+		{
+			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+			SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[_id].x * 2, ItemSpot[_id].y);
+			printf("%d번", _id + 1);
+			SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
+			printf("%s", name);
+			SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[_id].x * 2, DurSpot[_id].y);
+			printf("%d ", dur);
+		}
+		_id = id;
+		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
+		printf("%d번", id + 1);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
+		printf("%s", name);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
+		printf("%d ", dur);
+		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+	}
 }
