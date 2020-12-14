@@ -27,11 +27,12 @@ int main()
 	initItem();
 	initList();
 	map_index=0;
+	pc.isDie = 0;
 	pc.map = 0;        //플레이어 맵 인덱스
-	pc.pos.x = 64;     //플레이어 초기 x축
-	pc.pos.y = 32;     //플레이어 초기 y축
+	pc.pos.x = 46;     //플레이어 초기 x축
+	pc.pos.y = 18;     //플레이어 초기 y축
 	pc.hp = 3;
-	gameBoardInfo[0][32][31] = 20;
+	gameBoardInfo[map_index][pc.pos.y][pc.pos.x/2] = 20;
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
@@ -45,7 +46,7 @@ int main()
 	{
 		for(int j = 0; j< 11; j++)
 		{
-			if(monsterRoutes[i][j] != NULL)
+			if(monsterRoutes[i][j][0] != END)
 			{
 				InitMonster(MonsterArray[i] + j, i, monsterInitPosition[i][j], monsterRoutes[i][j]);
 			}
@@ -57,11 +58,15 @@ int main()
 		for(int i = 0; i < _MONSTER_MAX_COUNT; i++)
 		{
 			Character* k = MonsterArray[map_index] + i;
-			if (k != NULL)
+			if (monsterRoutes[map_index][i][0] != END && k->isDie != 1)
 				k->move(k, i);
 		}
-		Sleep(20);
+
+		if (pc.isDie)
+			break;
+		Sleep(30);
 	}
+	//게임 오버
 }
 
 void SetCurrentCursorPos(int x, int y)

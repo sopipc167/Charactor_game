@@ -498,6 +498,10 @@ void DrawBoard(int idx)
 		SetCurrentCursorPos(0, y);
 		for (x = 0; x < _MAP_WIDTH; x++)
 		{
+			if (gameBoardInfo[idx][y][x] == 0)
+			{
+				printf("  ");
+			}
 			if (gameBoardInfo[idx][y][x] == 1)
 			{
 				printf("¦¬");
