@@ -30,7 +30,7 @@ int main()
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 64;     //플레이어 초기 x축
 	pc.pos.y = 32;     //플레이어 초기 y축
-	pc.hp = 3;
+	pc.hp = 0;
 	gameBoardInfo[0][32][31] = 20;
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
@@ -53,7 +53,6 @@ int main()
 	}
 	while (1) {
 		ProcessKeyInput();
-
 		for(int i = 0; i < _MONSTER_MAX_COUNT; i++)
 		{
 			Character* k = MonsterArray[map_index] + i;
