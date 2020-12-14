@@ -60,6 +60,33 @@ extern Vector monsterInitPosition[_MAP_COUNT][_MONSTER_MAX_COUNT] =
 	{{22,15}, {41,10}}
 };
 
+int PlayerAttack(Character* p)
+{
+	Character* player = p;
+	int atk = player->atk;
+	return atk;
+}
+void PlayerHit(Character* p, int atk)
+{
+	Character* player = p;
+	player->hp -= atk;
+	if (player->hp == 0)
+	{
+		player->isDie = 1;
+		player->die(player);
+	}
+}
+void PlayerDie(Character* p)
+{
+	Character* player = p;
+	if (player->isDie == 1)
+	{
+		printf("Game over");
+	}
+	//모든 거 중지
+	//ui 좌표에 가서 게임오버 출력
+}
+
 void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[])
 {
 	monster->map = _floor;
@@ -135,4 +162,16 @@ int MonsterAttack(Character* _m)
 	int atk = monster->atk;
 
 	return atk;
+}
+void MonsterHit(Character* _m, int atk)
+{
+	Character* monster = _m;
+	monster->hp -= atk;
+	if (monster->hp == 0)
+	{
+
+	}
+}
+void MonsterDie(Character* _m)
+{
 }

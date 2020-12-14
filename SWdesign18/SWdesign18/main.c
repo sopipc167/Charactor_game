@@ -10,16 +10,16 @@ void ProcessKeyInput();
 void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
-void CursorView(char show);//Ä¿¼­ ¼û±â±â
+void CursorView(char show);//ì»¤ì„œ ìˆ¨ê¸°ê¸°
 Character pc;
 int map_index;
-//ÇÃ·¹ÀÌ¾î ¹øÈ£=20
+//í”Œë ˆì´ì–´ ë²ˆí˜¸=20
 
 
-//ÀÎº¥Åä¸® ¹è¿­
-//item ¹è¿­
+//ì¸ë²¤í† ë¦¬ ë°°ì—´
+//item ë°°ì—´
 
-//¸ó½ºÅÍ ¹è¿­
+//ëª¬ìŠ¤í„° ë°°ì—´
 Character MonsterArray[_MAP_COUNT][11];
 
 int main()
@@ -28,18 +28,20 @@ int main()
 	initList();
 	map_index=0;
 	pc.isDie = 0;
-	pc.map = 0;        //ÇÃ·¹ÀÌ¾î ¸Ê ÀÎµ¦½º
-	pc.pos.x = 46;     //ÇÃ·¹ÀÌ¾î ÃÊ±â xÃà
-	pc.pos.y = 18;     //ÇÃ·¹ÀÌ¾î ÃÊ±â yÃà
+  
+	pc.map = 0;        //í”Œë ˆì´ì–´ ë§µ ì¸ë±ìŠ¤
+	pc.pos.x = 46;     //í”Œë ˆì´ì–´ ì´ˆê¸° xì¶•
+	pc.pos.y = 18;     //í”Œë ˆì´ì–´ ì´ˆê¸° yì¶•
 	pc.hp = 3;
 	gameBoardInfo[map_index][pc.pos.y][pc.pos.x/2] = 20;
-	CursorView(0);     //Ä¿¼­ ¼û±â±â
+
+	CursorView(0);     //ì»¤ì„œ ìˆ¨ê¸°ê¸°
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
 	DrawUI();
 	setmapinfo();
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
-	printf("¡Ü");
+	printf("â—");
 
 
 	for (int i = 0; i < _MAP_COUNT; i++)
@@ -54,7 +56,6 @@ int main()
 	}
 	while (1) {
 		ProcessKeyInput();
-
 		for(int i = 0; i < _MONSTER_MAX_COUNT; i++)
 		{
 			Character* k = MonsterArray[map_index] + i;
@@ -66,7 +67,7 @@ int main()
 			break;
 		Sleep(30);
 	}
-	//°ÔÀÓ ¿À¹ö
+	//ê²Œì„ ì˜¤ë²„
 }
 
 void SetCurrentCursorPos(int x, int y)
@@ -93,7 +94,7 @@ void DrawVerticalLine(int type, int length, COORD start)
 		for (int i = 0; i < length; i++)
 		{
 			SetCurrentCursorPos(i * 2 + start.X, start.Y);
-			printf("¦¬");
+			printf("â”");
 		}
 	}
 	else
@@ -101,7 +102,7 @@ void DrawVerticalLine(int type, int length, COORD start)
 		for (int i = 0; i < length; i++)
 		{
 			SetCurrentCursorPos(start.X, start.Y + i);
-			printf("¦­");
+			printf("â”ƒ");
 		}
 	}
 }
@@ -111,7 +112,7 @@ void DrawHorizontalLine(int type, int length, COORD start)
 
 }
 
-void CursorView(char show)//Ä¿¼­¼û±â±â
+void CursorView(char show)//ì»¤ì„œìˆ¨ê¸°ê¸°
 {
 	HANDLE hConsole;
 	CONSOLE_CURSOR_INFO ConsoleCursor;

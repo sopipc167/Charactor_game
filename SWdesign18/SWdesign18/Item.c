@@ -78,13 +78,15 @@ void AddToInventory(Item item[],int index)
 
 void useFood(Character* p, int heal)
 {
-	if (heal >= 0)
-		p->hp += heal;
-	Inventory[4]->duration--;
-	if (Inventory[4]->duration == 0)
+	if (p->hp < 3)
 	{
-		Inventory[4]->duration = 1;
-		Inventory[4] = NULL;
+		p->hp += heal;
+		Inventory[4]->duration--;
+		if (Inventory[4]->duration == 0)
+		{
+			Inventory[4]->duration = 1;
+			Inventory[4] = NULL;
+		}
 	}
 	return 0;
 }
