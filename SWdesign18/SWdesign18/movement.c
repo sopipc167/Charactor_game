@@ -20,7 +20,6 @@
 #define keyboard_3 (51)
 #define keyboard_4 (52)
 #define keyboard_5 (53)
-#define keyboard_6 (54)
 
 
 int SetCurrentCursorPos(int x, int y);
@@ -47,7 +46,10 @@ int explos = 0;
 
 void ShowCharacter(Character Ch,int x,int y) {
     SetCurrentCursorPos(x, y);
-    printf("●");
+    if (Ch.hp <= 5)
+        printf("●");
+    else
+        printf("★");
 }
 
 void Show_alp(char alp, int x, int y) {
@@ -84,7 +86,7 @@ void ShiftRight() {
         map_switch(pc.map,1);
     }
     ShowCharacter(pc,pc.pos.x,pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
     }
 }
@@ -112,7 +114,7 @@ void ShiftLeft() {
         map_switch(pc.map,3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
     }
 }
@@ -138,7 +140,7 @@ void ShiftDown() {
         map_switch(pc.map,2);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
     }
 }
@@ -165,7 +167,7 @@ void ShiftUp() {
         map_switch(pc.map,0);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
     }
 }
@@ -275,11 +277,11 @@ void use_KNIFE(Character ch) {
 
 
     }
-    Inventory[0]->duration--;
-    if (Inventory[0]->duration == 0)
+    ch.inventory[0].duration--;
+    if (ch.inventory[0].duration == 0)
     {
-        Inventory[0]->duration = 30;
-        Inventory[0] = NULL;
+        ch.inventory[0].name = NULL;
+        ch.inventory[0].use = NULL;
     }
 }
 
@@ -460,11 +462,11 @@ void useRIFLE(Character* ch, int x) {//������ ��� �Ϸ�
     bullet.x = pc.pos.x;
     bullet.y = pc.pos.y;
     bulD = pc.Di;
-    Inventory[1]->duration--;
-    if (Inventory[1]->duration == 0)
+    ch->inventory[1].duration--;
+    if (ch->inventory[1].duration == 0)
     {
-        Inventory[1]->duration = 30;
-        Inventory[1] = NULL;
+        ch->inventory[1].name = NULL;
+        ch->inventory[1].use = NULL;
     }
 }
 
@@ -473,11 +475,11 @@ void useCANNON(Character* ch, int x) {
     cannonball.x = pc.pos.x;
     cannonball.y = pc.pos.y;
     cannD = pc.Di;
-    Inventory[2]->duration--;
-    if (Inventory[2]->duration == 0)
-    {
-        Inventory[2]->duration = 3;
-        Inventory[2] = NULL;
+    ch->inventory[2].duration--;
+    if (ch->inventory[2].duration == 0)
+    { 
+        ch->inventory[2].name = NULL;
+        ch->inventory[2].use = NULL;
     }
 }
 
@@ -508,7 +510,7 @@ void ProcessKeyInput() {
 
                 if (key == keyboard_a) {
                     if (pick == 1) {
-                        if (Inventory[0] != NULL)
+                        if (pc.inventory[0].name != NULL)
                         {
                             //Inventory[0]->use(&pc, 0);
                             use_KNIFE(pc);
@@ -516,29 +518,38 @@ void ProcessKeyInput() {
                     }
                     else if (pick == 2) {
                         if (bulletuse == 0) {
-                            if (Inventory[1] != NULL)
+                            if (pc.inventory[1].name != NULL)
                             {
-                                Inventory[1]->use(&pc,0);
+                                pc.inventory[1].use(&pc,0);
                                 //useRIFLE();
                             }
                         }
                     }
                     else if (pick == 3) {
                         if (cannonuse == 0&&explos!=1) {
-                            if (Inventory[2] != NULL)
+                            if (pc.inventory[2].name != NULL)
                             {
                                 //cannonuse = 1;
                                 //cannonball.x = pc.pos.x;
                                 //cannonball.y = pc.pos.y;
                                 //cannD = pc.Di;
-                                Inventory[2]->use(&pc, 0);
+                                pc.inventory[2].use(&pc, 0);
                             }
                         }
                     }
                     else if (pick == 4)
                     {
-                        if (Inventory[pick - 1] != NULL)
-                            Inventory[pick - 1]->use(&pc,1);
+                        if (pc.inventory[3].name != NULL)
+                        {
+                            pc.inventory[3].use(&pc, 4);
+                        }
+                    }
+                    else if (pick == 5)
+                    {
+                        if (pc.inventory[4].name != NULL)
+                        {
+                            pc.inventory[4].use(&pc, 1);
+                        }
                     }
                 }
                 else if (key == keyboard_s_test) {
@@ -559,11 +570,6 @@ void ProcessKeyInput() {
                 else if (key == keyboard_5) {
                     pick = 5;
                 }
-                else 
-                    if (key == keyboard_6) {
-                        pick = 6;
-                    }
-
             }
         }
         if (bulletuse == 1) {

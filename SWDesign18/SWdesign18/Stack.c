@@ -8,7 +8,7 @@ top = -1;
 
 int isFull()
 {
-	if (top + 1 == SIZE_M)
+	if (top + 2 == SIZE_M)
 		return 1;
 	else
 		return 0;
@@ -44,6 +44,7 @@ char pop()
 	char ascii = stack[top];
 	if (isEmpty())
 	{
+		//ui
 		return 0;
 	}
 	else
@@ -150,26 +151,6 @@ void isComplete(int ascii)
 				count -= 4;
 				//인벤토리에 추가
 				//AddToInventory(Food);
-				AddToInventory(ItemList, index);
-			}
-		}
-	}
-	else if (ascii == 'R')
-	{
-		if (top >= 3)
-		{
-			for (i = count; i >= count - 3; i--)
-			{
-				compare[j] = stack[i];
-				j++;
-			}
-			if (strcmp(compare, ItemList[5].name) == 0)
-			{
-				index = 5;
-				for (i = count; i >= count - 3; i--)
-					pop();
-				count -= 4;
-				//인벤토리에 추가
 				AddToInventory(ItemList, index);
 			}
 		}
