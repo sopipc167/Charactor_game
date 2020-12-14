@@ -44,6 +44,7 @@ char pop()
 	char ascii = stack[top];
 	if (isEmpty())
 	{
+		//ui
 		return 0;
 	}
 	else
