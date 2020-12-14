@@ -5,7 +5,7 @@
 #define _MONSTER_ATK 1
 #define _MONSTER_MOVE_DELTATIME 100
 
-#define _MONSTER_MAX_COUNT 11
+#define _MONSTER_MAX_COUNT 5
 #define _MONSTER_MAX_MOVE 70
 
 typedef struct item
@@ -19,6 +19,7 @@ typedef struct character
 {
 	int map;
 	Direction* route;
+	int routeCnt;
 	Vector pos;
 	Direction Di;
 	int hp;

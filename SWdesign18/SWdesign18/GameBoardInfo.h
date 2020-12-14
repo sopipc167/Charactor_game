@@ -12,7 +12,8 @@ typedef enum direction
 	LEFT = 0,
 	RIGHT,
 	UP,
-	DOWN
+	DOWN,
+	END
 }Direction;
 int map_id;
 typedef struct vector
