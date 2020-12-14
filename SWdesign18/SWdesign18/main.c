@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <stdio.h>
 #include <Windows.h>
 #include "GameBoardInfo.h"
@@ -28,13 +28,13 @@ int main()
 	initList();
 	map_index=0;
 	pc.isDie = 0;
-  
+	pc.inventory = Inventory;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 46;     //플레이어 초기 x축
 	pc.pos.y = 18;     //플레이어 초기 y축
 	pc.hp = 3;
 	gameBoardInfo[map_index][pc.pos.y][pc.pos.x/2] = 20;
-
+	initInventory(&pc);
 	CursorView(0);     //커서 숨기기
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
@@ -62,7 +62,6 @@ int main()
 			if (monsterRoutes[map_index][i][0] != END && k->isDie != 1)
 				k->move(k, i);
 		}
-
 		if (pc.isDie)
 			break;
 		Sleep(30);

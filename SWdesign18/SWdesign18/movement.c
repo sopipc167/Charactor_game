@@ -277,11 +277,11 @@ void use_KNIFE(Character ch) {
 
 
     }
-    Inventory[0]->duration--;
-    if (Inventory[0]->duration == 0)
+    ch.inventory[0].duration--;
+    if (ch.inventory[0].duration == 0)
     {
-        Inventory[0]->duration = 30;
-        Inventory[0] = NULL;
+        ch.inventory[0].name = NULL;
+        ch.inventory[0].use = NULL;
     }
 }
 
@@ -462,11 +462,11 @@ void useRIFLE(Character* ch, int x) {//������ ��� �Ϸ�
     bullet.x = pc.pos.x;
     bullet.y = pc.pos.y;
     bulD = pc.Di;
-    Inventory[1]->duration--;
-    if (Inventory[1]->duration == 0)
+    ch->inventory[1].duration--;
+    if (ch->inventory[1].duration == 0)
     {
-        Inventory[1]->duration = 30;
-        Inventory[1] = NULL;
+        ch->inventory[1].name = NULL;
+        ch->inventory[1].use = NULL;
     }
 }
 
@@ -475,11 +475,11 @@ void useCANNON(Character* ch, int x) {
     cannonball.x = pc.pos.x;
     cannonball.y = pc.pos.y;
     cannD = pc.Di;
-    Inventory[2]->duration--;
-    if (Inventory[2]->duration == 0)
-    {
-        Inventory[2]->duration = 3;
-        Inventory[2] = NULL;
+    ch->inventory[2].duration--;
+    if (ch->inventory[2].duration == 0)
+    { 
+        ch->inventory[2].name = NULL;
+        ch->inventory[2].use = NULL;
     }
 }
 
@@ -510,7 +510,7 @@ void ProcessKeyInput() {
 
                 if (key == keyboard_a) {
                     if (pick == 1) {
-                        if (Inventory[0] != NULL)
+                        if (pc.inventory[0].name != NULL)
                         {
                             //Inventory[0]->use(&pc, 0);
                             use_KNIFE(pc);
@@ -518,38 +518,37 @@ void ProcessKeyInput() {
                     }
                     else if (pick == 2) {
                         if (bulletuse == 0) {
-                            if (Inventory[1] != NULL)
+                            if (pc.inventory[1].name != NULL)
                             {
-                                printf("%d", pick);
-                                Inventory[1]->use(&pc,0);
+                                pc.inventory[1].use(&pc,0);
                                 //useRIFLE();
                             }
                         }
                     }
                     else if (pick == 3) {
                         if (cannonuse == 0&&explos!=1) {
-                            if (Inventory[2] != NULL)
+                            if (pc.inventory[2].name != NULL)
                             {
                                 //cannonuse = 1;
                                 //cannonball.x = pc.pos.x;
                                 //cannonball.y = pc.pos.y;
                                 //cannD = pc.Di;
-                                Inventory[2]->use(&pc, 0);
+                                pc.inventory[2].use(&pc, 0);
                             }
                         }
                     }
                     else if (pick == 4)
                     {
-                        if (Inventory[3] != NULL)
+                        if (pc.inventory[3].name != NULL)
                         {
-                            Inventory[3]->use(&pc, 4);
+                            pc.inventory[3].use(&pc, 4);
                         }
                     }
                     else if (pick == 5)
                     {
-                        if (Inventory[4] != NULL)
+                        if (pc.inventory[4].name != NULL)
                         {
-                            Inventory[4]->use(&pc, 1);
+                            pc.inventory[4].use(&pc, 1);
                         }
                     }
                 }

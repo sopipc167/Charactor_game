@@ -6,6 +6,7 @@
 #include<time.h>
 #include<Windows.h>
 
+extern Character pc;
 
 void initItem()
 {
@@ -32,47 +33,40 @@ void initItem()
 
 void initList()
 {
-	for (int i = 0; i < 6; i++)
-		Inventory[i] = NULL;
 	ItemList[0] = Knife;
 	ItemList[1] = Rifle;
 	ItemList[2] = Rocket;
 	ItemList[3] = Key;
 	ItemList[4] = Food;
 }
-void AddToInventory(Item item[],int index)
+void initInventory(Character* p)
 {
+	p->inventory[0].duration=0;
+	p->inventory[0].name = NULL;
+	p->inventory[0].use = NULL;
 
-	if (index == 0)
+	p->inventory[1].duration = 0;
+	p->inventory[1].name = NULL;
+	p->inventory[1].use = NULL;
+
+	p->inventory[2].duration = 0;
+	p->inventory[2].name = NULL;
+	p->inventory[2].use = NULL;
+
+	p->inventory[3].duration = 0;
+	p->inventory[3].name = NULL;
+	p->inventory[3].use = NULL;
+
+	p->inventory[4].duration = 0;
+	p->inventory[4].name = NULL;
+	p->inventory[4].use = NULL;
+}
+
+void AddToInventory(Item it[],int index)
+{
+	if (pc.inventory[index].duration == 0)
 	{
-		if (Inventory[index] == NULL)
-		{
-			Inventory[index] = item+index;
-			printf("%d", Inventory[0]->duration);
-		}
-	}
-	else if (index == 1)
-	{
-		if (Inventory[index] == NULL)
-		{
-			Inventory[index] = item+index;
-			printf("%d", Inventory[1]->duration);
-		}
-	}
-	else if (index == 2)
-	{
-		if (Inventory[index] == NULL)
-			Inventory[index] = item+index;
-	}
-	else if (index == 3)
-	{
-		if (Inventory[index] == NULL)
-			Inventory[index] = item + index;
-	}
-	else if (index == 4)
-	{
-		if (Inventory[index] == NULL)
-			Inventory[index] = item + index;
+		pc.inventory[index] = it[index];
 	}
 }
 
@@ -81,11 +75,11 @@ void useFood(Character* p, int heal)
 	if (p->hp < 3)
 	{
 		p->hp += heal;
-		Inventory[4]->duration--;
-		if (Inventory[4]->duration == 0)
+		p->inventory[4].duration--;
+		if (p->inventory[4].duration)
 		{
-			Inventory[4]->duration = 1;
-			Inventory[4] = NULL;
+			p->inventory[4].name = NULL;
+			p->inventory[4].use = NULL;
 		}
 	}
 	return 0;
@@ -115,11 +109,11 @@ void useKey(Character* p, int a)
 	}
 	if (flag == 1)
 	{
-		Inventory[a-1]->duration--;
-		if (Inventory[a-1]->duration == 0)
+		p->inventory[a-1].duration--;
+		if (p->inventory[a - 1].duration == 0)
 		{
-			Inventory[a-1]->duration = 30;
-			Inventory[a-1] = NULL;
+			p->inventory[a - 1].name = NULL;
+			p->inventory[a - 1].use = NULL;
 		}
 	}
 }
