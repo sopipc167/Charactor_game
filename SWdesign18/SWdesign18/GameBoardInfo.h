@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 
+
 #define _MAP_WIDTH (57)
 #define _MAP_HEIGHT (37)
 #define _UI_WIDTH (20)
@@ -21,6 +22,12 @@ typedef struct vector
 	int x;
 	int y;
 }Vector;
+typedef struct inven
+{
+	int duration;
+	char* name;
+	int select;
+}inven;
 void DrawBoard(int idx);
 void DrawUI();
 void getAlphabetUI(int id, char a);

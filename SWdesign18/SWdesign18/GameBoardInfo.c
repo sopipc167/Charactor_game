@@ -11,6 +11,7 @@
 Mapinfo[10][4] = { 0 };
 map_id = 0;
 int _id = -1;
+inven iv[5];
 Vector CharSpot[8];
 Vector ItemSpot[5];
 Vector NameSpot[5];
@@ -52,7 +53,7 @@ gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 	2,0,0,0,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,0,0,6,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,69,76,70,73,82,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	2,0,0,0,0,0,0,0,0,0,79,68,69,76,70,73,82,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,9,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 	},//82 65 84 83
@@ -602,24 +603,24 @@ void DrawUI()
 
 	NameSpot[0].x=2;
 	NameSpot[0].y = 16;
-	NameSpot[1].x=7;
+	NameSpot[1].x=5;
 	NameSpot[1].y = 16;
-	NameSpot[2].x=12;
+	NameSpot[2].x=8;
 	NameSpot[2].y = 16;
-	NameSpot[3].x=17;
+	NameSpot[3].x=11;
 	NameSpot[3].y = 16;
-	NameSpot[4].x=22;
+	NameSpot[4].x=14;
 	NameSpot[4].y = 16;
 
 	DurSpot[0].x=2;
 	DurSpot[0].y = 17;
-	DurSpot[1].x=7;
+	DurSpot[1].x=5;
 	DurSpot[1].y = 17;
-	DurSpot[2].x=12;
+	DurSpot[2].x=8;
 	DurSpot[2].y = 17;
-	DurSpot[3].x=17;
+	DurSpot[3].x=11;
 	DurSpot[3].y = 17;
-	DurSpot[4].x=22;
+	DurSpot[4].x=14;
 	DurSpot[4].y = 17;
 
 	int x, y;
@@ -705,6 +706,13 @@ void DrawUI()
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + x * 2 + 2, y);
 		}
 	}
+	for (int i = 0; i < 5; i++)
+	{
+		if (iv[i].name != NULL)
+		{
+			getItemUI(i, iv[i].duration, iv[i].name);
+		}
+	}
 }
 void getAlphabetUI(int id, char a)
 {
@@ -735,12 +743,33 @@ void getAlphabetUI(int id, char a)
 }
 void getItemUI(int id, int dur, char* name)
 {
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-	printf("%d번",id+1);
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
-	printf("%s", name);
-	SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
-	printf("%d ", dur);
+	iv[id].duration = dur;
+	iv[id].name = name;
+	if (dur == 0)
+	{
+
+		iv[id].name = NULL;
+		iv[id].select = 0;
+		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
+		printf("%d번", id + 1);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
+		printf("     ");
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
+		printf("   ");
+	}
+	else
+	{
+		if (iv[id].select)
+			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
+		printf("%d번", id + 1);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
+		printf("%s", name);
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
+		printf("%d ", dur);
+		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+	}
 }
 void Selection(int id, int dur, char* name)
 {
@@ -748,15 +777,20 @@ void Selection(int id, int dur, char* name)
 	{
 		if (_id != -1)
 		{
+			iv[_id].select = 0;
 			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[_id].x * 2, ItemSpot[_id].y);
 			printf("%d번", _id + 1);
-			SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
-			printf("%s", name);
-			SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[_id].x * 2, DurSpot[_id].y);
-			printf("%d ", dur);
+			if (iv[_id].name != NULL)
+			{
+				SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
+				printf("%s", iv[_id].name);
+				SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[_id].x * 2, DurSpot[_id].y);
+				printf("%d ", iv[_id].duration);
+			}
 		}
 		_id = id;
+		iv[id].select = 1;
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
 		printf("%d번", id + 1);
