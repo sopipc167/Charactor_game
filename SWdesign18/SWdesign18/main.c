@@ -11,7 +11,7 @@ void SetCurrentCursorPos(int x, int y);
 COORD GetCurrentCursorPos();
 void DrawLine(int type, int length, COORD start);
 void CursorView(char show);//커서 숨기기
-Character pc;
+//Character pc;
 int map_index;
 //플레이어 번호=20
 
@@ -27,12 +27,18 @@ int main()
 	initItem();
 	initList();
 	map_index=0;
+
 	pc.isDie = 0;
+	pc.die = PlayerDie;
 	pc.inventory = Inventory;
 	pc.map = 0;        //플레이어 맵 인덱스
-	pc.pos.x = 46;     //플레이어 초기 x축
+	pc.pos.x = 44;     //플레이어 초기 x축
 	pc.pos.y = 18;     //플레이어 초기 y축
 	pc.hp = 3;
+	pc.getHit = PlayerHit;
+
+	routeDelta = 0;
+
 	gameBoardInfo[map_index][pc.pos.y][pc.pos.x/2] = 20;
 	initInventory(&pc);
 	CursorView(0);     //커서 숨기기
@@ -54,17 +60,23 @@ int main()
 			}
 		}
 	}
-	while (1) {
+	while (1)
+	{
 		ProcessKeyInput();
-		for(int i = 0; i < _MONSTER_MAX_COUNT; i++)
+		routeDelta++;
+		if (routeDelta % 3 == 0)
 		{
-			Character* k = MonsterArray[map_index] + i;
-			if (monsterRoutes[map_index][i][0] != END && k->isDie != 1)
-				k->move(k, i);
+			for (int i = 0; i < _MONSTER_MAX_COUNT; i++)
+			{
+				Character* k = MonsterArray[map_index] + i;
+				if (monsterRoutes[map_index][i][0] != END && k->isDie != 1)
+					k->move(k, i);
+			}
 		}
+
 		if (pc.isDie)
 			break;
-		Sleep(30);
+		Sleep(20);
 	}
 	//게임 오버
 }

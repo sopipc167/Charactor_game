@@ -32,6 +32,10 @@ typedef struct character
 	Item* inventory;
 }Character;
 
+//플레이어 
+Character pc;
+//몬스터 이동, 공격 루틴 변수
+int routeDelta;
 
 
 int DetectCollision(int floor,int x, int y);
