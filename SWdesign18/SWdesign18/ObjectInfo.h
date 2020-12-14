@@ -46,7 +46,6 @@ Vector monsterInitPosition[_MAP_COUNT][_MONSTER_MAX_COUNT];
 void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[]);
 int PlayerAttack(Character* p);
 void PlayerHit(Character* p, int atk);
-void PlayerDie(Character* p);
 int MonsterRoute(Character* _m, int idx);
 int MonsterAttack(Character* _m);
 void MonsterHit(Character* _m, int atk);
