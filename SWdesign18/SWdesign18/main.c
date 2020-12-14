@@ -29,7 +29,6 @@ int main()
 	map_index=0;
 
 	pc.isDie = 0;
-	pc.die = PlayerDie;
 	pc.inventory = Inventory;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 44;     //플레이어 초기 x축

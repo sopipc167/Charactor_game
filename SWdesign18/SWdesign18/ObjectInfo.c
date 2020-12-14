@@ -37,8 +37,6 @@ int DetectSpell(int floor, int x, int y)
 }
 
 
-
-
 //몬스터 작업
 
 extern Direction monsterRoutes[_MAP_COUNT][_MONSTER_MAX_COUNT][_MONSTER_MAX_MOVE] =
@@ -185,22 +183,11 @@ void PlayerHit(Character* p, int atk)
 {
 	Character* player = p;
 	player->hp -= atk;
-
+	setHp(p->hp);
 	if (player->hp <= 0)
 	{
 		player->isDie = 1;
-		player->die(player);
 	}
-}
-void PlayerDie(Character* p)
-{
-	Character* player = p;
-	if (player->isDie == 1)
-	{
-		printf("Game over");
-	}
-	//모든 거 중지
-	//ui 좌표에 가서 게임오버 출력
 }
 void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[])
 {
@@ -219,7 +206,6 @@ void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[]
 	monster->move = MonsterRoute;
 	monster->getHit = MonsterHit;
 	monster->attack = MonsterAttack;
-	monster->die = MonsterDie;
 	monster->inventory = NULL;
 }
 
@@ -287,7 +273,7 @@ void MonsterHit(Character* _m, int atk)
 	monster->hp -= atk;
 	if (monster->hp <= 0)
 	{
-		monster->die(monster);
+		MonsterDie(monster);
 	}
 }
 
