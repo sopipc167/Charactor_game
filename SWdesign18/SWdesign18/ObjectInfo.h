@@ -5,8 +5,8 @@
 #define _MONSTER_ATK 1
 #define _MONSTER_MOVE_DELTATIME 100
 
-#define _MONSTER_MAX_COUNT 6
-#define _MONSTER_MAX_MOVE 120
+#define _MONSTER_MAX_COUNT 9
+#define _MONSTER_MAX_MOVE 130
 
 typedef struct item
 {
