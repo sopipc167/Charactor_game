@@ -27,7 +27,7 @@ typedef struct character
 	void (*move)(struct character* p, int);
 	void (*getHit)(struct character* p, int x);
 	int (*attack)(struct character* p);
-	void (*die)();
+	void (*die)(struct character* p);
 	Item* inventory;
 }Character;
 
