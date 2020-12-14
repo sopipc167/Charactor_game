@@ -56,6 +56,15 @@ extern Vector monsterInitPosition[_MAP_COUNT][_MONSTER_MAX_COUNT] =
 	{{22,15}, {41,10}}
 };
 
+int PlayerAttack(Character* p)
+{
+
+}
+int PlayerHit(Character* p, int atk)
+{
+
+}
+
 void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[])
 {
 	monster->map = _floor;
