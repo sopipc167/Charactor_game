@@ -28,6 +28,7 @@ int main()
 	initList();
 	map_index=0;
 
+	pc.routeCnt = 50;
 	pc.isDie = 0;
 	pc.inventory = Inventory;
 	pc.map = 0;        //플레이어 맵 인덱스
@@ -64,6 +65,7 @@ int main()
 	{
 		ProcessKeyInput();
 		routeDelta++;
+		pc.routeCnt++;
 		if (routeDelta % 3 == 0)
 		{
 			for (int i = 0; i < _MONSTER_MAX_COUNT; i++)
