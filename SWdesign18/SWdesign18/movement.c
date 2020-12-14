@@ -291,6 +291,7 @@ void use_KNIFE(Character ch) {
 
     }
     ch.inventory[0].duration--;
+    getItemUI(0, ch.inventory[0].duration, ch.inventory[0].name);
     if (ch.inventory[0].duration == 0)
     {
         ch.inventory[0].name = NULL;
@@ -493,6 +494,7 @@ void useCANNON(Character* ch, int x) {
     cannonball.y = pc.pos.y;
     cannD = pc.Di;
     ch->inventory[2].duration--;
+    getItemUI(2, ch->inventory[2].duration, ch->inventory[2].name);
     if (ch->inventory[2].duration == 0)
     { 
         ch->inventory[2].name = NULL;
