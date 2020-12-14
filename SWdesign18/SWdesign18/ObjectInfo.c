@@ -107,7 +107,6 @@ void PlayerDie(Character* p)
 	//모든 거 중지
 	//ui 좌표에 가서 게임오버 출력
 }
-
 void InitMonster(Character* monster, int _floor, Vector _pos, Direction _route[])
 {
 	monster->map = _floor;
@@ -136,7 +135,7 @@ int MonsterRoute(Character* _m, int idx)
 
 	Vector nextPos = monster->pos;
 	int end = 0;
-
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 	switch (monster->route[monster->routeCnt])
 	{
 	case LEFT:

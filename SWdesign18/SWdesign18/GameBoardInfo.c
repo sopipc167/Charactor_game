@@ -716,6 +716,7 @@ void DrawUI()
 }
 void getAlphabetUI(int id, char a)
 {
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 	if (a != 0 && id < 6)
 	{
 		UIBoardInfo[CharSpot[id].y][CharSpot[id].x] = a;

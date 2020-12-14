@@ -45,6 +45,18 @@ int explos = 0;
 
 
 void ShowCharacter(Character Ch,int x,int y) {
+    switch (Ch.hp)
+    {
+    case 3:
+        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+        break;
+    case 2:
+        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
+        break;
+    case 1:
+        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 12);
+        break;
+    }
     SetCurrentCursorPos(x, y);
     if (Ch.hp <= 5)
         printf("●");
@@ -53,6 +65,7 @@ void ShowCharacter(Character Ch,int x,int y) {
 }
 
 void Show_alp(char alp, int x, int y) {
+    SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
     SetCurrentCursorPos(x, y);
     printf("%c ", alp);
 }
@@ -286,6 +299,7 @@ void use_KNIFE(Character ch) {
 }
 
 void bulletmove() {//총알
+    SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
     if (bullet.x != pc.pos.x || bullet.y != pc.pos.y) {
         SetCurrentCursorPos(bullet.x, bullet.y);
         printf("  ");
@@ -332,6 +346,7 @@ void bulletmove() {//총알
 }
 
 void explosion(int x, int y) {//폭발 이펙트
+    SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
             if (pc.map == 0) {
@@ -387,6 +402,7 @@ void explosion(int x, int y) {//폭발 이펙트
 }
 
 void cannonmove() {//대포알
+    SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
     if (cannonball.x != pc.pos.x || cannonball.y != pc.pos.y) {
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
