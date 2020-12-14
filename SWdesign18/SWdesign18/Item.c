@@ -77,6 +77,7 @@ void useFood(Character* p, int heal)
 	{
 		p->hp += heal;
 		p->inventory[4].duration--;
+		getItemUI(4, p->inventory[4].duration, p->inventory[4].name);
 		if (p->inventory[4].duration)
 		{
 			p->inventory[4].name = NULL;
@@ -111,6 +112,7 @@ void useKey(Character* p, int a)
 	if (flag == 1)
 	{
 		p->inventory[a-1].duration--;
+		getItemUI(3, p->inventory[3].duration, p->inventory[3].name);
 		if (p->inventory[a - 1].duration == 0)
 		{
 			p->inventory[a - 1].name = NULL;

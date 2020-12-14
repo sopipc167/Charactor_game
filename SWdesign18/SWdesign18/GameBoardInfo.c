@@ -657,11 +657,11 @@ void DrawUI()
 			}
 			if (y == 9 && x == 3)
 			{
-				printf("KEY : ¿­¼è");
+				printf("KEY : ¿­¼è(¡á : ´ÝÈù ¹®)");
 			}
 			if (y == 11 && x == 3)
 			{
-				printf("FOOD : À½½Ä");
+				printf("FOOD : À½½Ä(HP+1)");
 			}
 			if (y == 13 && x == 2)
 			{
@@ -790,7 +790,24 @@ void getItemUI(int id, int dur, char* name)
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
 		printf("%d¹ø", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
-		printf("%s", name);
+		switch (id)
+		{
+		case 0:
+			printf("%s", "KNIFE");
+			break;
+		case 1:
+			printf("%s", "RIFLE");
+			break;
+		case 2:
+			printf("%s", "ROCKET");
+			break;
+		case 3:
+			printf("%s", "KEY");
+			break;
+		case 4:
+			printf("%s", "FOOD");
+			break;
+		}
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
 		printf("%d ", dur);
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
@@ -809,7 +826,24 @@ void Selection(int id, int dur, char* name)
 			if (iv[_id].name != NULL)
 			{
 				SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
-				printf("%s", iv[_id].name);
+				switch (_id)
+				{
+				case 0:
+					printf("%s", "KNIFE");
+					break;
+				case 1:
+					printf("%s", "RIFLE");
+					break;
+				case 2:
+					printf("%s", "ROCKET");
+					break;
+				case 3:
+					printf("%s", "KEY");
+					break;
+				case 4:
+					printf("%s", "FOOD");
+					break;
+				}
 				SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[_id].x * 2, DurSpot[_id].y);
 				printf("%d ", iv[_id].duration);
 			}
@@ -820,7 +854,24 @@ void Selection(int id, int dur, char* name)
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
 		printf("%d¹ø", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
-		printf("%s", name);
+		switch (id)
+		{
+		case 0:
+			printf("%s", "KNIFE");
+			break;
+		case 1:
+			printf("%s", "RIFLE");
+			break;
+		case 2:
+			printf("%s", "ROCKET");
+			break;
+		case 3:
+			printf("%s", "KEY");
+			break;
+		case 4:
+			printf("%s", "FOOD");
+			break;
+		}
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
 		printf("%d ", dur);
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
