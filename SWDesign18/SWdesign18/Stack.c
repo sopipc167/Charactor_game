@@ -8,7 +8,7 @@ top = -1;
 
 int isFull()
 {
-	if (top + 1 == SIZE_M)
+	if (top + 2 == SIZE_M)
 		return 1;
 	else
 		return 0;

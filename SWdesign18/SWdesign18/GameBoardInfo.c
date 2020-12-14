@@ -9,6 +9,10 @@
 */
 Mapinfo[10][4] = { 0 };
 map_id = 0;
+Vector CharSpot[8];
+Vector ItemSpot[5];
+Vector NameSpot[5];
+Vector DurSpot[5];
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -435,12 +439,11 @@ UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH] =
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,7,0,7,0,7,0,7,0,7,0,7,0,7,0,7,0,0,2,
+	2,0,7,0,7,0,7,0,7,0,7,0,7,0,7,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 };
-Vector ItemSpot[8];
 //북0 동1 남2 서3
 void setmapinfo()
 {
@@ -566,22 +569,64 @@ void DrawBoard(int idx)
 }
 void DrawUI()
 {
+	CharSpot[0].x = 2;
+	CharSpot[0].y = 31;
+	CharSpot[1].x = 4;
+	CharSpot[1].y = 31;
+	CharSpot[2].x = 6;
+	CharSpot[2].y = 31;
+	CharSpot[3].x = 8;
+	CharSpot[3].y = 31;
+	CharSpot[4].x = 10;
+	CharSpot[4].y = 31;
+	CharSpot[5].x = 12;
+	CharSpot[5].y = 31;
+	CharSpot[6].x = 14;
+	CharSpot[6].y = 31;
+	CharSpot[7].x = 16;
+	CharSpot[7].y = 31;
 	ItemSpot[0].x = 2;
-	ItemSpot[0].y = 31;
-	ItemSpot[1].x = 4;
-	ItemSpot[1].y = 31;
-	ItemSpot[2].x = 6;
-	ItemSpot[2].y = 31;
-	ItemSpot[3].x = 8;
-	ItemSpot[3].y = 31;
-	ItemSpot[4].x = 10;
-	ItemSpot[4].y = 31;
-	ItemSpot[5].x = 12;
-	ItemSpot[5].y = 31;
-	ItemSpot[6].x = 14;
-	ItemSpot[6].y = 31;
+
+	ItemSpot[0].x = 2;
+	ItemSpot[0].y = 15;
+	ItemSpot[1].x = 5;
+	ItemSpot[1].y = 15;
+	ItemSpot[2].x = 8;
+	ItemSpot[2].y = 15;
+	ItemSpot[3].x = 11;
+	ItemSpot[3].y = 15;;
+	ItemSpot[4].x = 14;
+	ItemSpot[4].y = 15;
+
+	NameSpot[0].x=2;
+	NameSpot[0].y = 16;
+	NameSpot[1].x=7;
+	NameSpot[1].y = 16;
+	NameSpot[2].x=12;
+	NameSpot[2].y = 16;
+	NameSpot[3].x=17;
+	NameSpot[3].y = 16;
+	NameSpot[4].x=22;
+	NameSpot[4].y = 16;
+
+	DurSpot[0].x=2;
+	DurSpot[0].y = 17;
+	DurSpot[1].x=7;
+	DurSpot[1].y = 17;
+	DurSpot[2].x=12;
+	DurSpot[2].y = 17;
+	DurSpot[3].x=17;
+	DurSpot[3].y = 17;
+	DurSpot[4].x=22;
+	DurSpot[4].y = 17;
+
 	int x, y;
 	SetCurrentCursorPos(_MAP_WIDTH * 2, 0);
+	for (int i = 0; i < 5; i++)
+	{
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[i].x * 2, ItemSpot[i].y);
+		printf("%d번", i);
+	}
 	for (y = 0; y < _MAP_HEIGHT; y++)
 	{
 		SetCurrentCursorPos(_MAP_WIDTH * 2, y);
@@ -610,6 +655,10 @@ void DrawUI()
 			if (y == 11 && x == 3)
 			{
 				printf("FOOD : 음식");
+			}
+			if (y == 13 && x == 2)
+			{
+				printf("아이템 목록:");
 			}
 			if (UIBoardInfo[y][x] == 1)
 			{
@@ -652,8 +701,46 @@ void DrawUI()
 }
 void getAlphabetUI(int id, char a)
 {
-	SetCurrentCursorPos(0, 0);
-	UIBoardInfo[ItemSpot[id].y][ItemSpot[id].x] = a;
+	if (a != 0 && id < 6)
+	{
+		UIBoardInfo[CharSpot[id].y][CharSpot[id].x] = a;
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
+		printf("    ");
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[id].x * 2, CharSpot[id].y);
+		printf("%c", a);
+	}
+	else if (id >= 6)
+	{
+		
+		SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[id].x * 2, CharSpot[id].y);
+		printf("%c", a);
+		if (a == '_')
+		{
+			SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
+			printf("    ");
+		}
+		else
+		{
+			SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
+			printf("Full");
+		}
+	}
+}
+void getItemUI(int id, int dur, char* name)
+{
 	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-	printf("%c", a);
+	printf("%d번",id+1);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
+	printf("%s", name);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
+	printf("%d", dur);
+}
+void Selection(int id, int dur, char* name)
+{
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
+	printf("%d", id + 1);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
+	printf("%s", name);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
+	printf("%d", dur);
 }
