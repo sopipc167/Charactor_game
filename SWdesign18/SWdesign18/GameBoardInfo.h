@@ -37,3 +37,4 @@ int Mapinfo[10][4];
 int UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH];
 void getItemUI(int id, int dur, char* name);
 void Selection(int id, int dur, char* name);
+void setHp(int health);
