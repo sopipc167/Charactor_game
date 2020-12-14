@@ -186,6 +186,7 @@ void PlayerHit(Character* p, int atk)
 {
 	Character* player = p;
 	player->hp -= atk;
+	setHp(p->hp);
 	if (player->hp == 0)
 	{
 		player->isDie = 1;

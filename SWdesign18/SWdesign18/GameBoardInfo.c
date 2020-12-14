@@ -886,10 +886,16 @@ void Selection(int id, int dur, char* name)
 void setHp(int health)
 {
 	hp = health;
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 	SetCurrentCursorPos(_MAP_WIDTH * 2 + HpSpot.x * 2, HpSpot.y);
+	printf("hp : ");
 	for (int i = 0; i < hp; i++)
 	{
 		printf("¢¾ ");
+	}
+	for (int i = 0; i < 3 - hp; i++)
+	{
+		printf("  ");
 	}
 	if (hp == 0)
 	{

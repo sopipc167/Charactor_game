@@ -39,6 +39,7 @@ int main()
 	system("mode con cols=155 lines=42");
 	DrawBoard(map_index);
 	DrawUI();
+	setHp(pc.hp);
 	setmapinfo();
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
