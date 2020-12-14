@@ -16,6 +16,8 @@ Vector CharSpot[8];
 Vector ItemSpot[5];
 Vector NameSpot[5];
 Vector DurSpot[5];
+Vector HpSpot;
+int hp = 0;
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -561,9 +563,9 @@ void DrawBoard(int idx)
 			{
 				printf("¡á");
 			}
-			else if ((gameBoardInfo[idx][y][x] >= 65)&&(gameBoardInfo[idx][y][x]<=120))
+			else if ((gameBoardInfo[idx][y][x] >= 65) && (gameBoardInfo[idx][y][x] <= 120))
 			{
-				printf("%c",gameBoardInfo[idx][y][x]);
+				printf("%c", gameBoardInfo[idx][y][x]);
 			}
 			else if (gameBoardInfo[idx][y][x] < 0)
 			{
@@ -576,6 +578,9 @@ void DrawBoard(int idx)
 }
 void DrawUI()
 {
+	HpSpot.x = 2;
+	HpSpot.y = 27;
+
 	CharSpot[0].x = 2;
 	CharSpot[0].y = 31;
 	CharSpot[1].x = 4;
@@ -605,26 +610,26 @@ void DrawUI()
 	ItemSpot[4].x = 14;
 	ItemSpot[4].y = 15;
 
-	NameSpot[0].x=2;
+	NameSpot[0].x = 2;
 	NameSpot[0].y = 16;
-	NameSpot[1].x=5;
+	NameSpot[1].x = 5;
 	NameSpot[1].y = 16;
-	NameSpot[2].x=8;
+	NameSpot[2].x = 8;
 	NameSpot[2].y = 16;
-	NameSpot[3].x=11;
+	NameSpot[3].x = 11;
 	NameSpot[3].y = 16;
-	NameSpot[4].x=14;
+	NameSpot[4].x = 14;
 	NameSpot[4].y = 16;
 
-	DurSpot[0].x=2;
+	DurSpot[0].x = 2;
 	DurSpot[0].y = 17;
-	DurSpot[1].x=5;
+	DurSpot[1].x = 5;
 	DurSpot[1].y = 17;
-	DurSpot[2].x=8;
+	DurSpot[2].x = 8;
 	DurSpot[2].y = 17;
-	DurSpot[3].x=11;
+	DurSpot[3].x = 11;
 	DurSpot[3].y = 17;
-	DurSpot[4].x=14;
+	DurSpot[4].x = 14;
 	DurSpot[4].y = 17;
 
 	int x, y;
@@ -632,7 +637,7 @@ void DrawUI()
 	for (int i = 0; i < 5; i++)
 	{
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[i].x * 2, ItemSpot[i].y);
-		printf("%d¹ø", i+1);
+		printf("%d¹ø", i + 1);
 	}
 	for (y = 0; y < _MAP_HEIGHT; y++)
 	{
@@ -876,5 +881,18 @@ void Selection(int id, int dur, char* name)
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
 		printf("%d ", dur);
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+	}
+}
+void setHp(int health)
+{
+	hp = health;
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + HpSpot.x * 2, HpSpot.y);
+	for (int i = 0; i < hp; i++)
+	{
+		printf("¢¾ ");
+	}
+	if (hp == 0)
+	{
+		printf("GAME OVER!!!");
 	}
 }
