@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include "GameBoardInfo.h"
 #include<Windows.h>
 
 /*
-	. º® : 1~10
-	. ¸ó½ºÅÍ : -10~
-	. ¹® :
-	. ±ÛÀÚ : 30~120 (¾Æ½ºÅ°ÄÚµå°ª)
+	. ë²½ : 1~10
+	. ëª¬ìŠ¤í„° : -10~
+	. ë¬¸ :
+	. ê¸€ìž : 30~120 (ì•„ìŠ¤í‚¤ì½”ë“œê°’)
 */
 Mapinfo[10][4] = { 0 };
 map_id = 0;
@@ -17,7 +17,7 @@ Vector ItemSpot[5];
 Vector NameSpot[5];
 Vector DurSpot[5];
 Vector HpSpot;
-int hp = 0;
+int hp = 3;
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -45,8 +45,8 @@ gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,2,
 	7,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,0,0,0,6,1,1,1,1,1,1,5,0,0,0,6,1,1,1,1,1,1,4,0,0,0,6,1,1,1,5,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'L','F','I','R',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
+	2,0,0,0,0,0,0,0,0,0,0,0,0,0,'E','F','I','N','K',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,4,0,0,0,6,1,1,1,1,1,1,1,1,0,0,0,0,0,2,
 	2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
@@ -449,7 +449,7 @@ UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH] =
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 };
-//ºÏ0 µ¿1 ³²2 ¼­3
+//ë¶0 ë™1 ë‚¨2 ì„œ3
 void setmapinfo()
 {
 	Mapinfo[0][0] = 55435;
@@ -512,56 +512,56 @@ void DrawBoard(int idx)
 			}
 			if (gameBoardInfo[idx][y][x] == 1)
 			{
-				printf("¦¬");
+				printf("â”");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 2)
 			{
-				printf("¦­");
+				printf("â”ƒ");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 3)
 			{
-				printf("¦®");
+				printf("â”");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 4)
 			{
-				printf("¦¯");
+				printf("â”“");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 5)
 			{
-				printf("¦°");
+				printf("â”›");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 6)
 			{
-				printf("¦±");
+				printf("â”—");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 7)
 			{
-				printf("¦²");
+				printf("â”£");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 8)
 			{
-				printf("¦´");
+				printf("â”«");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 9)
 			{
-				printf("¦µ");
+				printf("â”»");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 10)
 			{
-				printf("¦³");
+				printf("â”³");
 			}
 			else if (gameBoardInfo[idx][y][x] == 15)
 			{
-				printf("¡á");
+				printf("â– ");
 			}
 			else if ((gameBoardInfo[idx][y][x] >= 65) && (gameBoardInfo[idx][y][x] <= 120))
 			{
@@ -637,7 +637,7 @@ void DrawUI()
 	for (int i = 0; i < 5; i++)
 	{
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[i].x * 2, ItemSpot[i].y);
-		printf("%d¹ø", i + 1);
+		printf("%dë²ˆ", i + 1);
 	}
 	for (y = 0; y < _MAP_HEIGHT; y++)
 	{
@@ -646,81 +646,81 @@ void DrawUI()
 		{
 			if (y == 1 && x == 3)
 			{
-				printf("Á¶ÇÕ°¡´ÉÇÑ ¾ÆÀÌÅÛ     ¸Ê ¹øÈ£ %d", map_id);
+				printf("ì¡°í•©ê°€ëŠ¥í•œ ì•„ì´í…œ     ë§µ ë²ˆí˜¸ %d", map_id);
 			}
 			if (y == 3 && x == 3)
 			{
-				printf("KNIFE : Ä®");
+				printf("KNIFE : ì¹¼");
 			}
 			if (y == 5 && x == 3)
 			{
-				printf("GUN : ÃÑ");
+				printf("GUN : ì´");
 			}
 			if (y == 7 && x == 3)
 			{
-				printf("ROKET : ·ÎÄÏ");
+				printf("ROKET : ë¡œì¼“");
 			}
 			if (y == 9 && x == 3)
 			{
-				printf("KEY : ¿­¼è(¡á : ´ÝÈù ¹®)");
+				printf("KEY : ì—´ì‡ (â–  : ë‹«ížŒ ë¬¸)");
 			}
 			if (y == 11 && x == 3)
 			{
-				printf("FOOD : À½½Ä(HP+1)");
+				printf("FOOD : ìŒì‹(HP+1)");
 			}
 			if (y == 13 && x == 2)
 			{
-				printf("¾ÆÀÌÅÛ ¸ñ·Ï:");
+				printf("ì•„ì´í…œ ëª©ë¡:");
 			}
 			if (y == 21 && x == 2)
 			{
-				printf("Á¶ÀÛ¹ý:");
+				printf("ì¡°ìž‘ë²•:");
 			}
 			if (y == 22 && x == 2)
 			{
-				printf("ÀÌµ¿:¹æÇâÅ°");
+				printf("ì´ë™:ë°©í–¥í‚¤");
 			}
 			if (y == 23 && x == 2)
 			{
-				printf("1~5¹ø ¹øÈ£Å°: ¾ÆÀÌÅÛ ¼±ÅÃ");
+				printf("1~5ë²ˆ ë²ˆí˜¸í‚¤: ì•„ì´í…œ ì„ íƒ");
 			}
 			if (y == 24 && x == 2)
 			{
-				printf("A : ÇØ´ç ¾ÆÀÌÅÛ »ç¿ë");
+				printf("A : í•´ë‹¹ ì•„ì´í…œ ì‚¬ìš©");
 			}
 			if (y == 25 && x == 2)
 			{
-				printf("S : ±ÛÀÚ ¹ö¸®±â");
+				printf("S : ê¸€ìž ë²„ë¦¬ê¸°");
 			}
 
 			if (UIBoardInfo[y][x] == 1)
 			{
-				printf("¦¬");
+				printf("â”");
 
 			}
 			else if (UIBoardInfo[y][x] == 2)
 			{
-				printf("¦­");
+				printf("â”ƒ");
 
 			}
 			else if (UIBoardInfo[y][x] == 3)
 			{
-				printf("¦®");
+				printf("â”");
 
 			}
 			else if (UIBoardInfo[y][x] == 4)
 			{
-				printf("¦¯");
+				printf("â”“");
 
 			}
 			else if (UIBoardInfo[y][x] == 5)
 			{
-				printf("¦°");
+				printf("â”›");
 
 			}
 			else if (UIBoardInfo[y][x] == 6)
 			{
-				printf("¦±");
+				printf("â”—");
 
 			}
 			else if (UIBoardInfo[y][x] == 7)
@@ -743,6 +743,7 @@ void DrawUI()
 			getItemUI(i, iv[i].duration, iv[i].name);
 		}
 	}
+	setHp(hp);
 }
 void getAlphabetUI(int id, char a)
 {
@@ -783,7 +784,7 @@ void getItemUI(int id, int dur, char* name)
 		iv[id].select = 0;
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d¹ø", id + 1);
+		printf("%dë²ˆ", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		printf("     ");
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
@@ -794,7 +795,7 @@ void getItemUI(int id, int dur, char* name)
 		if (iv[id].select)
 			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d¹ø", id + 1);
+		printf("%dë²ˆ", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		switch (id)
 		{
@@ -828,7 +829,7 @@ void Selection(int id, int dur, char* name)
 			iv[_id].select = 0;
 			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[_id].x * 2, ItemSpot[_id].y);
-			printf("%d¹ø", _id + 1);
+			printf("%dë²ˆ", _id + 1);
 			if (iv[_id].name != NULL)
 			{
 				SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
@@ -858,7 +859,7 @@ void Selection(int id, int dur, char* name)
 		iv[id].select = 1;
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d¹ø", id + 1);
+		printf("%dë²ˆ", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		switch (id)
 		{
@@ -891,7 +892,7 @@ void setHp(int health)
 	printf("hp : ");
 	for (int i = 0; i < hp; i++)
 	{
-		printf("¢¾ ");
+		printf("â™¥ ");
 	}
 	for (int i = 0; i < 3 - hp; i++)
 	{

@@ -27,7 +27,6 @@ int main()
 	initItem();
 	initList();
 	map_index=0;
-
 	pc.routeCnt = 50;
 	pc.isDie = 0;
 	pc.inventory = Inventory;
@@ -50,7 +49,6 @@ int main()
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
 
-
 	for (int i = 0; i < _MAP_COUNT; i++)
 	{
 		for(int j = 0; j< 11; j++)
@@ -63,7 +61,6 @@ int main()
 	}
 	while (1)
 	{
-		ProcessKeyInput();
 		routeDelta++;
 		pc.routeCnt++;
 		if (routeDelta % 3 == 0)
@@ -75,7 +72,7 @@ int main()
 					k->move(k, i);
 			}
 		}
-
+		ProcessKeyInput();
 		if (pc.isDie)
 			break;
 		Sleep(20);

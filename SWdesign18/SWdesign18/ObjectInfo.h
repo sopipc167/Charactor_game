@@ -37,7 +37,7 @@ Character pc;
 //몬스터 이동, 공격 루틴 변수
 int routeDelta;
 
-
+Character MonsterArray[_MAP_COUNT][11];
 int DetectCollision(int floor,int x, int y);
 
 
