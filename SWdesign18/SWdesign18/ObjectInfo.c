@@ -253,16 +253,19 @@ int MonsterRoute(Character* _m, int idx)
 		printf("#");
 	}
 
-	if (pc.routeCnt > 50)
-	{
 		if (pc.pos.x / 2 - monster->pos.x <= 1 && pc.pos.x / 2 - monster->pos.x >= -1 && pc.pos.y == monster->pos.y)
-			pc.getHit(&pc, monster->attack(monster));
+			if (pc.routeCnt > 30)
+			{
+				pc.getHit(&pc, monster->attack(monster));
+				pc.routeCnt = 0;
+			}
 		else if (pc.pos.y - monster->pos.y <= 1 && pc.pos.y - monster->pos.y >= -1 && pc.pos.x / 2 == monster->pos.x)
-			pc.getHit(&pc, monster->attack(monster));
+			if (pc.routeCnt > 30)
+			{
+				pc.getHit(&pc, monster->attack(monster));
+				pc.routeCnt = 0;
+			}
 
-		pc.routeCnt = 0;
-	}
-		
 	return 0;
 }
 
