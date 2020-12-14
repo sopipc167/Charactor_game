@@ -67,6 +67,7 @@ void AddToInventory(Item it[],int index)
 	if (pc.inventory[index].duration == 0)
 	{
 		pc.inventory[index] = it[index];
+		getItemUI(index, pc.inventory[index].duration, pc.inventory[index].name);
 	}
 }
 

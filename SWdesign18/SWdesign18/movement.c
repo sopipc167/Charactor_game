@@ -463,6 +463,7 @@ void useRIFLE(Character* ch, int x) {//������ ��� �Ϸ�
     bullet.y = pc.pos.y;
     bulD = pc.Di;
     ch->inventory[1].duration--;
+    getItemUI(1, ch->inventory[1].duration, ch->inventory[1].name);
     if (ch->inventory[1].duration == 0)
     {
         ch->inventory[1].name = NULL;
@@ -557,18 +558,23 @@ void ProcessKeyInput() {
                 }
                 else if (key == keyboard_1) {
                     pick = 1;
+                    Selection(0, pc.inventory[0].duration, pc.inventory[0].name);
                 }
                 else if (key == keyboard_2) {
                     pick = 2;
+                    Selection(1, pc.inventory[1].duration, pc.inventory[1].name);
                 }
                 else if (key == keyboard_3) {
                     pick = 3;
+                    Selection(2, pc.inventory[2].duration, pc.inventory[2].name);
                 }
                 else if (key == keyboard_4) {
                     pick = 4;
+                    Selection(3, pc.inventory[3].duration, pc.inventory[3].name);
                 }
                 else if (key == keyboard_5) {
                     pick = 5;
+                    Selection(4, pc.inventory[4].duration, pc.inventory[4].name);
                 }
             }
         }
