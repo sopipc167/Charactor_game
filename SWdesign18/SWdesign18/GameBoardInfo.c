@@ -687,6 +687,7 @@ void DrawUI()
 			{
 				printf("S : 글자 버리기");
 			}
+
 			if (UIBoardInfo[y][x] == 1)
 			{
 				printf("━");
