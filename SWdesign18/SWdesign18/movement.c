@@ -64,15 +64,17 @@ void ShiftRight() {
     pc.Di = RIGHT;
 
 
-	if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y) == 7)
-	{
-		victory();
-		pc.isDie = 1;
-	}
-    else if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y))
+    if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y) == 7)
     {
-        return;
+        victory();
+        pc.isDie = 1;
     }
+    else if ((DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y) >= 30) && (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y) <= 120))
+    {
+        insert(DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y));
+    }
+    else if (DetectSpell(pc.map, (pc.pos.x + 2) / 2, pc.pos.y))
+        return;
 
 
 
@@ -97,15 +99,17 @@ void ShiftRight() {
 void ShiftLeft() {
     pc.Di = LEFT;
 
-	if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y) == 7)
-	{
-		victory();
-		pc.isDie = 1;
-	}
-    else if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y))
+    if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y) == 7)
     {
-        return;
+        victory();
+        pc.isDie = 1;
     }
+    else if ((DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y) >= 30) && (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y) <= 120))
+    {
+        insert(DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y));
+    }
+    else if (DetectSpell(pc.map, (pc.pos.x - 2) / 2, pc.pos.y))
+        return;
 	
 
 
@@ -129,15 +133,17 @@ void ShiftLeft() {
 void ShiftDown() {
     pc.Di = DOWN;
 
-	if (DetectSpell(pc.map, pc.pos.x / 2, pc.pos.y + 1) == 7)
-	{
-		victory();
-		pc.isDie = 1;
-	}
-    else if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1))
+    if (DetectSpell(pc.map, pc.pos.x / 2, pc.pos.y + 1) == 7)
     {
-        return;
+        victory();
+        pc.isDie = 1;
     }
+    else if ((DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1) >= 30) && (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1) <= 120))
+    {
+        insert(DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1));
+    }
+    else if(DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1))
+        return;
 
 
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {
@@ -160,15 +166,17 @@ void ShiftDown() {
 void ShiftUp() {
     pc.Di = UP;
 
-	if (DetectSpell(pc.map, (pc.pos.x ) / 2, pc.pos.y - 1) == 7)
-	{
-		victory();
-		pc.isDie = 1;
-	}
-    else if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1))
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1) == 7)
     {
-        return;
+        victory();
+        pc.isDie = 1;
     }
+    else if ((DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1) >= 30) && (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1) <= 120))
+    {
+        insert(DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1));
+    }
+    else if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1))
+        return;
 
 
     if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {

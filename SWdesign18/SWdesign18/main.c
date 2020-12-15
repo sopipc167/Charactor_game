@@ -73,8 +73,10 @@ int main()
 			}
 		}
 		ProcessKeyInput();
-		if (pc.isDie)
+		if (pc.isDie) {
+			system("pause");
 			break;
+		}
 		Sleep(20);
 	}
 	//게임 오버

@@ -776,7 +776,7 @@ void getAlphabetUI(int id, char a)
 		if (a == '_')
 		{
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
-			printf("  ");
+			printf("    ");
 		}
 		else
 		{

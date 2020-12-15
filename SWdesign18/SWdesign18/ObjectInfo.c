@@ -27,15 +27,12 @@ int DetectSpell(int floor, int x, int y)
 	else if ((num == 0)) /* || (열린 문) || (함정)*/
 		return 0;
 	else if ((num >= 30) && (num <= 120)) {
-		insert(num);
-		return 0;
+		return num;
 	}
 	if (num == 11)
 	{
 		return 7;
 	}
-	else//몬스터
-		return -1;
 }
 
 
@@ -261,7 +258,7 @@ int MonsterRoute(Character* _m, int idx)
 				pc.getHit(&pc, monster->attack(monster));
 				pc.routeCnt = 0;
 			}
-		else if (pc.pos.y - monster->pos.y <= 1 && pc.pos.y - monster->pos.y >= -1 && pc.pos.x / 2 == monster->pos.x)
+		 if (pc.pos.y - monster->pos.y <= 1 && pc.pos.y - monster->pos.y >= -1 && pc.pos.x / 2 == monster->pos.x)
 			if (pc.routeCnt > 30)
 			{
 				pc.getHit(&pc, monster->attack(monster));
