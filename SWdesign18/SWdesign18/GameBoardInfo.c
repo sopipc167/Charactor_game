@@ -156,7 +156,7 @@ gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 	2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	2,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,2,1,1,1,2,0,0,0,2,1,1,1,1,1,1,1,2,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,2,
-	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,'R',0,2,0,0,0,2,0,0,0,0,0,0,0,0,
+	2,0,'C',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,'R',0,2,0,0,0,2,0,0,0,0,0,0,0,0,
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,2,
 	2,0,0,0,2,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,0,2,1,1,1,1,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,1,1,1,1,2,
 	2,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,0,0,0,2,
@@ -599,37 +599,37 @@ void DrawUI()
 	CharSpot[7].y = 31;
 	ItemSpot[0].x = 2;
 
-	ItemSpot[0].x = 2;
+	ItemSpot[0].x = 1;
 	ItemSpot[0].y = 15;
 	ItemSpot[1].x = 5;
 	ItemSpot[1].y = 15;
-	ItemSpot[2].x = 8;
+	ItemSpot[2].x = 9;
 	ItemSpot[2].y = 15;
-	ItemSpot[3].x = 11;
+	ItemSpot[3].x = 13;
 	ItemSpot[3].y = 15;;
-	ItemSpot[4].x = 14;
+	ItemSpot[4].x = 17;
 	ItemSpot[4].y = 15;
 
-	NameSpot[0].x = 2;
+	NameSpot[0].x = 1;
 	NameSpot[0].y = 16;
 	NameSpot[1].x = 5;
 	NameSpot[1].y = 16;
-	NameSpot[2].x = 8;
+	NameSpot[2].x = 9;
 	NameSpot[2].y = 16;
-	NameSpot[3].x = 11;
+	NameSpot[3].x = 13;
 	NameSpot[3].y = 16;
-	NameSpot[4].x = 14;
+	NameSpot[4].x = 17;
 	NameSpot[4].y = 16;
 
-	DurSpot[0].x = 2;
+	DurSpot[0].x = 1;
 	DurSpot[0].y = 17;
 	DurSpot[1].x = 5;
 	DurSpot[1].y = 17;
-	DurSpot[2].x = 8;
+	DurSpot[2].x = 9;
 	DurSpot[2].y = 17;
-	DurSpot[3].x = 11;
+	DurSpot[3].x = 13;
 	DurSpot[3].y = 17;
-	DurSpot[4].x = 14;
+	DurSpot[4].x = 17;
 	DurSpot[4].y = 17;
 
 	int x, y;
@@ -764,7 +764,7 @@ void getAlphabetUI(int id, char a)
 		if (a == '_')
 		{
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
-			printf("    ");
+			printf("  ");
 		}
 		else
 		{
@@ -786,9 +786,9 @@ void getItemUI(int id, int dur, char* name)
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
 		printf("%d¹ø", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
-		printf("     ");
+		printf("      ");
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
-		printf("   ");
+		printf("     ");
 	}
 	else
 	{
