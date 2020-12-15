@@ -1,13 +1,14 @@
-癤#pragma once
+﻿#pragma once
 #include "GameBoardInfo.h"
 #include<Windows.h>
 
 /*
-	. 踰 : 1~10
-	. 紐ъㅽ : -10~
-	. 臾 :
-	. 湲 : 30~120 (ㅽㅼ媛)
+	. 벽 : 1~10
+	. 몬스터 : -10~
+	. 문 :
+	. 글자 : 30~120 (아스키코드값)
 */
+
 Mapinfo[10][4] = { 0 };
 map_id = 0;
 int _id = -1;
@@ -17,7 +18,7 @@ Vector ItemSpot[5];
 Vector NameSpot[5];
 Vector DurSpot[5];
 Vector HpSpot;
-int hp = 3;
+int hp = 0;
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -449,7 +450,7 @@ UIBoardInfo[_MAP_HEIGHT][_UI_WIDTH] =
 	2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5
 };
-//遺0 1 2 3
+//북0 동1 남2 서3
 void setmapinfo()
 {
 	Mapinfo[0][0] = 55435;
@@ -512,56 +513,56 @@ void DrawBoard(int idx)
 			}
 			if (gameBoardInfo[idx][y][x] == 1)
 			{
-				printf("");
+				printf("━");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 2)
 			{
-				printf("");
+				printf("┃");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 3)
 			{
-				printf("");
+				printf("┏");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 4)
 			{
-				printf("");
+				printf("┓");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 5)
 			{
-				printf("");
+				printf("┛");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 6)
 			{
-				printf("");
+				printf("┗");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 7)
 			{
-				printf("");
+				printf("┣");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 8)
 			{
-				printf("");
+				printf("┫");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 9)
 			{
-				printf("");
+				printf("┻");
 
 			}
 			else if (gameBoardInfo[idx][y][x] == 10)
 			{
-				printf("");
+				printf("┳");
 			}
 			else if (gameBoardInfo[idx][y][x] == 15)
 			{
-				printf("");
+				printf("■");
 			}
 			else if ((gameBoardInfo[idx][y][x] >= 65) && (gameBoardInfo[idx][y][x] <= 120))
 			{
@@ -637,7 +638,7 @@ void DrawUI()
 	for (int i = 0; i < 5; i++)
 	{
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[i].x * 2, ItemSpot[i].y);
-		printf("%d踰", i + 1);
+		printf("%d번", i + 1);
 	}
 	for (y = 0; y < _MAP_HEIGHT; y++)
 	{
@@ -646,81 +647,81 @@ void DrawUI()
 		{
 			if (y == 1 && x == 3)
 			{
-				printf("議고⑷ν 댄     留 踰 %d", map_id);
+				printf("조합가능한 아이템     맵 번호 %d", map_id);
 			}
 			if (y == 3 && x == 3)
 			{
-				printf("KNIFE : 移");
+				printf("KNIFE : 칼");
 			}
 			if (y == 5 && x == 3)
 			{
-				printf("RIFLE : 총");
+				printf("GUN : 총");
 			}
 			if (y == 7 && x == 3)
 			{
-				printf("ROKET : 濡耳");
+				printf("ROKET : 로켓");
 			}
 			if (y == 9 && x == 3)
 			{
-				printf("KEY : 댁( : ロ 臾)");
+				printf("KEY : 열쇠(■ : 닫힌 문)");
 			}
 			if (y == 11 && x == 3)
 			{
-				printf("FOOD : (HP+1)");
+				printf("FOOD : 음식(HP+1)");
 			}
 			if (y == 13 && x == 2)
 			{
-				printf("댄 紐⑸:");
+				printf("아이템 목록:");
 			}
 			if (y == 21 && x == 2)
 			{
-				printf("議곗踰:");
+				printf("조작법:");
 			}
 			if (y == 22 && x == 2)
 			{
-				printf("대:諛⑺ν");
+				printf("이동:방향키");
 			}
 			if (y == 23 && x == 2)
 			{
-				printf("1~5踰 踰명: 댄 ");
+				printf("1~5번 번호키: 아이템 선택");
 			}
 			if (y == 24 && x == 2)
 			{
-				printf("A : 대 댄 ъ");
+				printf("A : 해당 아이템 사용");
 			}
 			if (y == 25 && x == 2)
 			{
-				printf("S : 湲 踰由ш린");
+				printf("S : 글자 버리기");
 			}
 
 			if (UIBoardInfo[y][x] == 1)
 			{
-				printf("");
+				printf("━");
 
 			}
 			else if (UIBoardInfo[y][x] == 2)
 			{
-				printf("");
+				printf("┃");
 
 			}
 			else if (UIBoardInfo[y][x] == 3)
 			{
-				printf("");
+				printf("┏");
 
 			}
 			else if (UIBoardInfo[y][x] == 4)
 			{
-				printf("");
+				printf("┓");
 
 			}
 			else if (UIBoardInfo[y][x] == 5)
 			{
-				printf("");
+				printf("┛");
 
 			}
 			else if (UIBoardInfo[y][x] == 6)
 			{
-				printf("");
+				printf("┗");
 
 			}
 			else if (UIBoardInfo[y][x] == 7)
@@ -736,7 +737,6 @@ void DrawUI()
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + x * 2 + 2, y);
 		}
 	}
-	setHp(hp);
 	for (int i = 0; i < 5; i++)
 	{
 		if (iv[i].name != NULL)
@@ -744,7 +744,6 @@ void DrawUI()
 			getItemUI(i, iv[i].duration, iv[i].name);
 		}
 	}
-	setHp(hp);
 }
 void getAlphabetUI(int id, char a)
 {
@@ -765,7 +764,7 @@ void getAlphabetUI(int id, char a)
 		if (a == '_')
 		{
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + CharSpot[7].x * 2, CharSpot[7].y);
-			printf("    ");
+			printf("     ");
 		}
 		else
 		{
@@ -785,7 +784,7 @@ void getItemUI(int id, int dur, char* name)
 		iv[id].select = 0;
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d踰", id + 1);
+		printf("%d번", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		printf("     ");
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + DurSpot[id].x * 2, DurSpot[id].y);
@@ -796,7 +795,7 @@ void getItemUI(int id, int dur, char* name)
 		if (iv[id].select)
 			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d踰", id + 1);
+		printf("%d번", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		switch (id)
 		{
@@ -830,7 +829,7 @@ void Selection(int id, int dur, char* name)
 			iv[_id].select = 0;
 			SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[_id].x * 2, ItemSpot[_id].y);
-			printf("%d踰", _id + 1);
+			printf("%d번", _id + 1);
 			if (iv[_id].name != NULL)
 			{
 				SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[_id].x * 2, NameSpot[_id].y);
@@ -860,7 +859,7 @@ void Selection(int id, int dur, char* name)
 		iv[id].select = 1;
 		SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + ItemSpot[id].x * 2, ItemSpot[id].y);
-		printf("%d踰", id + 1);
+		printf("%d번", id + 1);
 		SetCurrentCursorPos(_MAP_WIDTH * 2 + NameSpot[id].x * 2, NameSpot[id].y);
 		switch (id)
 		{
@@ -893,7 +892,7 @@ void setHp(int health)
 	printf("hp : ");
 	for (int i = 0; i < hp; i++)
 	{
-		printf(" ");
+		printf("♥ ");
 	}
 	for (int i = 0; i < 3 - hp; i++)
 	{
