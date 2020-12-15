@@ -44,7 +44,7 @@ int explos = 0;
 
 
 
-void ShowCharacter(Character Ch,int x,int y) {
+void ShowCharacter(Character Ch, int x, int y) {
     SetCurrentCursorPos(x, y);
     printf("●");
 }
@@ -71,21 +71,21 @@ void ShiftRight() {
 
 
 
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
-        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2], pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {
+        Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
-        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 0;
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.x += 2;
 
-    if (pc.pos.x == (_MAP_WIDTH-1)*2) {
-        map_switch(pc.map,1);
+    if (pc.pos.x == (_MAP_WIDTH - 1) * 2) {
+        map_switch(pc.map, 1);
     }
-    ShowCharacter(pc,pc.pos.x,pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
-        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    ShowCharacter(pc, pc.pos.x, pc.pos.y);
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 20;
     }
 }
 
@@ -100,33 +100,33 @@ void ShiftLeft() {
 
 
 
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
     else {
         DeleteCharacter(pc.pos.x, pc.pos.y);
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
-    pc.pos.x -=2;
+    pc.pos.x -= 2;
     if (pc.pos.x == 0) {
-        map_switch(pc.map,3);
+        map_switch(pc.map, 3);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
-        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 20;
     }
 }
 
 void ShiftDown() {
     pc.Di = DOWN;
 
-    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y+1))
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y + 1))
     {
         return;
     }
 
 
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
     else {
@@ -134,12 +134,12 @@ void ShiftDown() {
         gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 0;
     }
     pc.pos.y++;
-    if (pc.pos.y == _MAP_HEIGHT-1) {
-        map_switch(pc.map,2);
+    if (pc.pos.y == _MAP_HEIGHT - 1) {
+        map_switch(pc.map, 2);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
-        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 20;
     }
 }
 
@@ -147,13 +147,13 @@ void ShiftUp() {
     pc.Di = UP;
 
 
-    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y-1))
+    if (DetectSpell(pc.map, (pc.pos.x) / 2, pc.pos.y - 1))
     {
         return;
     }
 
 
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] <= 120) {
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2], pc.pos.x, pc.pos.y);
     }
     else {
@@ -162,11 +162,11 @@ void ShiftUp() {
     }
     pc.pos.y--;
     if (pc.pos.y == 0) {
-        map_switch(pc.map,0);
+        map_switch(pc.map, 0);
     }
     ShowCharacter(pc, pc.pos.x, pc.pos.y);
-    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
-        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x/2] = 20;
+    if (gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] < 30 || gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] > 120) {
+        gameBoardInfo[pc.map][pc.pos.y][pc.pos.x / 2] = 20;
     }
 }
 
@@ -192,9 +192,9 @@ void use_KNIFE(Character ch) {
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
-        for (int i = 1; i < count+1; i++) {
+        for (int i = 1; i < count + 1; i++) {
             SetCurrentCursorPos(pc.pos.x - i * 2, pc.pos.y);
-            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x-i*2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2] <= 120) {
+            if (gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2] <= 120) {
                 Show_alp(gameBoardInfo[pc.map][pc.pos.y][(pc.pos.x - i * 2) / 2], pc.pos.x - i * 2, pc.pos.y);
             }
             else {
@@ -211,7 +211,7 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <0) {
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
                 int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
                 Show_alp('#', ch.pos.x, ch.pos.y);
                 MonsterHit(&MonsterArray[ch.map][num], 1);
@@ -246,9 +246,9 @@ void use_KNIFE(Character ch) {
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
         Sleep(150);
         for (int i = 1; i < count + 1; i++) {
-            SetCurrentCursorPos(pc.pos.x, pc.pos.y-i);
-            if (gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2] <= 120) {
-                Show_alp(gameBoardInfo[pc.map][pc.pos.y-i][(pc.pos.x) / 2], pc.pos.x , pc.pos.y-i);
+            SetCurrentCursorPos(pc.pos.x, pc.pos.y - i);
+            if (gameBoardInfo[pc.map][pc.pos.y - i][(pc.pos.x) / 2] >= 30 && gameBoardInfo[pc.map][pc.pos.y - i][(pc.pos.x) / 2] <= 120) {
+                Show_alp(gameBoardInfo[pc.map][pc.pos.y - i][(pc.pos.x) / 2], pc.pos.x, pc.pos.y - i);
             }
             else {
                 printf("  ");
@@ -305,7 +305,7 @@ void bulletmove() {//총알
     else if (gameBoardInfo[pc.map][bullet.y][bullet.x / 2] < 0)
     {
         int num = -gameBoardInfo[pc.map][bullet.y][bullet.x / 2] - 10;
-        Show_alp('#' , bullet.x, bullet.y);
+        Show_alp('#', bullet.x, bullet.y);
         SetCurrentCursorPos(0, 0);
         printf("%d", num);
         MonsterHit(&MonsterArray[pc.map][num], 1);
@@ -352,19 +352,17 @@ void explosion(int x, int y) {//폭발 이펙트
     SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
     for (int x1 = 0; x1 < 3; x1++) {
         for (int y1 = 0; y1 < 3; y1++) {
-            if (pc.map == 0) {
-                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 4 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                        printf("＊");
-                    }
-                }
-            }
-            else {
-                if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
-                    if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 2 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
-                        SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
-                        printf("＊");
+            if (x - 2 + x1 * 2 >= 0 && y - 1 + y1 >= 0) {
+                if (x - 2 + x1 * 2 > 0 && y - 1 + y1 > 0 && y - 1 + y1 <= _MAP_HEIGHT - 2 && x - 2 + x1 * 2 <= (_MAP_WIDTH - 2) * 2) {
+                    SetCurrentCursorPos(x - 2 + x1 * 2, y - 1 + y1);
+                    printf("＊");
+                    if (gameBoardInfo[pc.map][(cannonball.y - 1 + y1)][(cannonball.x - 2 + x1 * 2) / 2] < 0)
+                    {
+                        int num = -gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] - 10;
+                        Show_alp('#', cannonball.x, cannonball.y);
+                        SetCurrentCursorPos(0, 0);
+                        printf("%d", num);
+                        MonsterHit(&MonsterArray[pc.map][num], 5);
                     }
                 }
             }
@@ -376,26 +374,15 @@ void explosion(int x, int y) {//폭발 이펙트
             for (int y1 = 0; y1 < 3; y1++) {
                 int x2 = x - 2 + x1 * 2;
                 int y2 = y - 1 + y1;
-                if (pc.map == 0) {
-                    if (x2 >= 0 && y2 >= 0) {
-                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 4 && x2 <= (_MAP_WIDTH - 2) * 2) {
-                            SetCurrentCursorPos(x2, y2);
-                            printf("  ");
-                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
-                        }
-                    }
-                }
-                else {
-                    if (x2 >= 0 && y2 >= 0) {
-                        if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 2 && x2 <= (_MAP_WIDTH - 2) * 2) {
-                            SetCurrentCursorPos(x2, y2);
-                            printf("  ");
-                            gameBoardInfo[pc.map][y2][x2 / 2] = 0;
-                        }
+                if (x2 >= 0 && y2 >= 0) {
+                    if (x2 > 0 && y2 > 0 && y2 <= _MAP_HEIGHT - 2 && x2 <= (_MAP_WIDTH - 2) * 2) {
+                        SetCurrentCursorPos(x2, y2);
+                        printf("  ");
+                        gameBoardInfo[pc.map][y2][x2 / 2] = 0;
                     }
                 }
                 if (pc.pos.x == x2 && pc.pos.y == y2) {
-                    ShowCharacter(pc,pc.pos.x,pc.pos.y);
+                    ShowCharacter(pc, pc.pos.x, pc.pos.y);
                 }
             }
         }
@@ -410,9 +397,25 @@ void cannonmove() {//대포알
         SetCurrentCursorPos(cannonball.x, cannonball.y);
         printf("  ");
     }
-    if (gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] >= 30 && gameBoardInfo[pc.map][cannonball.y][cannonball.x/ 2] <= 120) {
+    if (gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] >= 30 && gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2], cannonball.x, cannonball.y);
     }
+
+
+
+    else if (gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] < 0)
+    {
+        int num = -gameBoardInfo[pc.map][cannonball.y][cannonball.x / 2] - 10;
+        Show_alp('#', cannonball.x, cannonball.y);
+        SetCurrentCursorPos(0, 0);
+        printf("%d", num);
+        MonsterHit(&MonsterArray[pc.map][num], 5);
+        cannonuse = 0;
+        explos = 1;
+    }
+
+
+
     if (cannD == 0) {
         cannonball.x -= 2;
         if (DetectCollision(pc.map, cannonball.x / 2, cannonball.y)) {
@@ -459,18 +462,18 @@ BOOL iskeydown(int key) {
     return ((GetAsyncKeyState(key) & 0x8000) != 0);
 }//키다운 함수
 
-void map_switch(int map,int direc) {
+void map_switch(int map, int direc) {
     int mapdes_x;
     int mapdes_y;
     int numb;
     numb = Mapinfo[map][direc];
     map_index = numb / 10000;
-    mapdes_x = (numb / 100)%100;
+    mapdes_x = (numb / 100) % 100;
     mapdes_y = numb % 100;
     system("cls");
     DrawBoard(map_index);
     DrawUI();
-    pc.pos.x = mapdes_x*2;
+    pc.pos.x = mapdes_x * 2;
     pc.pos.y = mapdes_y;
     pc.map = map_index;
     SetCurrentCursorPos(pc.pos.x, pc.pos.y);
@@ -498,7 +501,7 @@ void useCANNON(Character* ch, int x) {
     ch->inventory[2].duration--;
     getItemUI(2, ch->inventory[2].duration, ch->inventory[2].name);
     if (ch->inventory[2].duration == 0)
-    { 
+    {
         ch->inventory[2].name = NULL;
         ch->inventory[2].use = NULL;
     }
@@ -541,13 +544,13 @@ void ProcessKeyInput() {
                         if (bulletuse == 0) {
                             if (pc.inventory[1].name != NULL)
                             {
-                                pc.inventory[1].use(&pc,0);
+                                pc.inventory[1].use(&pc, 0);
                                 //useRIFLE();
                             }
                         }
                     }
                     else if (pick == 3) {
-                        if (cannonuse == 0&&explos!=1) {
+                        if (cannonuse == 0 && explos != 1) {
                             if (pc.inventory[2].name != NULL)
                             {
                                 //cannonuse = 1;
