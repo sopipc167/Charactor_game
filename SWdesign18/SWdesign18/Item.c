@@ -78,6 +78,7 @@ void useFood(Character* p, int heal)
 		p->hp += heal;
 		p->inventory[4].duration--;
 		getItemUI(4, p->inventory[4].duration, p->inventory[4].name);
+		setHp(p->hp);
 		if (p->inventory[4].duration)
 		{
 			p->inventory[4].name = NULL;
