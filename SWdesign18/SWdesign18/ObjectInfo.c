@@ -30,6 +30,10 @@ int DetectSpell(int floor, int x, int y)
 		insert(num);
 		return 0;
 	}
+	if (num == 11)
+	{
+		return 7;
+	}
 	else//몬스터
 		return -1;
 }

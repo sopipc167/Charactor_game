@@ -17,7 +17,7 @@ Vector ItemSpot[5];
 Vector NameSpot[5];
 Vector DurSpot[5];
 Vector HpSpot;
-int hp = 3;
+int hp = 5;
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -559,6 +559,10 @@ void DrawBoard(int idx)
 			{
 				printf("┳");
 			}
+			else if (gameBoardInfo[idx][y][x] == 11)
+			{
+				printf("★");
+			}
 			else if (gameBoardInfo[idx][y][x] == 15)
 			{
 				printf("■");
@@ -579,7 +583,7 @@ void DrawBoard(int idx)
 void DrawUI()
 {
 	HpSpot.x = 2;
-	HpSpot.y = 27;
+	HpSpot.y = 29;
 
 	CharSpot[0].x = 2;
 	CharSpot[0].y = 31;
@@ -672,25 +676,33 @@ void DrawUI()
 			{
 				printf("아이템 목록:");
 			}
-			if (y == 21 && x == 2)
+			if (y == 19 && x == 2)
 			{
 				printf("조작법:");
 			}
-			if (y == 22 && x == 2)
+			if (y == 20 && x == 2)
 			{
 				printf("이동:방향키");
 			}
-			if (y == 23 && x == 2)
+			if (y == 21 && x == 2)
 			{
 				printf("1~5번 번호키: 아이템 선택");
 			}
-			if (y == 24 && x == 2)
+			if (y == 22 && x == 2)
 			{
 				printf("A : 해당 아이템 사용");
 			}
-			if (y == 25 && x == 2)
+			if (y == 23 && x == 2)
 			{
 				printf("S : 글자 버리기");
+			}
+			if (y == 25 && x == 2)
+			{
+				printf("게임의 목표 : ");
+			}
+			if (y == 26 && x == 2)
+			{
+				printf("★을 얻기위해 미로를 탐험하세요");
 			}
 
 			if (UIBoardInfo[y][x] == 1)
@@ -887,14 +899,14 @@ void Selection(int id, int dur, char* name)
 void setHp(int health)
 {
 	hp = health;
-	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 4);
 	SetCurrentCursorPos(_MAP_WIDTH * 2 + HpSpot.x * 2, HpSpot.y);
 	printf("hp : ");
 	for (int i = 0; i < hp; i++)
 	{
 		printf("♥ ");
 	}
-	for (int i = 0; i < 3 - hp; i++)
+	for (int i = 0; i < 5 - hp; i++)
 	{
 		printf("  ");
 	}
@@ -902,4 +914,15 @@ void setHp(int health)
 	{
 		printf("GAME OVER!!!");
 	}
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
+}
+void victory()
+{
+	SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 6);
+	SetCurrentCursorPos(_MAP_WIDTH * 2 + HpSpot.x * 2, HpSpot.y);
+	printf("Congratulations! Game Clear!!");
+}
+void setPoint(int p)
+{
+	
 }
