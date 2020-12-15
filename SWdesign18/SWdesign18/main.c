@@ -27,14 +27,13 @@ int main()
 	initItem();
 	initList();
 	map_index=0;
-
 	pc.routeCnt = 50;
 	pc.isDie = 0;
 	pc.inventory = Inventory;
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 44;     //플레이어 초기 x축
 	pc.pos.y = 18;     //플레이어 초기 y축
-	pc.hp = 3;
+	pc.hp = 5;
 	pc.getHit = PlayerHit;
 
 	routeDelta = 0;
@@ -50,7 +49,6 @@ int main()
 	SetCurrentCursorPos(pc.pos.x, pc.pos.y);
 	printf("●");
 
-
 	for (int i = 0; i < _MAP_COUNT; i++)
 	{
 		for(int j = 0; j< 11; j++)
@@ -63,7 +61,6 @@ int main()
 	}
 	while (1)
 	{
-		ProcessKeyInput();
 		routeDelta++;
 		pc.routeCnt++;
 		if (routeDelta % 3 == 0)
@@ -75,7 +72,7 @@ int main()
 					k->move(k, i);
 			}
 		}
-
+		ProcessKeyInput();
 		if (pc.isDie)
 			break;
 		Sleep(20);

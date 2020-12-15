@@ -45,23 +45,8 @@ int explos = 0;
 
 
 void ShowCharacter(Character Ch,int x,int y) {
-    switch (Ch.hp)
-    {
-    case 3:
-        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 7);
-        break;
-    case 2:
-        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 14);
-        break;
-    case 1:
-        SetConsoleTextAttribute(GetStdHandle((STD_OUTPUT_HANDLE)), 12);
-        break;
-    }
     SetCurrentCursorPos(x, y);
-    if (Ch.hp <= 5)
-        printf("●");
-    else
-        printf("★");
+    printf("●");
 }
 
 void Show_alp(char alp, int x, int y) {
@@ -191,6 +176,7 @@ void use_KNIFE(Character ch) {
     COORD curpos = GetCurrentCursorPos();
     SetCurrentCursorPos(ch.pos.x, ch.pos.y);
     if (ch.Di == 0) {
+
         for (int reach = 0; reach < 3; reach++) {
             if (DetectCollision(ch.map, (ch.pos.x - 2) / 2, ch.pos.y))
                 break;
@@ -198,8 +184,10 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -223,8 +211,10 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         Sleep(150);
@@ -247,8 +237,10 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -272,8 +264,10 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <= -10) {
-                //damage(-(gameBoardInfo[floor][y][x/2]+10),30);
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -307,6 +301,14 @@ void bulletmove() {//총알
     }
     if (gameBoardInfo[pc.map][bullet.y][bullet.x / 2] >= 30 && gameBoardInfo[pc.map][bullet.y][bullet.x / 2] <= 120) {
         Show_alp(gameBoardInfo[pc.map][bullet.y][bullet.x / 2], bullet.x, bullet.y);
+    }
+    else if (gameBoardInfo[pc.map][bullet.y][bullet.x / 2] < 0)
+    {
+        int num = -gameBoardInfo[pc.map][bullet.y][bullet.x / 2] - 10;
+        Show_alp('#' , bullet.x, bullet.y);
+        SetCurrentCursorPos(0, 0);
+        printf("%d", num);
+        MonsterHit(&MonsterArray[pc.map][num], 1);
     }
     if (bulD == 0) {
         bullet.x -= 2;

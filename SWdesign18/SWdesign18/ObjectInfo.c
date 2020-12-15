@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "ObjectInfo.h"
 #include "GameBoardInfo.h"
 #include <Windows.h>
@@ -8,15 +8,13 @@ int DetectCollision(int floor, int x, int y)
 {
 	int num = gameBoardInfo[floor][y][x];
 
-	if ((num <= -10) || ((num >= 1) && (num <= 10) || (num == 20)) /*|| (막힌 문)*/)
+	if ( ((num >= 1) && (num <= 10) || (num == 20)) /*|| (막힌 문)*/)
 		return 1;
-	else if ((num == 0)) /* || (열린 문) || (함정)*/
+	else if ((num <= 0)) /* || (열린 문) || (함정)*/
 		return 0;
 	else if ((num >= 30) && (num <= 120)) {
 		return 0;
 	}
-	else//몬스터
-		return -1;
 }
 
 
@@ -279,6 +277,8 @@ void MonsterHit(Character* _m, int atk)
 {
 	Character* monster = _m;
 	monster->hp -= atk;
+	SetCurrentCursorPos(0, 0);
+	printf("%d", monster->hp);
 	if (monster->hp <= 0)
 	{
 		MonsterDie(monster);
@@ -288,4 +288,5 @@ void MonsterHit(Character* _m, int atk)
 void MonsterDie(Character* _m)
 {
 	_m->isDie = 1;
+	gameBoardInfo[_m->map][_m->pos.y][_m->pos.x] = 0;
 }
