@@ -17,7 +17,7 @@ Vector ItemSpot[5];
 Vector NameSpot[5];
 Vector DurSpot[5];
 Vector HpSpot;
-int hp = 0;
+int hp = 3;
 gameBoardInfo[10][_MAP_HEIGHT][_MAP_WIDTH] =
 {
 	{
@@ -654,7 +654,7 @@ void DrawUI()
 			}
 			if (y == 5 && x == 3)
 			{
-				printf("GUN : รั");
+				printf("RIFLE : รั");
 			}
 			if (y == 7 && x == 3)
 			{
@@ -736,6 +736,7 @@ void DrawUI()
 			SetCurrentCursorPos(_MAP_WIDTH * 2 + x * 2 + 2, y);
 		}
 	}
+	setHp(hp);
 	for (int i = 0; i < 5; i++)
 	{
 		if (iv[i].name != NULL)
