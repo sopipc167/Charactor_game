@@ -33,7 +33,7 @@ int main()
 	pc.map = 0;        //플레이어 맵 인덱스
 	pc.pos.x = 44;     //플레이어 초기 x축
 	pc.pos.y = 18;     //플레이어 초기 y축
-	pc.hp = 3;
+	pc.hp = 5;
 	pc.getHit = PlayerHit;
 
 	routeDelta = 0;

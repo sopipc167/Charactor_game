@@ -277,6 +277,8 @@ void MonsterHit(Character* _m, int atk)
 {
 	Character* monster = _m;
 	monster->hp -= atk;
+	SetCurrentCursorPos(0, 0);
+	printf("%d", monster->hp);
 	if (monster->hp <= 0)
 	{
 		MonsterDie(monster);

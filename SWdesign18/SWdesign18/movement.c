@@ -185,6 +185,9 @@ void use_KNIFE(Character ch) {
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -209,7 +212,9 @@ void use_KNIFE(Character ch) {
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("─");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <0) {
-               
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         Sleep(150);
@@ -233,6 +238,9 @@ void use_KNIFE(Character ch) {
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
             if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
@@ -256,8 +264,10 @@ void use_KNIFE(Character ch) {
             count++;
             SetCurrentCursorPos(ch.pos.x, ch.pos.y);
             printf("│");
-            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] <0) {
-              
+            if (gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] < 0) {
+                int num = -gameBoardInfo[ch.map][ch.pos.y][ch.pos.x / 2] - 10;
+                Show_alp('#', ch.pos.x, ch.pos.y);
+                MonsterHit(&MonsterArray[ch.map][num], 1);
             }
         }
         SetCurrentCursorPos(ch.pos.x, ch.pos.y);
